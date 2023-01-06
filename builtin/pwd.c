@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.h                                          :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/06 20:33:04 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/06 21:34:04 by wonyang          ###   ########seoul.kr  */
+/*   Created: 2023/01/06 21:24:18 by wonyang           #+#    #+#             */
+/*   Updated: 2023/01/06 21:35:15 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTIN_H
-# define BUILTIN_H
+#include <unistd.h>
+#include <stdlib.h>
+#include "../libft/libft.h"
 
-int	ft_echo(char **argv);
-int	ft_pwd(char **argv);
+int	ft_pwd(char **argv)
+{
+	char	*path;
 
-#endif
+	argv = (char **)argv;
+	path = getcwd(NULL, 0);
+	if (!path)
+		return (-1);
+	ft_putendl_fd(path, STDIN_FILENO);
+	free(path);
+	path = NULL;
+	return (0);
+}
