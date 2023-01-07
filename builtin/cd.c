@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:36:28 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/07 12:22:37 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/07 12:41:44 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static int	move_oldpwd(void)
 	}
 	if (chdir(path) != 0)
 		return (-1);
+	ft_putendl_fd(path, STDOUT_FILENO);
 	return (0);
 }
 
