@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/10 00:35:26 by wonyang           #+#    #+#             */
-/*   Updated: 2022/12/04 13:21:17 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/07 15:07:36 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	(*del)(lst->content);
+	if (del)
+		(*del)(lst->content);
 	free(lst);
 }
