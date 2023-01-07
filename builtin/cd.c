@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:36:28 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/06 22:42:00 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/06 22:45:32 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static int	move_home(void)
 
 static int	move_path(char *path)
 {
-	printf("path : %s\n", path);
 	if (chdir(path) != 0)
 	{
 		ft_putstr_fd("bash: cd: ", STDERR_FILENO);
