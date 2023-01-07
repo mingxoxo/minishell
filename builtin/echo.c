@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:35:35 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/06 21:20:32 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/07 12:39:51 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static void	print_argument(char **argv, int start_idx)
 	while (argv[i])
 	{
 		if (i != start_idx)
-			ft_putchar_fd(' ', STDIN_FILENO);
-		ft_putstr_fd(argv[i], STDIN_FILENO);
+			ft_putchar_fd(' ', STDOUT_FILENO);
+		ft_putstr_fd(argv[i], STDOUT_FILENO);
 		i++;
 	}
 }
@@ -62,7 +62,7 @@ int	ft_echo(char **argv)
 	else
 	{
 		print_argument(argv, 1);
-		ft_putchar_fd('\n', STDIN_FILENO);
+		ft_putchar_fd('\n', STDOUT_FILENO);
 	}
 	return (0);
 }
