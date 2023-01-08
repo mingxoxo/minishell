@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cast.c                                             :+:      :+:    :+:   */
+/*   cast_arr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 17:17:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/07 17:36:21 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/08 17:02:21 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static char	*make_format(t_enode *node)
 	return (line);
 }
 
-char	**cast_envp(t_envp *envp)
+char	**cast_envp_arr(t_envp *envp)
 {
 	int		i;
 	t_enode	*node;
