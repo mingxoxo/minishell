@@ -6,19 +6,26 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 17:17:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/08 16:59:27 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/08 18:51:05 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ds_envp.h"
 
-void	init_envp(t_envp *envp, char **arr)
+t_error	init_envp(t_envp *envp, char **arr)
 {
+	t_error	errno;
+
 	envp->cnt = 0;
-	envp->change = 1;
 	envp->arr = NULL;
 	envp->head = NULL;
-	cast_envp_list(envp, arr);
+	errno = cast_envp_list(envp, arr);
+	if (errno != SCS)
+		return (errno);
+	envp->arr = cast_envp_arr(envp);
+	if (!(envp->arr))
+		return (ERROR);
+	return (SCS);
 }
 
 t_enode	*init_enode(char *key, char *value)
@@ -63,5 +70,14 @@ t_error	set_key_value(t_envp *envp, char *key, char *value)
 		return (ERROR);
 	}
 	add_last(envp, node);
+	return (SCS);
+}
+
+t_error	refresh_arr(t_envp *envp)
+{
+	ft_freesplit(envp->arr);
+	envp->arr = cast_envp_arr(envp);
+	if (!(envp->arr))
+		return (ERROR);
 	return (SCS);
 }

@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 17:17:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/08 17:20:50 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/08 18:51:05 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ typedef struct s_envp
 {
 	struct s_enode	*head;
 	int				cnt;
-	int				change;
 	char			**arr;
 }					t_envp;
 
 // init.c
-void	init_envp(t_envp *envp, char **arr);
+t_error	init_envp(t_envp *envp, char **arr);
 t_enode	*init_enode(char *key, char *value);
 t_error	set_key_value(t_envp *envp, char *key, char *value);
+t_error	refresh_arr(t_envp *envp);
 
 // add.c
 void	add_last(t_envp *envp, t_enode *new);
@@ -46,14 +46,14 @@ void	add_first(t_envp *envp, t_enode *new);
 // delete.c
 void	del_value(t_enode *node);
 int		del_key_enode(t_envp *envp, char *key);
-void	clear_enode(t_envp *envp);
+void	clear_envp(t_envp *envp);
 
 // search.c
 t_enode	*search_key_enode(t_envp *envp, char *key);
 char	*search_key_value(t_envp *envp, char *key);
 
 // cast_*.c
-char	**cast_envp(t_envp *envp);
+char	**cast_envp_arr(t_envp *envp);
 t_error	cast_envp_line(t_envp *envp, char *line);
 t_error	cast_envp_list(t_envp *envp, char **arr);
 

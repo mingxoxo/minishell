@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 17:17:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/08 16:16:36 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/08 18:59:38 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	del_key(t_enode *node)
 		printf("[ds_envp]del_key error: node is NULL\n");
 		return ;
 	}
-	if (!(node->key))
+	if (node->key)
 		free(node->key);
 	node->key = NULL;
 }
@@ -31,7 +31,7 @@ void	del_value(t_enode *node)
 		printf("[ds_envp]del_value error: node is NULL\n");
 		return ;
 	}
-	if (!(node->value))
+	if (node->value)
 		free(node->value);
 	node->value = NULL;
 }
@@ -72,7 +72,7 @@ int	del_key_enode(t_envp *envp, char *key)
 	return (0);
 }
 
-void	clear_enode(t_envp *envp)
+void	clear_envp(t_envp *envp)
 {
 	t_enode	*tmp;
 	t_enode	*node;
@@ -84,5 +84,8 @@ void	clear_enode(t_envp *envp)
 		tmp = tmp->next;
 		del_enode(envp, node);
 	}
+	if (envp->arr)
+		ft_freesplit(envp->arr);
 	envp->head = NULL;
+	envp->arr = NULL;
 }
