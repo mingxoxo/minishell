@@ -6,13 +6,13 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 17:17:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/07 17:18:35 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/08 16:16:36 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ds_envp.h"
 
-static void	del_key(t_enode *node, void (*del)(void *))
+static void	del_key(t_enode *node)
 {
 	if (!node)
 	{
@@ -20,14 +20,11 @@ static void	del_key(t_enode *node, void (*del)(void *))
 		return ;
 	}
 	if (!(node->key))
-	{
-		if (del)
-			(*del)(node->key);
-	}
+		free(node->key);
 	node->key = NULL;
 }
 
-void	del_value(t_enode *node, void (*del)(void *))
+void	del_value(t_enode *node)
 {
 	if (!node)
 	{
@@ -35,14 +32,11 @@ void	del_value(t_enode *node, void (*del)(void *))
 		return ;
 	}
 	if (!(node->value))
-	{
-		if (del)
-			(*del)(node->value);
-	}
+		free(node->value);
 	node->value = NULL;
 }
 
-static void	del_enode(t_envp *envp, t_enode *node, void (*del)(void *))
+static void	del_enode(t_envp *envp, t_enode *node)
 {
 	t_enode	*del_prev;
 	t_enode	*del_next;
@@ -60,27 +54,25 @@ static void	del_enode(t_envp *envp, t_enode *node, void (*del)(void *))
 		del_prev->next = del_next;
 	if (del_next)
 		del_next->prev = del_prev;
-	del_key(node, del);
-	del_value(node, del);
+	del_key(node);
+	del_value(node);
 	free(node);
 	node = NULL;
 	envp->cnt--;
 }
 
-void	del_key_enode(t_envp *envp, char *key, void (*del)(void *))
+int	del_key_enode(t_envp *envp, char *key)
 {
 	t_enode	*node;
 
 	node = search_key_enode(envp, key);
 	if (!node)
-	{
-		printf("[ds_envp]del_key_enode error: There is no key in the envp.\n");
-		return ;
-	}
-	del_enode(envp, node, del);
+		return (-1);
+	del_enode(envp, node);
+	return (0);
 }
 
-void	clear_enode(t_envp *envp, void (*del)(void *))
+void	clear_enode(t_envp *envp)
 {
 	t_enode	*tmp;
 	t_enode	*node;
@@ -90,7 +82,7 @@ void	clear_enode(t_envp *envp, void (*del)(void *))
 	{
 		node = tmp;
 		tmp = tmp->next;
-		del_enode(envp, node, del);
+		del_enode(envp, node);
 	}
 	envp->head = NULL;
 }
