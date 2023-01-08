@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 17:17:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/08 18:51:05 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/08 19:31:02 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	add_first(t_envp *envp, t_enode *new);
 
 // delete.c
 void	del_value(t_enode *node);
-int		del_key_enode(t_envp *envp, char *key);
+t_error	del_key_enode(t_envp *envp, char *key);
 void	clear_envp(t_envp *envp);
 
 // search.c

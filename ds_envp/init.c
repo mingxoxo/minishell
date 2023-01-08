@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 17:17:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/08 18:51:05 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/08 19:31:49 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static void	set_value(t_enode *node, char *value)
 
 t_error	set_key_value(t_envp *envp, char *key, char *value)
 {
+	t_error	errno;
 	t_enode	*node;
 
 	node = search_key_enode(envp, key);
@@ -70,6 +71,9 @@ t_error	set_key_value(t_envp *envp, char *key, char *value)
 		return (ERROR);
 	}
 	add_last(envp, node);
+	errno = refresh_arr(envp);
+	if (errno != SCS)
+		return (errno);
 	return (SCS);
 }
 

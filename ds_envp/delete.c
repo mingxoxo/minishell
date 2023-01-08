@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 17:17:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/08 19:25:30 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/08 19:31:50 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,19 @@ static void	del_enode(t_envp *envp, t_enode *node)
 	envp->cnt--;
 }
 
-int	del_key_enode(t_envp *envp, char *key)
+t_error	del_key_enode(t_envp *envp, char *key)
 {
+	t_error	errno;
 	t_enode	*node;
 
 	node = search_key_enode(envp, key);
 	if (!node)
-		return (-1);
+		return (FAIL);
 	del_enode(envp, node);
-	refresh_arr(envp);
-	return (0);
+	errno = refresh_arr(envp);
+	if (errno != SCS)
+		return (errno);
+	return (SCS);
 }
 
 void	clear_envp(t_envp *envp)
