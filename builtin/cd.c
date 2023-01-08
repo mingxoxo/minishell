@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:36:28 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/07 14:39:46 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/08 21:58:41 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,70 +14,102 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "../libft/libft.h"
+#include "../includes/ds_envp.h"
+#include "../includes/return.h"
 
-static int	path_error(char *path)
+static t_error	update_pwd(t_envp *envp)
+{
+	t_error	errno;
+	char	*old_path;
+	char	*path;
+
+	if (search_key_value(envp, "OLDPWD"))
+	{
+		old_path = search_key_value(envp, "PWD");
+		if (!old_path)
+			errno = set_key_value(envp, "OLDPWD", "");
+		else
+			errno = set_key_value(envp, "OLDPWD", old_path);
+	}
+	if (errno)
+		return (errno);
+	if (search_key_value(envp, "PWD"))
+	{
+		path = getcwd(NULL, 0);
+		if (!path)
+			return (ERROR);
+		errno = set_key_value(envp, "PWD", path);
+	}
+	return (errno);
+}
+
+static t_error	path_error(char *path)
 {
 	ft_putstr_fd("bash: cd: ", STDERR_FILENO);
 	ft_putstr_fd(path, STDERR_FILENO);
 	ft_putendl_fd(": No such file or directory", STDERR_FILENO);
-	return (-1);
+	return (FAIL);
 }
 
-// todo : getenv를 내장 환경변수로 변경
-static int	move_home(void)
+static t_error	move_home(t_envp *envp)
 {
 	char	*path;
 
-	path = getenv("HOME");
+	path = search_key_value(envp, "HOME");
 	if (!path)
 	{
 		ft_putendl_fd("bash: cd: HOME not set", STDERR_FILENO);
-		return (-1);
+		return (FAIL);
 	}
 	if (chdir(path) != 0)
 		return (path_error(path));
-	return (0);
+	return (update_pwd(envp));
 }
 
-static int	move_path(char *path)
-{
-	if (chdir(path) != 0)
-		return (path_error(path));
-	return (0);
-}
-
-// todo : getenv를 내장 환경변수로 변경
-static int	move_oldpwd(void)
+static t_error	move_oldpwd(t_envp *envp)
 {
 	char	*path;
 
-	path = getenv("OLDPWD");
+	path = search_key_value(envp, "OLDPWD");
 	if (!path)
 	{
 		ft_putendl_fd("bash: cd: OLDPWD not set", STDERR_FILENO);
-		return (-1);
+		return (FAIL);
 	}
 	if (chdir(path) != 0)
 		return (path_error(path));
 	ft_putendl_fd(path, STDOUT_FILENO);
-	return (0);
+	return (update_pwd(envp));
 }
 
-int	ft_cd(char **argv)
+t_error	ft_cd(char **argv, t_envp *envp)
 {
 	char	*path;
 	
 	if (!argv || !(*argv))
 	{
 		printf("ft_cd argument error!\n");
-		return (-1);
+		return (FAIL);
 	}
 	path = argv[1];
 	if (!path)
-		return (move_home());
+		return (move_home(envp));
 	if (ft_strcmp(path, ".") == 0)
-		return (0);
+		return (update_pwd(envp));
 	if (ft_strcmp(path, "-") == 0)
-		return (move_oldpwd());
-	return (move_path(path));
+		return (move_oldpwd(envp));
+	if (chdir(path) != 0)
+		return (path_error(path));
+	return (update_pwd(envp));
+}
+
+int	main(int c, char **a, char **m)
+{
+	t_envp envp;
+
+	init_envp(&envp, m);
+	ft_cd(a, &envp);
+	printf("PWD : %s\n", search_key_value(&envp, "PWD"));
+	printf("OLDPWD : %s\n", search_key_value(&envp, "OLDPWD"));
+	return (0);
 }
