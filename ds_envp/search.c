@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   search.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/10 00:35:26 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/08 15:07:03 by wonyang          ###   ########seoul.kr  */
+/*   Created: 2022/06/08 23:33:50 by wonyang           #+#    #+#             */
+/*   Updated: 2023/01/07 17:03:25 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
+#include "../includes/ds_envp.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+t_enode	*search_key_enode(t_envp *envp, char *key)
 {
-	if (del)
-		(*del)(lst->content);
-	free(lst);
+	t_enode	*node;
+
+	node = envp->head;
+	while (node)
+	{
+		if (ft_strcmp(node->key, key) == 0)
+			return (node);
+		node = node->next;
+	}
+	return (NULL);
 }
