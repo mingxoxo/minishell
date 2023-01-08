@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:33:50 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/07 17:03:25 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/08 16:36:34 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,14 @@ t_enode	*search_key_enode(t_envp *envp, char *key)
 		node = node->next;
 	}
 	return (NULL);
+}
+
+char	*search_key_value(t_envp *envp, char *key)
+{
+	t_enode	*node;
+
+	node = search_key_enode(envp, key);
+	if (!node)
+		return (NULL);
+	return (node->value);
 }
