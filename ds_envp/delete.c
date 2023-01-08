@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 17:17:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/08 19:31:50 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/08 19:37:54 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,13 @@ static void	del_enode(t_envp *envp, t_enode *node)
 
 t_error	del_key_enode(t_envp *envp, char *key)
 {
-	t_error	errno;
 	t_enode	*node;
 
 	node = search_key_enode(envp, key);
 	if (!node)
 		return (FAIL);
 	del_enode(envp, node);
-	errno = refresh_arr(envp);
-	if (errno != SCS)
-		return (errno);
-	return (SCS);
+	return (refresh_arr(envp));
 }
 
 void	clear_envp(t_envp *envp)
