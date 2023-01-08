@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:36:28 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/08 21:58:41 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/08 22:58:54 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static t_error	update_pwd(t_envp *envp)
 	{
 		old_path = search_key_value(envp, "PWD");
 		if (!old_path)
-			errno = set_key_value(envp, "OLDPWD", "");
+			errno = set_env(envp, "OLDPWD", "");
 		else
-			errno = set_key_value(envp, "OLDPWD", old_path);
+			errno = set_env(envp, "OLDPWD", old_path);
 	}
 	if (errno)
 		return (errno);
@@ -38,7 +38,7 @@ static t_error	update_pwd(t_envp *envp)
 		path = getcwd(NULL, 0);
 		if (!path)
 			return (ERROR);
-		errno = set_key_value(envp, "PWD", path);
+		errno = set_env(envp, "PWD", path);
 	}
 	return (errno);
 }
@@ -85,7 +85,7 @@ static t_error	move_oldpwd(t_envp *envp)
 t_error	ft_cd(char **argv, t_envp *envp)
 {
 	char	*path;
-	
+
 	if (!argv || !(*argv))
 	{
 		printf("ft_cd argument error!\n");
@@ -108,7 +108,9 @@ int	main(int c, char **a, char **m)
 	t_envp envp;
 
 	init_envp(&envp, m);
+	print_arr((&envp)->arr);
 	ft_cd(a, &envp);
+	print_arr((&envp)->arr);
 	printf("PWD : %s\n", search_key_value(&envp, "PWD"));
 	printf("OLDPWD : %s\n", search_key_value(&envp, "OLDPWD"));
 	return (0);
