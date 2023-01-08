@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:36:28 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/07 12:41:44 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/07 14:39:46 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "../libft/libft.h"
+
+static int	path_error(char *path)
+{
+	ft_putstr_fd("bash: cd: ", STDERR_FILENO);
+	ft_putstr_fd(path, STDERR_FILENO);
+	ft_putendl_fd(": No such file or directory", STDERR_FILENO);
+	return (-1);
+}
 
 // todo : getenv를 내장 환경변수로 변경
 static int	move_home(void)
@@ -27,19 +35,14 @@ static int	move_home(void)
 		return (-1);
 	}
 	if (chdir(path) != 0)
-		return (-1);
+		return (path_error(path));
 	return (0);
 }
 
 static int	move_path(char *path)
 {
 	if (chdir(path) != 0)
-	{
-		ft_putstr_fd("bash: cd: ", STDERR_FILENO);
-		ft_putstr_fd(path, STDERR_FILENO);
-		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
-		return (-1);
-	}
+		return (path_error(path));
 	return (0);
 }
 
@@ -55,7 +58,7 @@ static int	move_oldpwd(void)
 		return (-1);
 	}
 	if (chdir(path) != 0)
-		return (-1);
+		return (path_error(path));
 	ft_putendl_fd(path, STDOUT_FILENO);
 	return (0);
 }
