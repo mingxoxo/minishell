@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 22:13:46 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/07 16:39:43 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/08 19:24:51 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	add_last(t_envp *envp, t_enode *new)
 		last = last->next;
 	new->prev = last;
 	last->next = new;
+	refresh_arr(envp);
 }
 
 void	add_first(t_envp *envp, t_enode *new)
@@ -45,4 +46,5 @@ void	add_first(t_envp *envp, t_enode *new)
 		first->next->prev = new;
 	new->next = first->next;
 	first->next = new;
+	refresh_arr(envp);
 }
