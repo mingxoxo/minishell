@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 17:17:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/08 19:37:54 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/09 16:20:00 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static void	del_enode(t_envp *envp, t_enode *node)
 	del_value(node);
 	free(node);
 	node = NULL;
-	envp->cnt--;
 }
 
 t_error	del_key_enode(t_envp *envp, char *key)
