@@ -6,7 +6,7 @@
 #    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/09 14:55:58 by wonyang          ###   ########seoul.kr   #
+#    Updated: 2023/01/09 16:27:19 by wonyang          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ _BTN_SRCS	= cd.c \
 			  pwd.c \
 			  env.c \
 			  unset.c \
+			  exit.c \
 
 BTN_SRCS	= $(addprefix $(BTN_DIR), $(_BTN_SRCS))
 
