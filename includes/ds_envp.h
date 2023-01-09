@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 17:17:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/08 22:54:15 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/09 15:57:49 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct s_enode
 typedef struct s_envp
 {
 	struct s_enode	*head;
-	int				cnt;
 	char			**arr;
 }					t_envp;
 
