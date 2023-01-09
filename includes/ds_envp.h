@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 17:17:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/08 19:31:02 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/09 15:57:49 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,18 @@ typedef struct s_enode
 typedef struct s_envp
 {
 	struct s_enode	*head;
-	int				cnt;
 	char			**arr;
 }					t_envp;
 
 // init.c
 t_error	init_envp(t_envp *envp, char **arr);
 t_enode	*init_enode(char *key, char *value);
-t_error	set_key_value(t_envp *envp, char *key, char *value);
 t_error	refresh_arr(t_envp *envp);
 
-// add.c
-void	add_last(t_envp *envp, t_enode *new);
-void	add_first(t_envp *envp, t_enode *new);
+// set.c
+t_error	set_key_value(t_envp *envp, char *key, char *value);
+t_error	set_env(t_envp *envp, char *ori_key, char *ori_value);
+t_error	set_export(t_envp *envp, char *line);
 
 // delete.c
 void	del_value(t_enode *node);

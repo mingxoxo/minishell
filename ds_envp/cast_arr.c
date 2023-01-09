@@ -6,22 +6,42 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 17:17:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/08 17:02:21 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/09 16:18:19 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ds_envp.h"
 
-static void	init_arr(char **arr, size_t len)
+static int	count_envp(t_enode *node)
 {
-	size_t	i;
+	int	cnt;
+
+	cnt = 0;
+	while (node)
+	{
+		if (node->value)
+			cnt++;
+		node = node->next;
+	}
+	return (cnt);
+}
+
+static t_error	init_arr(t_envp *envp, char ***arr)
+{
+	int		i;
+	int		cnt;
 
 	i = 0;
-	while (i < len)
+	cnt = count_envp(envp->head);
+	*arr = (char **)malloc(sizeof(char *) * (cnt + 1));
+	if (!(*arr))
+		return (ERROR);
+	while (i < cnt + 1)
 	{
-		arr[i] = NULL;
+		(*arr)[i] = NULL;
 		i++;
 	}
+	return (SCS);
 }
 
 static char	*make_format(t_enode *node)
@@ -45,21 +65,22 @@ char	**cast_envp_arr(t_envp *envp)
 	t_enode	*node;
 	char	**arr;
 
-	arr = (char **)malloc(sizeof(char *) * (envp->cnt + 1));
-	if (!arr)
+	if (init_arr(envp, &arr) == ERROR)
 		return (NULL);
-	init_arr(arr, envp->cnt + 1);
 	i = 0;
 	node = envp->head;
-	while (i < envp->cnt)
+	while (node)
 	{
-		arr[i] = make_format(node);
-		if (!(arr[i]))
+		if (node->value)
 		{
-			ft_freesplit(arr);
-			return (NULL);
+			arr[i] = make_format(node);
+			if (!(arr[i]))
+			{
+				ft_freesplit(arr);
+				return (NULL);
+			}
+			i++;
 		}
-		i++;
 		node = node->next;
 	}
 	return (arr);

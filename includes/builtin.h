@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   builtin.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/09 21:15:27 by wonyang          ###   ########seoul.kr  */
+/*   Created: 2023/01/06 20:33:04 by wonyang           #+#    #+#             */
+/*   Updated: 2023/01/09 19:47:02 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <stdio.h>
-#include "libft.h"
-#include "ds_envp.h"
-#include "builtin.h"
+#ifndef BUILTIN_H
+# define BUILTIN_H
 
-int	main(int argc, char **argv, char **env)
-{
-	char	*str;
+# include "return.h"
+# include "ds_envp.h"
 
-	while (1)
-	{
-		str = readline("prompt :");
-		if (ft_strcmp(str, "exit") == 0)
-			exit(0);
-		add_history(str);
-		printf("%s\n", str);
-		free(str);
-	}
-	return (0);
-}
+int		ft_echo(char **argv);
+t_error	ft_pwd(char **argv);
+t_error	ft_cd(char **argv, t_envp *envp);
+int		ft_env(char **argv, t_envp *envp);
+t_error	ft_export(char **argv, t_envp *envp);
+t_error	ft_unset(char **argv, t_envp *envp);
+int		ft_exit(char **argv);
+
+#endif

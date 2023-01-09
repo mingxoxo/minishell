@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 16:21:17 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/08 19:39:46 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/08 22:52:31 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ t_error	cast_envp_line(t_envp *envp, char *line)
 	char	*value;
 
 	errno = get_key(line, &key);
-	if (errno != SCS)
+	if (errno)
 		return (errno);
 	errno = get_value(line, &value);
-	if (errno != SCS)
+	if (errno)
 		return (errno);
 	return (set_key_value(envp, key, value));
 }
@@ -75,7 +75,7 @@ t_error	cast_envp_list(t_envp *envp, char **arr)
 	while (*arr)
 	{
 		errno = cast_envp_line(envp, *arr);
-		if (errno != SCS)
+		if (errno)
 			return (errno);
 		arr++;
 	}

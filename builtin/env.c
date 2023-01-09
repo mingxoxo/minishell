@@ -1,35 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/09 21:15:27 by wonyang          ###   ########seoul.kr  */
+/*   Created: 2023/01/09 12:40:20 by wonyang           #+#    #+#             */
+/*   Updated: 2023/01/09 20:28:52 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <stdio.h>
-#include "libft.h"
+#include <unistd.h>
+#include "return.h"
 #include "ds_envp.h"
-#include "builtin.h"
+#include "libft.h"
 
-int	main(int argc, char **argv, char **env)
+int	ft_env(char **argv, t_envp *envp)
 {
-	char	*str;
+	char	**arr;
+	int		i;
 
-	while (1)
+	if (!argv || !(*argv))
 	{
-		str = readline("prompt :");
-		if (ft_strcmp(str, "exit") == 0)
-			exit(0);
-		add_history(str);
-		printf("%s\n", str);
-		free(str);
+		printf("ft_env argument error!\n");
+		return (-1);
+	}
+	if (argv[1])
+	{
+		ft_putstr_fd("env: ", STDERR_FILENO);
+		ft_putstr_fd(argv[1], STDERR_FILENO);
+		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
+		return (-1);
+	}
+	arr = envp->arr;
+	while (arr[i])
+	{
+		ft_putendl_fd(arr[i], STDOUT_FILENO);
+		i++;
 	}
 	return (0);
 }

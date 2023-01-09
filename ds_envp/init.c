@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 17:17:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/08 19:37:32 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/09 16:07:51 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ t_error	init_envp(t_envp *envp, char **arr)
 {
 	t_error	errno;
 
-	envp->cnt = 0;
 	envp->arr = NULL;
 	envp->head = NULL;
 	errno = cast_envp_list(envp, arr);
@@ -42,40 +41,10 @@ t_enode	*init_enode(char *key, char *value)
 	return (new);
 }
 
-static void	set_value(t_enode *node, char *value)
-{
-	if (!node)
-	{
-		printf("[ds_envp]set_value error: node is NULL\n");
-		return ;
-	}
-	node->value = value;
-}
-
-t_error	set_key_value(t_envp *envp, char *key, char *value)
-{
-	t_enode	*node;
-
-	node = search_key_enode(envp, key);
-	if (node)
-	{
-		del_value(node);
-		set_value(node, value);
-		return (refresh_arr(envp));
-	}
-	node = init_enode(key, value);
-	if (!node)
-	{
-		perror("[ds_envp]set_key_value");
-		return (ERROR);
-	}
-	add_last(envp, node);
-	return (refresh_arr(envp));
-}
-
 t_error	refresh_arr(t_envp *envp)
 {
-	ft_freesplit(envp->arr);
+	if (envp->arr)
+		ft_freesplit(envp->arr);
 	envp->arr = cast_envp_arr(envp);
 	if (!(envp->arr))
 		return (ERROR);

@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/09 21:15:27 by wonyang          ###   ########seoul.kr  */
+/*   Created: 2023/01/06 21:24:18 by wonyang           #+#    #+#             */
+/*   Updated: 2023/01/09 21:02:29 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include "return.h"
 #include "libft.h"
-#include "ds_envp.h"
-#include "builtin.h"
 
-int	main(int argc, char **argv, char **env)
+t_error	ft_pwd(char **argv)
 {
-	char	*str;
+	char	*path;
 
-	while (1)
-	{
-		str = readline("prompt :");
-		if (ft_strcmp(str, "exit") == 0)
-			exit(0);
-		add_history(str);
-		printf("%s\n", str);
-		free(str);
-	}
-	return (0);
+	argv = (char **)argv;
+	path = getcwd(NULL, 0);
+	if (!path)
+		return (ERROR);
+	ft_putendl_fd(path, STDOUT_FILENO);
+	free(path);
+	path = NULL;
+	return (SCS);
 }
