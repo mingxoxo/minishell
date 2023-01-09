@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/09 16:04:29 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 16:06:04 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ int	main(int argc, char **argv, char **envp)
 		printf("%s\n", str);
 		free(str);
 	}
-    return (0);
+	return (0);
 }
