@@ -6,14 +6,14 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:24:18 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/08 16:07:50 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 21:02:29 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
-#include "../includes/return.h"
-#include "../libft/libft.h"
+#include "return.h"
+#include "libft.h"
 
 t_error	ft_pwd(char **argv)
 {
