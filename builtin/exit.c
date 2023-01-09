@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:15:07 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/09 16:28:23 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 17:07:58 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 #include <stdlib.h>
 #include "libft.h"
 
-bool	is_valid_argument(char *arg)
+static bool	is_valid_argument(char *arg)
 {
 	if (!arg)
 		return (true);
 	return (ft_isinteger(arg));
 }
 
-int	count_argument(char **argv)
+static int	count_argument(char **argv)
 {
 	int	i;
 
