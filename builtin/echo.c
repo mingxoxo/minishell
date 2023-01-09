@@ -6,14 +6,14 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:35:35 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/09 20:43:44 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 20:44:37 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include <unistd.h>
 #include <stdio.h>
-#include "../libft/libft.h"
+#include "libft.h"
 
 // ** returns
 // valid option : true
