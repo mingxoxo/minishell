@@ -6,7 +6,7 @@
 #    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/08 22:49:36 by wonyang          ###   ########seoul.kr   #
+#    Updated: 2023/01/09 16:02:26 by wonyang          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,14 @@ NAME		= minishell
 LIBFT		= libft
 LIBFT_HEADER = libft.h
 LIBFT_LIB	= $(LIBFT)/libft.a
-HEADER_DIR	= ./includes
+RDLINE_DIR	= $(shell brew --prefix readline)
+
+HEADERS		= -I$(LIBFT) \
+			  -Iincludes \
+			  -I$(RDLINE_DIR)/include/ \
+
+LIBS		= -lft -L$(LIBFT) \
+			  -L$(RDLINE_DIR)/lib/ -lreadline\
 
 # CFLAGS		= -Wall -Werror -Wextra
 
@@ -50,7 +57,7 @@ OBJS		= $(TREE_SRCS:%.c=%.o) \
 
 # define compile commands
 $(NAME) : 	$(OBJS) $(LIBFT_LIB)
-			cc $(CFLAGS) -o $(NAME) $(OBJS) -lft -L$(LIBFT)
+			cc $(CFLAGS) -o $(NAME) $(OBJS) $(LIBS)
 
 all	:		$(NAME)
 
@@ -58,7 +65,7 @@ $(LIBFT_LIB):
 			make bonus -C $(LIBFT)/
 
 %.o	: 		%.c
-			cc $(CFLAGS) -c $^ -I./ -I$(LIBFT) -I$(HEADER_DIR) -o $@
+			cc $(CFLAGS) -c $^ $(HEADERS) -o $@
 
 clean	:
 			rm -f $(OBJS)
