@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:40:20 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/09 14:02:47 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 20:28:52 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	ft_env(char **argv, t_envp *envp)
 	char	**arr;
 	int		i;
 
-	if (!argv || !(*argv)){
+	if (!argv || !(*argv))
+	{
 		printf("ft_env argument error!\n");
 		return (-1);
 	}
