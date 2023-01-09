@@ -6,11 +6,7 @@
 #    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2023/01/09 20:04:09 by wonyang          ###   ########seoul.kr   #
-=======
-#    Updated: 2023/01/09 16:02:26 by wonyang          ###   ########seoul.kr   #
->>>>>>> main
+#    Updated: 2023/01/09 21:15:27 by wonyang          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +15,6 @@ NAME		= minishell
 LIBFT		= libft
 LIBFT_HEADER = libft.h
 LIBFT_LIB	= $(LIBFT)/libft.a
-<<<<<<< HEAD
-HEADER_DIR	= includes
-=======
 RDLINE_DIR	= $(shell brew --prefix readline)
 
 HEADERS		= -I$(LIBFT) \
@@ -30,7 +23,6 @@ HEADERS		= -I$(LIBFT) \
 
 LIBS		= -lft -L$(LIBFT) \
 			  -L$(RDLINE_DIR)/lib/ -lreadline\
->>>>>>> main
 
 # CFLAGS		= -Wall -Werror -Wextra
 
@@ -88,11 +80,7 @@ $(LIBFT_LIB):
 			make bonus -C $(LIBFT)/
 
 %.o	: 		%.c
-<<<<<<< HEAD
-			cc $(CFLAGS) -c $^ -I$(LIBFT) -I$(HEADER_DIR) -o $@
-=======
 			cc $(CFLAGS) -c $^ $(HEADERS) -o $@
->>>>>>> main
 
 clean	:
 			rm -f $(OBJS)
