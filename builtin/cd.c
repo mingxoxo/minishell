@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:36:28 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/09 12:13:12 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 12:34:42 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ static t_error	path_error(char *path)
 {
 	ft_putstr_fd("bash: cd: ", STDERR_FILENO);
 	ft_putstr_fd(path, STDERR_FILENO);
+	if (access(path, F_OK) == 0)
+	{
+		ft_putendl_fd(": Not a directory", STDERR_FILENO);
+		return (FAIL);
+	}
 	ft_putendl_fd(": No such file or directory", STDERR_FILENO);
 	return (FAIL);
 }
