@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 17:17:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/08 22:56:04 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/09 16:07:51 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ t_error	init_envp(t_envp *envp, char **arr)
 {
 	t_error	errno;
 
-	envp->cnt = 0;
 	envp->arr = NULL;
 	envp->head = NULL;
 	errno = cast_envp_list(envp, arr);
