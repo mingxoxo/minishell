@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:35:35 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/08 16:21:24 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/09 20:43:44 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 // ** returns
 // valid option : true
 // invalid option : false
-static bool	valid_option(char *str)
+static bool	is_valid_option(char *str)
 {
 	int	i;
 
@@ -57,7 +57,7 @@ int	ft_echo(char **argv)
 		printf("ft_echo argument error!\n");
 		return (-1);
 	}
-	if (valid_option(argv[1]) == true)
+	if (is_valid_option(argv[1]) == true)
 		print_argument(argv, 2);
 	else
 	{
