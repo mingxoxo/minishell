@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:36:28 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/08 22:58:54 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/09 12:13:12 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "../libft/libft.h"
-#include "../includes/ds_envp.h"
-#include "../includes/return.h"
+#include "libft.h"
+#include "ds_envp.h"
+#include "return.h"
 
 static t_error	update_pwd(t_envp *envp)
 {
@@ -101,17 +101,4 @@ t_error	ft_cd(char **argv, t_envp *envp)
 	if (chdir(path) != 0)
 		return (path_error(path));
 	return (update_pwd(envp));
-}
-
-int	main(int c, char **a, char **m)
-{
-	t_envp envp;
-
-	init_envp(&envp, m);
-	print_arr((&envp)->arr);
-	ft_cd(a, &envp);
-	print_arr((&envp)->arr);
-	printf("PWD : %s\n", search_key_value(&envp, "PWD"));
-	printf("OLDPWD : %s\n", search_key_value(&envp, "OLDPWD"));
-	return (0);
 }

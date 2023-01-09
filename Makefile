@@ -6,7 +6,7 @@
 #    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/08 22:49:36 by wonyang          ###   ########seoul.kr   #
+#    Updated: 2023/01/09 12:15:16 by wonyang          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,18 @@ NAME		= minishell
 LIBFT		= libft
 LIBFT_HEADER = libft.h
 LIBFT_LIB	= $(LIBFT)/libft.a
-HEADER_DIR	= ./includes
+HEADER_DIR	= includes
 
 # CFLAGS		= -Wall -Werror -Wextra
+
+# builtin source files
+BTN_DIR		= builtin/
+
+_BTN_SRCS	= cd.c \
+			  echo.c \
+			  pwd.c \
+
+BTN_SRCS	= $(addprefix $(BTN_DIR), $(_BTN_SRCS))
 
 # ds_tree source files
 TREE_DIR	= ds_tree/
@@ -32,19 +41,20 @@ TREE_SRCS	= $(addprefix $(TREE_DIR), $(_TREE_SRCS))
 # ds_envp source files
 ENVP_DIR	= ds_envp/
 
-_ENVP_SRCS	= add.c \
-			  cast_arr.c \
+_ENVP_SRCS	= cast_arr.c \
 			  cast_list.c \
 			  delete.c \
 			  init.c \
 			  search.c \
+			  set.c \
 
 ENVP_SRCS	= $(addprefix $(ENVP_DIR), $(_ENVP_SRCS))
 
 # main source files
 SRCS		= main.c \
 
-OBJS		= $(TREE_SRCS:%.c=%.o) \
+OBJS		= $(BTN_SRCS:%.c=%.o) \
+			  $(TREE_SRCS:%.c=%.o) \
 			  $(ENVP_SRCS:%.c=%.o) \
 			  $(SRCS:%.c=%.o) \
 
@@ -58,7 +68,7 @@ $(LIBFT_LIB):
 			make bonus -C $(LIBFT)/
 
 %.o	: 		%.c
-			cc $(CFLAGS) -c $^ -I./ -I$(LIBFT) -I$(HEADER_DIR) -o $@
+			cc $(CFLAGS) -c $^ -I$(LIBFT) -I$(HEADER_DIR) -o $@
 
 clean	:
 			rm -f $(OBJS)
