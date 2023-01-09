@@ -6,7 +6,7 @@
 #    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/09 12:15:16 by wonyang          ###   ########seoul.kr   #
+#    Updated: 2023/01/09 13:58:14 by wonyang          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ BTN_DIR		= builtin/
 _BTN_SRCS	= cd.c \
 			  echo.c \
 			  pwd.c \
+			  env.c \
 
 BTN_SRCS	= $(addprefix $(BTN_DIR), $(_BTN_SRCS))
 
