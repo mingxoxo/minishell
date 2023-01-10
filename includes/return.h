@@ -6,14 +6,15 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 15:52:39 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/08 17:28:26 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/10 16:10:31 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RETURN_H
 # define RETURN_H
 
-typedef enum e_error{
+typedef enum e_error
+{
 	ERROR = -2,
 	FAIL = -1,
 	SCS
