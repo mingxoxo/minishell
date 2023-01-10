@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/10 16:39:35 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/10 22:49:27 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,21 @@
 #include "libft.h"
 #include "ds_envp.h"
 #include "builtin.h"
+#include "minishell.h"
 #include "token.h"
 
 int	main(int argc, char **argv, char **env)
 {
 	char	*str;
 
+	set_minishell_setting();
 	while (1)
 	{
 		str = readline("prompt$ ");
-		if (ft_strcmp(str, "exit") == 0)
+		if (str == NULL)
 			exit(0);
+		else if (ft_strcmp(str, "") == 0)
+			continue ;
 		add_history(str);
 		printf("%s\n", str);
 		tokenization(str);
