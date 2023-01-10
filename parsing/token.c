@@ -6,29 +6,24 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:15:15 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/10 21:57:19 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/10 22:22:44 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "token.h"
 
-static void	print_arr(int *arr, char *line)
+static void	del_t_token(void *content)
 {
-	size_t	i;
+	t_token	*token;
 
-	i = 0;
-	while (i < ft_strlen(line))
-	{
-		printf(" %d", arr[i]);
-		i++;
-	}
-	printf("\n");
+	if (!content)
+		return ;
+	token = (t_token *)(content);
+	if (token->str)
+		free(token->str);
+	free(content);
 }
-
-// if space -> space가 끝날때까지
-// if word -> word가 끝날때까지
-// if oper -> oper 크기에 맞게 움직이기....!
 
 static void	print_lst(t_list *lst)
 {
@@ -51,16 +46,12 @@ static t_error	make_token(char *line, t_ttype type, size_t len, t_list **lst)
 	if (!token)
 		return (ERROR);
 	token->str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!(token->str))
-	{
-		free(token);
-		return (ERROR);
-	}
 	new = ft_lstnew(token);
-	if (!new)
+	if (!(token->str) || !new)
 	{
 		free(token->str);
 		free(token);
+		free(new);
 		return (ERROR);
 	}
 	ft_strlcpy(token->str, line, len + 1);
@@ -95,7 +86,12 @@ static t_error	make_list(char *line, int *arr, t_list **lst)
 	{
 		cust_idx = arr[start - line];
 		type = cust_idx / 10;
-		if (type == T_SPACE || type == T_WORD)
+		if (type == T_SPACE)
+		{
+			start++;
+			continue ;
+		}
+		if (type == T_WORD)
 			len = count_len(line, arr, start - line);
 		else
 			len = cust_idx % 10 % 2 + 1;
@@ -118,17 +114,16 @@ t_error	tokenization(char *line)
 	if (!lst)
 		return (ERROR);
 	fill_arr(line, arr);
-	print_arr(arr, line);
 	handling_quote(line, arr, '\"');
 	handling_quote(line, arr, '\'');
-	print_arr(arr, line);
 	if (make_list(line, arr, &lst) == ERROR)
 	{
 		free(arr);
-		ft_lstclear(&lst, free); // del 함수 수정하기
+		ft_lstclear(&lst, del_t_token);
 		return (ERROR);
 	}
 	print_lst(lst->next);
 	free(arr);
+	ft_lstclear(&lst, del_t_token);
 	return (SCS);
 }

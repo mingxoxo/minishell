@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:01:53 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/10 19:47:35 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/10 22:03:10 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 # include "return.h"
 # include <stdlib.h>
 
+# define T_SPACE 6
+
 typedef enum e_token_type
 {
 	T_WORD,
-	T_SPACE,
 	T_PIPE,
 	T_IO,
 	T_PAREN,
