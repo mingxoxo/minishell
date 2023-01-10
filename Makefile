@@ -6,7 +6,7 @@
 #    By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/10 16:41:09 by jeongmin         ###   ########.fr        #
+#    Updated: 2023/01/10 19:29:08 by jeongmin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,7 @@ ENVP_SRCS	= $(addprefix $(ENVP_DIR), $(_ENVP_SRCS))
 PARSING_DIR		= parsing/
 
 _PARSING_SRCS	= token.c \
+				  arr.c
 
 PARSING_SRCS	= $(addprefix $(PARSING_DIR), $(_PARSING_SRCS))
 

@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:01:53 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/10 19:05:03 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/10 19:47:35 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ typedef struct s_token
 	char	*str;
 }	t_token;
 
+// token.c
 t_error	tokenization(char *line);
+
+// arr.c
+int		*init_arr(size_t len);
+void	fill_arr(char *line, int *arr);
+void	handling_quote(char *line, int *arr, char c);
 
 #endif
