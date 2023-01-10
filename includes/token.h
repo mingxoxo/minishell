@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/10 16:39:35 by jeongmin         ###   ########.fr       */
+/*   Created: 2023/01/10 16:01:53 by jeongmin          #+#    #+#             */
+/*   Updated: 2023/01/10 19:05:03 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include "libft.h"
-#include "ds_envp.h"
-#include "builtin.h"
-#include "token.h"
+#ifndef TOKEN_H
+# define TOKEN_H
 
-int	main(int argc, char **argv, char **env)
+# include "libft.h"
+# include "return.h"
+# include <stdlib.h>
+
+typedef enum e_token_type
 {
-	char	*str;
+	T_WORD,
+	T_SPACE,
+	T_PIPE,
+	T_IO,
+	T_PAREN,
+	T_OPER
+}	t_ttype;
 
-	while (1)
-	{
-		str = readline("prompt$ ");
-		if (ft_strcmp(str, "exit") == 0)
-			exit(0);
-		add_history(str);
-		printf("%s\n", str);
-		tokenization(str);
-		free(str);
-	}
-	return (0);
-}
+typedef struct s_token
+{
+	t_ttype	type;
+	char	*str;
+}	t_token;
+
+t_error	tokenization(char *line);
+
+#endif
