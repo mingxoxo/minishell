@@ -6,7 +6,7 @@
 #    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/09 21:15:27 by wonyang          ###   ########seoul.kr   #
+#    Updated: 2023/01/10 15:51:37 by wonyang          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,7 @@ ENVP_SRCS	= $(addprefix $(ENVP_DIR), $(_ENVP_SRCS))
 
 # main source files
 SRCS		= main.c \
+			  terminal.c \
 
 OBJS		= $(BTN_SRCS:%.c=%.o) \
 			  $(TREE_SRCS:%.c=%.o) \
