@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:15:15 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/10 22:22:44 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/10 22:43:34 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,13 @@ t_error	tokenization(char *line)
 	t_list	*lst;
 
 	arr = init_arr(ft_strlen(line));
-	if (!arr)
-		return (ERROR);
 	lst = ft_lstnew(NULL);
-	if (!lst)
+	if (!arr || !lst)
+	{
+		free(arr);
+		free(lst);
 		return (ERROR);
+	}
 	fill_arr(line, arr);
 	handling_quote(line, arr, '\"');
 	handling_quote(line, arr, '\'');
