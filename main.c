@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/10 19:36:56 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/10 22:49:27 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "ds_envp.h"
 #include "builtin.h"
 #include "minishell.h"
+#include "token.h"
 
 int	main(int argc, char **argv, char **env)
 {
@@ -25,13 +26,14 @@ int	main(int argc, char **argv, char **env)
 	set_minishell_setting();
 	while (1)
 	{
-		str = readline("prompt :");
+		str = readline("prompt$ ");
 		if (str == NULL)
 			exit(0);
 		else if (ft_strcmp(str, "") == 0)
 			continue ;
 		add_history(str);
 		printf("%s\n", str);
+		tokenization(str);
 		free(str);
 	}
 	return (0);

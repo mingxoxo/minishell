@@ -6,7 +6,7 @@
 #    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/10 19:45:12 by wonyang          ###   ########seoul.kr   #
+#    Updated: 2023/01/10 22:48:45 by wonyang          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,13 @@ _ENVP_SRCS	= cast_arr.c \
 
 ENVP_SRCS	= $(addprefix $(ENVP_DIR), $(_ENVP_SRCS))
 
+PARSING_DIR		= parsing/
+
+_PARSING_SRCS	= token.c \
+				  arr.c
+
+PARSING_SRCS	= $(addprefix $(PARSING_DIR), $(_PARSING_SRCS))
+
 # main source files
 SRCS		= main.c \
 			  terminal.c \
@@ -69,6 +76,7 @@ SRCS		= main.c \
 OBJS		= $(BTN_SRCS:%.c=%.o) \
 			  $(TREE_SRCS:%.c=%.o) \
 			  $(ENVP_SRCS:%.c=%.o) \
+			  $(PARSING_SRCS:%.c=%.o) \
 			  $(SRCS:%.c=%.o) \
 
 # define compile commands
