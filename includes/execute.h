@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:33:04 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/11 18:10:17 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 20:43:24 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,13 @@ t_error	redirection(t_tnode *node);
 // path.c
 t_error	make_cmd_path(char *cmd_name, char **path, char **envp);
 
-//util.c
+// heredoc.c
+char	**execute_all_heredoc(t_tnode **cmd_list);
+
+// heredoc_util.c
+char	*execute_heredoc(t_tnode *node);
+
+// util.c
 t_error	ft_dup2(int fd1, int fd2);
 
 #endif
