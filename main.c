@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/11 20:13:22 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/11 23:01:54 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	main(int argc, char **argv, char **env)
 		print_lst(lst->next);
 		node = make_tree(lst->next);
 		preorder(node, 0, "root");
+		clear_node(node, NULL);
 		ft_lstclear(&lst, del_t_token);
 		free(str);
 	}

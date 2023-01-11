@@ -6,19 +6,18 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 17:13:27 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/11 22:39:16 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/11 23:01:49 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "make_tree.h"
 
-void	print_lst(t_list *lst);
-
 t_error	make_cmd(t_tnode **node, t_list **lst)
 {
 	t_error	errno;
 
-	if (!(*node) || is_root_symbol((*node)->content))
+	errno = SCS;
+	if (!(*node) || is_dsv_symbol((*node)->content))
 	{
 		if (make_new_node(node) == ERROR)
 			return (ERROR);
@@ -30,25 +29,25 @@ t_error	make_cmd(t_tnode **node, t_list **lst)
 	return (errno);
 }
 
-t_tnode	*make_tree(t_list *lst)
+t_tnode	*make_tree(t_list *head)
 {
-	t_list	*tmp;
+	t_list	*lst;
 	t_tnode	*node;
 	t_error	errno;
 
 	node = NULL;
-	tmp = lst;
-	while (tmp)
+	lst = head;
+	while (lst)
 	{
-		if (is_this_symbol(tmp->content, T_PAREN))
-			errno = make_t_paren(&node, &tmp);
-		else if (is_dsv_symbol(tmp->content))
-			errno = make_dsv_node(&node, tmp);
+		if (is_this_symbol(lst->content, T_PAREN))
+			errno = make_t_paren(&node, &lst);
+		else if (is_dsv_symbol(lst->content))
+			errno = make_dsv_node(&node, lst);
 		else
-			errno = make_cmd(&node, tmp);
+			errno = make_cmd(&node, &lst);
 		if (errno == ERROR)
 			return (clear_node(check_root(node), NULL));
-		tmp = tmp->next;
+		lst = lst->next;
 	}
 	return (check_root(node));
 }

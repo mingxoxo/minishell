@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 17:38:04 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/11 22:37:44 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/11 22:45:17 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_error	make_t_paren(t_tnode **node, t_list **lst)
 	end->next = paren;
 	if (!tree)
 		return (ERROR);
-	if (*node && is_root_symbol((*node)->content))
+	if (*node && is_dsv_symbol((*node)->content))
 		set_rchild(*node, tree);
 	else
 		*node = tree;
@@ -74,6 +74,11 @@ t_error	make_t_io(t_tnode *node, t_list **lst)
 	t_tnode	*file;
 
 	new = init_node((*lst)->content);
+	if (!((*lst)->next))
+	{
+		free(new);
+		return (FAIL);
+	}
 	(*lst) = (*lst)->next;
 	file = init_node((*lst)->content);
 	if (!new || !file)
