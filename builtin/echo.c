@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:35:35 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/09 20:44:37 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 11:19:22 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ static void	print_argument(char **argv, int start_idx)
 
 int	ft_echo(char **argv)
 {
-	char	*option;
-
 	if (!argv || !(*argv))
 	{
 		printf("ft_echo argument error!\n");

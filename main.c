@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/10 22:49:27 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 11:20:47 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ int	main(int argc, char **argv, char **env)
 {
 	char	*str;
 
+	(void)argc;
+	(void)argv;
+	(void)env;
 	set_minishell_setting();
 	while (1)
 	{

@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:40:20 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/09 20:28:52 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 11:19:47 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	ft_env(char **argv, t_envp *envp)
 		return (-1);
 	}
 	arr = envp->arr;
+	i = 0;
 	while (arr[i])
 	{
 		ft_putendl_fd(arr[i], STDOUT_FILENO);
