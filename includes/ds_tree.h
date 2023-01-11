@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:33:50 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/11 18:22:23 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/11 19:38:43 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_tnode	*clear_node(t_tnode *node, void (*del)(void *));
 void	*pop_node(t_tnode *node);
 
 // search.c
-void	preorder(t_tnode *node);
+void	preorder(t_tnode *node, int level, char *direction);
 void	inorder(t_tnode *node);
 
 #endif
