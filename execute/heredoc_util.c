@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 20:42:06 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/11 22:20:58 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 22:43:39 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,18 @@ char	*execute_heredoc(t_tnode *node)
 		return (NULL);
 	}
 	return (file_name);
+}
+
+void	remove_heredoc_files(char **file_list)
+{
+	int	i;
+
+	i = 0;
+	while (file_list[i])
+	{
+		unlink(file_list[i]);
+		free(file_list[i]);
+		i++;
+	}
+	free(file_list);
 }

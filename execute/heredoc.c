@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 18:40:41 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/11 22:22:59 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 22:42:22 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ char	**execute_all_heredoc(t_tnode **cmd_list)
 			if (is_heredoc_node(node))
 			{
 				tmpfile_list[file_cnt] = execute_heredoc(node);
+				if (tmpfile_list[file_cnt] == NULL)
+					break ;
 				file_cnt++;
 			}
 			node = node->right;

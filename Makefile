@@ -6,7 +6,7 @@
 #    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/11 22:25:56 by wonyang          ###   ########seoul.kr   #
+#    Updated: 2023/01/11 23:37:47 by wonyang          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,8 @@ _EXE_SRCS		= argv.c \
 				  util.c \
 				  heredoc.c \
 				  heredoc_util.c \
+				  execute.c \
+				  child.c \
 
 EXE_SRCS		= $(addprefix $(EXE_DIR), $(_EXE_SRCS))
 
