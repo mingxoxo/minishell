@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 17:38:04 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/11 20:23:02 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/11 22:24:01 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,22 @@ t_error	make_t_paren(t_tnode **node, t_list **lst)
 	return (SCS);
 }
 
-t_error	make_root(t_tnode **node, t_list *lst)
+t_error	make_cross_node(t_tnode **node, t_list *lst)
 {
 	t_tnode	*new;
-	t_tnode	*root;
+	t_tnode	*parent;
 
 	new = init_node(lst->content);
 	if (!new)
 		return (ERROR);
-	root = search_root(*node);
-	if (root)
-		set_lchild(new, root);
+	parent = check_parent(*node, lst->content);
+	if (parent)
+	{
+		set_lchild(new, parent->right);
+		set_rchild(parent, new);
+	}
+	else
+		set_lchild(new, check_root(*node));
 	*node = new;
 	return (SCS);
 }

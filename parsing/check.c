@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 17:38:04 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/11 20:14:44 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/11 22:20:16 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,27 @@ t_list	*check_end_node(t_list *lst)
 	if (end == lst)
 		return (NULL);
 	return (end);
+}
+
+t_tnode	*check_parent(t_tnode *node, t_token *token)
+{
+	t_token	*parent;
+
+	while (node)
+	{
+		parent = (t_token *)(node->content);
+		if (parent->type > token->type)
+			return (node);
+		node = node->parent;
+	}
+	return (node);
+}
+
+t_tnode	*check_root(t_tnode *node)
+{
+	if (!node)
+		return (NULL);
+	while (node->parent)
+		node = node->parent;
+	return (node);
 }
