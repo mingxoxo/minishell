@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:33:50 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/06 22:12:30 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/11 18:11:01 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_node
 
 // init.c
 t_tnode	*init_node(void *content);
+void	set_content(t_tnode *node, void *content);
 void	set_lchild(t_tnode *node, t_tnode *left);
 void	set_rchild(t_tnode *node, t_tnode *right);
 
