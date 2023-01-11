@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:01:53 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/11 22:27:37 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/11 22:37:48 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ t_tnode	*make_tree(t_list *lst);
 // make_node.c
 t_error	make_new_node(t_tnode **node);
 t_error	make_t_paren(t_tnode **node, t_list **lst);
-t_error	make_cross_node(t_tnode **node, t_list *lst);
+t_error	make_dsv_node(t_tnode **node, t_list *lst);
 t_error	make_t_io(t_tnode *node, t_list **lst);
 t_error	make_t_word(t_tnode *node, t_list *lst);
 
 // check.c
-bool	is_root_symbol(t_token *token);
+bool	is_dsv_symbol(t_token *token);
 bool	is_this_symbol(t_token *token, t_ttype type);
 t_list	*check_end_node(t_list *lst);
 t_tnode	*check_parent(t_tnode *node, t_token *token);

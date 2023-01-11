@@ -6,13 +6,13 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 17:38:04 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/11 22:20:16 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/11 22:37:41 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "make_tree.h"
 
-bool	is_root_symbol(t_token *token)
+bool	is_dsv_symbol(t_token *token)
 {
 	if (token == NULL)
 		return (false);

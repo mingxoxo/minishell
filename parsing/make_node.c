@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 17:38:04 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/11 22:24:01 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/11 22:37:44 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_error	make_t_paren(t_tnode **node, t_list **lst)
 	return (SCS);
 }
 
-t_error	make_cross_node(t_tnode **node, t_list *lst)
+t_error	make_dsv_node(t_tnode **node, t_list *lst)
 {
 	t_tnode	*new;
 	t_tnode	*parent;
