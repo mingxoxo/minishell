@@ -6,7 +6,7 @@
 #    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/11 16:36:43 by wonyang          ###   ########seoul.kr   #
+#    Updated: 2023/01/11 16:38:31 by wonyang          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,13 @@ _PARSING_SRCS	= token.c \
 				  arr.c
 
 PARSING_SRCS	= $(addprefix $(PARSING_DIR), $(_PARSING_SRCS))
+
+# execute part source files
+EXE_DIR			= execute/
+
+_EXE_SRCS		= formatting.c \
+
+EXE_SRCS		= $(addprefix $(EXE_DIR), $(_EXE_SRCS))
 
 # main source files
 SRCS		= main.c \
