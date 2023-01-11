@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:01:53 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/11 22:49:14 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/11 23:11:13 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_error	make_t_word(t_tnode *node, t_list *lst);
 // check.c
 bool	is_dsv_symbol(t_token *token);
 bool	is_this_symbol(t_token *token, t_ttype type);
-t_list	*check_end_node(t_list *lst);
+t_list	*check_end_node(t_list **lst);
 t_tnode	*check_parent(t_tnode *node, t_token *token);
 t_tnode	*check_root(t_tnode *node);
 

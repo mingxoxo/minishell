@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 17:38:04 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/11 22:45:17 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/11 23:12:16 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_error	make_t_paren(t_tnode **node, t_list **lst)
 	t_list	*end;
 	t_list	*paren;
 
-	end = check_end_node((*lst)->next);
+	end = check_end_node(&((*lst)->next));
 	if (!end)
 		return (FAIL);
 	paren = end->next;

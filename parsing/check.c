@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 17:38:04 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/11 22:37:41 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/11 23:12:53 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,22 @@ bool	is_this_symbol(t_token *token, t_ttype type)
 	return (false);
 }
 
-t_list	*check_end_node(t_list *lst)
+t_list	*check_end_node(t_list **lst)
 {
 	t_list	*end;
 
-	end = lst;
+	end = *lst;
+	if (!end)
+		return (NULL);
 	while (end->next && !is_this_symbol(end->next->content, T_PAREN))
 		end = end->next;
-	if (end == lst)
+	if (!(end->next))
 		return (NULL);
+	if (end == *lst)
+	{
+		*lst = (*lst)->next;
+		return (NULL);
+	}
 	return (end);
 }
 
