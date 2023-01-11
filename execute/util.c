@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.h                                          :+:      :+:    :+:   */
+/*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/06 20:33:04 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/11 18:10:17 by wonyang          ###   ########seoul.kr  */
+/*   Created: 2023/01/11 18:08:57 by wonyang           #+#    #+#             */
+/*   Updated: 2023/01/11 18:09:17 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTE_H
-# define EXECUTE_H
-
-#include "ds_tree.h"
+#include <unistd.h>
 #include "return.h"
 
-// argv.c
-char	**make_argv(t_tnode *node);
-t_error	make_cmd_path(char *cmd_name, char **path, char **envp);
-
-// redirection.c
-t_error	redirection(t_tnode *node);
-
-// path.c
-t_error	make_cmd_path(char *cmd_name, char **path, char **envp);
-
-//util.c
-t_error	ft_dup2(int fd1, int fd2);
-
-#endif
+t_error	ft_dup2(int fd1, int fd2)
+{
+	if (close(fd2) == -1)
+		return (ERROR);
+	if (dup2(fd1, fd2) == -1)
+		return (ERROR);
+	if (close(fd1) == -1)
+		return (ERROR);
+	return (SCS);
+}

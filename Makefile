@@ -6,7 +6,7 @@
 #    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/11 17:32:54 by wonyang          ###   ########seoul.kr   #
+#    Updated: 2023/01/11 18:09:34 by wonyang          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,8 @@ EXE_DIR			= execute/
 
 _EXE_SRCS		= argv.c \
 				  path.c \
+				  redirection.c \
+				  util.c \
 
 EXE_SRCS		= $(addprefix $(EXE_DIR), $(_EXE_SRCS))
 
