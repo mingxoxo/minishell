@@ -6,7 +6,7 @@
 #    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/11 16:38:31 by wonyang          ###   ########seoul.kr   #
+#    Updated: 2023/01/11 17:17:49 by wonyang          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,7 +73,7 @@ PARSING_SRCS	= $(addprefix $(PARSING_DIR), $(_PARSING_SRCS))
 # execute part source files
 EXE_DIR			= execute/
 
-_EXE_SRCS		= formatting.c \
+_EXE_SRCS		= argv.c \
 
 EXE_SRCS		= $(addprefix $(EXE_DIR), $(_EXE_SRCS))
 
