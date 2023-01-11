@@ -6,7 +6,7 @@
 #    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/11 11:17:07 by wonyang          ###   ########seoul.kr   #
+#    Updated: 2023/01/11 16:36:43 by wonyang          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ _ENVP_SRCS	= cast_arr.c \
 
 ENVP_SRCS	= $(addprefix $(ENVP_DIR), $(_ENVP_SRCS))
 
+# parsing part source files
 PARSING_DIR		= parsing/
 
 _PARSING_SRCS	= token.c \
