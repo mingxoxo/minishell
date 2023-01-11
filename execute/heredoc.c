@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 18:40:41 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/11 20:44:34 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 22:22:59 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "ds_tree.h"
 #include "token.h"
 #include "libft.h"
+#include "execute.h"
 
 static int	count_heredoc(t_tnode *node)
 {
@@ -85,5 +86,5 @@ char	**execute_all_heredoc(t_tnode **cmd_list)
 		}
 		i++;
 	}
-	return (tmpfile);
+	return (tmpfile_list);
 }

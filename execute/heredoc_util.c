@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 20:42:06 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/11 20:49:19 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/11 22:20:58 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "token.h"
 #include "libft.h"
 #include "execute.h"
+#include "return.h"
 
 static char	*make_heredoc_filename(void)
 {
@@ -50,6 +51,22 @@ static void	heredoc_readline(int fd, char *delimiter)
 	}
 }
 
+static t_error	change_node_info(t_tnode *node, char *filename)
+{
+	t_token	*type;
+	t_token	*path;
+
+	type = (t_token *)node->content;
+	path = (t_token *)node->left->content;
+	free(type->str);
+	free(path->str);
+	type->str = ft_strdup("<");
+	if (!(type->str))
+		return (ERROR);
+	path->str = filename;
+	return (SCS);
+}
+
 char	*execute_heredoc(t_tnode *node)
 {
 	char	*delimiter;
@@ -64,8 +81,10 @@ char	*execute_heredoc(t_tnode *node)
 	if (fd < 0)
 		return (NULL);
 	heredoc_readline(fd, delimiter);
-	// todo : update node
-	if (close(fd) == -1)
+	if (change_node_info(node, file_name) == ERROR || close(fd) == -1)
+	{
+		free(file_name);
 		return (NULL);
+	}
 	return (file_name);
 }
