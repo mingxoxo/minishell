@@ -6,16 +6,25 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:33:05 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/12 18:38:06 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 20:15:49 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include "ds_envp.h"
 #include "execute.h"
 #include "libft.h"
 
 extern t_envp	g_envp;
+
+static t_error	set_child_signal(void)
+{
+	if (signal(SIGINT, SIG_DFL) == SIG_ERR)
+		return (ERROR);
+	return (SCS);
+}
 
 static t_error	child_execute(t_tnode *cmd_node)
 {
@@ -26,8 +35,18 @@ static t_error	child_execute(t_tnode *cmd_node)
 	cmd_argv = make_argv(cmd_node);
 	if (!cmd_argv)
 		return (ERROR);
-	if (make_cmd_path(cmd_argv[0], &path, g_envp.arr) == ERROR
-		|| apply_redirections(cmd_node) == ERROR
+	if (make_cmd_path(cmd_argv[0], &path, g_envp.arr) == ERROR)
+	{
+		ft_freesplit(cmd_argv);
+		return (ERROR);
+	}
+	if (!path)
+	{
+		perror("command not found");
+		exit(127);
+	}
+	if (apply_redirections(cmd_node) == ERROR
+		|| set_child_signal() == ERROR
 		|| execve(path, cmd_argv, g_envp.arr) == FAIL)
 	{
 		free(path);
@@ -76,8 +95,9 @@ static pid_t	last_fork_child(t_tnode *cmd_node, int before_fd)
 			return (0);
 		if (child_execute(cmd_node) == ERROR)
 			return (0);
+		printf("child run~!\n");
 	}
-	if (close(before_fd) == -1)
+	if (before_fd != STDIN_FILENO && close(before_fd) == -1)
 		return (0);
 	return (child_pid);
 }
