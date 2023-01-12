@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/12 16:41:34 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 21:50:04 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ int	main(int argc, char **argv, char **env)
 		else if (ft_strcmp(str, "") == 0)
 			continue ;
 		add_history(str);
-		// printf("%s\n", str);
 		lst = tokenization(str);
 		if (!lst)
 		{

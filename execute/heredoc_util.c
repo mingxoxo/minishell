@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 20:42:06 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/12 22:26:20 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 22:39:45 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,16 @@ static void	heredoc_readline(int fd, char *delimiter)
 	}
 }
 
-static t_error	change_node_info(t_tnode *node, char *filename)
+static void	change_node_info(t_tnode *node, char *filename)
 {
 	t_token	*path;
 
 	path = (t_token *)node->left->content;
 	free(path->str);
-	path->str = ft_strdup(filename);
-	if (!path->str)
-		return (ERROR);
-	return (SCS);
+	path->str = filename;
 }
 
-char	*execute_heredoc(t_tnode *node)
+t_error	execute_heredoc(t_tnode *node)
 {
 	char	*delimiter;
 	char	*file_name;
@@ -80,17 +77,15 @@ char	*execute_heredoc(t_tnode *node)
 	delimiter = ((t_token *)(node->left->content))->str;
 	file_name = make_heredoc_filename();
 	if (!file_name)
-		return (NULL);
+		return (ERROR);
 	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (fd < 0)
-		return (NULL);
+		return (ERROR);
 	heredoc_readline(fd, delimiter);
-	if (change_node_info(node, file_name) == ERROR || close(fd) == -1)
-	{
-		free(file_name);
-		return (NULL);
-	}
-	return (file_name);
+	change_node_info(node, file_name);
+	if (close(fd) == -1)
+		return (ERROR);
+	return (SCS);
 }
 
 void	remove_heredoc_files(char **file_list)

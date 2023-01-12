@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 22:30:55 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/12 22:19:17 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 22:38:51 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,24 +45,21 @@ static int	wait_proc(pid_t *pid_list)
 t_error	execute_cmds(t_tnode *root)
 {
 	t_tnode **cmd_list;
-	char	**file_list;
 	pid_t	*pid_list;
 
 	cmd_list = make_cmd_list(root);
 	if (!cmd_list)
 		return (ERROR);
-	file_list = execute_all_heredoc(cmd_list);
 	pid_list = empty_pid_list(cmd_list);
-	if (!file_list || !pid_list
+	if (!pid_list
+		|| execute_all_heredoc(cmd_list) == ERROR
 		|| create_childs(cmd_list, pid_list) == ERROR)
 	{
 		printf("create_childs error!!\n");
-		remove_heredoc_files(file_list);
 		free(pid_list);
 		return (ERROR);
 	}
 	wait_proc(pid_list);
-	remove_heredoc_files(file_list);
 	free(pid_list);
 	return (SCS);
 }
