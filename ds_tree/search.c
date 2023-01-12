@@ -6,19 +6,26 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:33:50 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/06 22:12:08 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/11 19:49:10 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ds_tree.h"
+#include "token.h"
 
-void	preorder(t_tnode *node)
+void	preorder(t_tnode *node, int level, char *direction)
 {
+	t_token	*token;
+
 	if (!node)
 		return ;
-	printf("%s\n", (char *)(node->content));
-	preorder(node->left);
-	preorder(node->right);
+	token = (t_token *)(node->content);
+	if (!token)
+		printf("level: %d d: %s NULL\n", level, direction);
+	else
+		printf("level: %d d: %s [%s]\n", level, direction, token->str);
+	preorder(node->left, level + 1, "left");
+	preorder(node->right, level + 1, "right");
 }
 
 void	inorder(t_tnode *node)

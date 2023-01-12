@@ -6,14 +6,13 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:15:15 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/10 22:43:34 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/11 17:05:51 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "token.h"
 
-static void	del_t_token(void *content)
+void	del_t_token(void *content)
 {
 	t_token	*token;
 
@@ -23,18 +22,6 @@ static void	del_t_token(void *content)
 	if (token->str)
 		free(token->str);
 	free(content);
-}
-
-static void	print_lst(t_list *lst)
-{
-	t_token	*token;
-
-	while (lst)
-	{
-		token = (t_token *)(lst->content);
-		printf("[%d] [%s]\n", token->type, token->str);
-		lst = lst->next;
-	}
 }
 
 static t_error	make_token(char *line, t_ttype type, size_t len, t_list **lst)
@@ -102,7 +89,7 @@ static t_error	make_list(char *line, int *arr, t_list **lst)
 	return (SCS);
 }
 
-t_error	tokenization(char *line)
+t_list	*tokenization(char *line)
 {
 	int		*arr;
 	t_list	*lst;
@@ -113,7 +100,7 @@ t_error	tokenization(char *line)
 	{
 		free(arr);
 		free(lst);
-		return (ERROR);
+		return (NULL);
 	}
 	fill_arr(line, arr);
 	handling_quote(line, arr, '\"');
@@ -122,10 +109,8 @@ t_error	tokenization(char *line)
 	{
 		free(arr);
 		ft_lstclear(&lst, del_t_token);
-		return (ERROR);
+		return (NULL);
 	}
-	print_lst(lst->next);
 	free(arr);
-	ft_lstclear(&lst, del_t_token);
-	return (SCS);
+	return (lst);
 }

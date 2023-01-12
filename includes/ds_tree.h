@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:33:50 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/06 22:12:30 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/11 19:38:43 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_node
 
 // init.c
 t_tnode	*init_node(void *content);
+void	set_content(t_tnode *node, void *content);
 void	set_lchild(t_tnode *node, t_tnode *left);
 void	set_rchild(t_tnode *node, t_tnode *right);
 
@@ -41,11 +42,11 @@ t_tnode	*add_rchild(t_tnode *node, void *content);
 
 // delete.c
 void	del_node(t_tnode *node, void (*del)(void *));
-void	clear_node(t_tnode *node, void (*del)(void *));
+t_tnode	*clear_node(t_tnode *node, void (*del)(void *));
 void	*pop_node(t_tnode *node);
 
 // search.c
-void	preorder(t_tnode *node);
+void	preorder(t_tnode *node, int level, char *direction);
 void	inorder(t_tnode *node);
 
 #endif
