@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:33:04 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/12 11:47:45 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 16:34:56 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@
 # include "ds_tree.h"
 # include "return.h"
 
+// preprocess.c
+t_tnode	**make_cmd_list(t_tnode *root);
+
 // execute.c
-t_error	execute_cmds(t_tnode **cmd_list);
+t_error	execute_cmds(t_tnode *root);
 
 // child.c
 t_error	create_childs(t_tnode **cmd_list, pid_t *pid_list);

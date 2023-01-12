@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 20:42:06 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/12 11:47:30 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 17:13:47 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	heredoc_readline(int fd, char *delimiter)
 			free(line);
 			break ;
 		}
-		write(fd, line, ft_strlen(line));
+		ft_putendl_fd(line, fd);
 		free(line);
 	}
 }
@@ -66,9 +66,13 @@ static t_error	change_node_info(t_tnode *node, char *filename)
 	free(type->str);
 	free(path->str);
 	type->str = ft_strdup("<");
-	if (!(type->str))
+	path->str = ft_strdup(filename);
+	if (!type->str || !path->str)
+	{
+		free(type->str);
+		free(path->str);
 		return (ERROR);
-	path->str = filename;
+	}
 	return (SCS);
 }
 

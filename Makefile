@@ -6,7 +6,7 @@
 #    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/12 10:52:23 by wonyang          ###   ########seoul.kr   #
+#    Updated: 2023/01/12 16:47:11 by wonyang          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ HEADERS		= -I$(LIBFT) \
 LIBS		= -lft -L$(LIBFT) \
 			  -L$(RDLINE_DIR)/lib/ -lreadline\
 
-# CFLAGS		= -Wall -Werror -Wextra
+CFLAGS		= -Wall -Werror -Wextra -g3 -fsanitize=address
 
 # builtin source files
 BTN_DIR		= builtin/
@@ -84,6 +84,7 @@ _EXE_SRCS		= argv.c \
 				  heredoc_util.c \
 				  execute.c \
 				  child.c \
+				  preprocess.c \
 
 EXE_SRCS		= $(addprefix $(EXE_DIR), $(_EXE_SRCS))
 

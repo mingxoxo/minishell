@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/12 11:42:21 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 16:41:34 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "builtin.h"
 #include "make_tree.h"
 #include "minishell.h"
+#include "execute.h"
 
 t_envp	g_envp;
 
@@ -52,16 +53,15 @@ int	main(int argc, char **argv, char **env)
 		else if (ft_strcmp(str, "") == 0)
 			continue ;
 		add_history(str);
-		printf("%s\n", str);
+		// printf("%s\n", str);
 		lst = tokenization(str);
 		if (!lst)
 		{
 			free(str);
 			continue ;
 		}
-		print_lst(lst->next);
 		node = make_tree(lst->next);
-		preorder(node, 0, "root");
+		execute_cmds(node);
 		clear_node(node, NULL);
 		ft_lstclear(&lst, del_t_token);
 		free(str);

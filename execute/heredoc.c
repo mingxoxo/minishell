@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 18:40:41 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/11 22:42:22 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 17:19:44 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	count_heredoc(t_tnode *node)
 	while (node)
 	{
 		token = (t_token *)(node->content);
-		if (token->type == T_IO && ft_strcmp(token->str, "<<"))
+		if (token->type == T_IO && ft_strcmp(token->str, "<<") == 0)
 			count++;
 		node = node->right;
 	}
@@ -70,9 +70,11 @@ char	**execute_all_heredoc(t_tnode **cmd_list)
 	t_tnode	*node;
 
 	tmpfile_list = empty_tmpfile_list(cmd_list);
+	if (!tmpfile_list)
+		return (NULL);
 	i = 0;
 	file_cnt = 0;
-	while (1)
+	while (cmd_list[i])
 	{
 		node = cmd_list[i];
 		while (node)
