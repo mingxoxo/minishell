@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 20:42:06 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/12 11:39:18 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 11:47:30 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static char	*make_heredoc_filename(void)
 		return (NULL);
 	res = (char *)ft_calloc(sizeof(char), 31);
 	read(fd, res, 30);
-	if (close(fd) == -1){
+	if (close(fd) == -1)
+	{
 		free(res);
 		return (NULL);
 	}
