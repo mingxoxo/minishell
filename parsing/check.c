@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 17:38:04 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/11 23:12:53 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/12 15:12:23 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_list	*check_end_node(t_list **lst)
 		end = end->next;
 	if (!(end->next))
 		return (NULL);
-	if (end == *lst)
+	if (is_this_symbol(end->content, T_PAREN))
 	{
 		*lst = (*lst)->next;
 		return (NULL);
