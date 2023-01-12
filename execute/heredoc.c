@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 18:40:41 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/12 22:39:22 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 23:32:50 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ t_error	execute_all_heredoc(t_tnode **cmd_list)
 		while (node)
 		{
 			if (is_heredoc_node(node) && execute_heredoc(node) == ERROR)
+			{
+				ft_putendl_fd("heredoc error", STDERR_FILENO);
 				return (ERROR);
+			}
 			node = node->right;
 		}
 		i++;

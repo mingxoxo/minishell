@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 22:30:55 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/12 22:38:51 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 22:45:45 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ t_error	execute_cmds(t_tnode *root)
 		|| execute_all_heredoc(cmd_list) == ERROR
 		|| create_childs(cmd_list, pid_list) == ERROR)
 	{
-		printf("create_childs error!!\n");
 		free(pid_list);
 		return (ERROR);
 	}

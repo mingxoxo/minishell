@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:33:05 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/12 20:15:49 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 23:34:09 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,13 @@ static pid_t	fork_child(t_tnode *cmd_node, int *before_fd)
 	if (child_pid == 0)
 	{
 		if (close(fd[0]) == -1
-			|| ft_dup2(tmp, STDIN_FILENO) == ERROR
+			|| (tmp != STDIN_FILENO && ft_dup2(tmp, STDIN_FILENO) == ERROR)
 			|| ft_dup2(fd[1], STDOUT_FILENO) == ERROR
 			|| child_execute(cmd_node) == ERROR)
 			return (0);
 	}
-	if (close(tmp) == -1 || close(fd[1]) == -1)
+	if ((tmp != STDIN_FILENO && close(tmp) == -1)
+		|| close(fd[1]) == -1)
 		return (0);
 	return (child_pid);
 }
@@ -95,7 +96,6 @@ static pid_t	last_fork_child(t_tnode *cmd_node, int before_fd)
 			return (0);
 		if (child_execute(cmd_node) == ERROR)
 			return (0);
-		printf("child run~!\n");
 	}
 	if (before_fd != STDIN_FILENO && close(before_fd) == -1)
 		return (0);
