@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 20:42:06 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/12 17:13:47 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 22:26:20 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 static char	*make_heredoc_filename(void)
 {
 	char	*res;
+	char	*path;
 	int		fd;
 
 	fd = open("/dev/urandom", O_RDONLY);
@@ -31,12 +32,14 @@ static char	*make_heredoc_filename(void)
 		return (NULL);
 	res = (char *)ft_calloc(sizeof(char), 31);
 	read(fd, res, 30);
-	if (close(fd) == -1)
+	if (!res || close(fd) == -1)
 	{
 		free(res);
 		return (NULL);
 	}
-	return (res);
+	path = ft_strjoin(".", res);
+	free(res);
+	return (path);
 }
 
 static void	heredoc_readline(int fd, char *delimiter)
@@ -58,21 +61,13 @@ static void	heredoc_readline(int fd, char *delimiter)
 
 static t_error	change_node_info(t_tnode *node, char *filename)
 {
-	t_token	*type;
 	t_token	*path;
 
-	type = (t_token *)node->content;
 	path = (t_token *)node->left->content;
-	free(type->str);
 	free(path->str);
-	type->str = ft_strdup("<");
 	path->str = ft_strdup(filename);
-	if (!type->str || !path->str)
-	{
-		free(type->str);
-		free(path->str);
+	if (!path->str)
 		return (ERROR);
-	}
 	return (SCS);
 }
 

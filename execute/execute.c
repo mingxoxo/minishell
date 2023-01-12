@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 22:30:55 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/12 20:13:51 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 22:19:17 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static int	wait_proc(pid_t *pid_list)
 		waitpid(pid_list[i], &status, 0);
 		i++;
 	}
-	printf("status : %d\n", status/ 256);
 	return (status / 256);
 }
 

@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 17:36:33 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/12 18:09:15 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 22:19:08 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,20 @@ static t_error	set_infile_normal(char *path)
 		perror(path);
 		return (ERROR);
 	}
+	return (ft_dup2(in_fd, STDIN_FILENO));
+}
+
+static t_error	set_infile_heredoc(char *path)
+{
+	int	in_fd;
+
+	in_fd = open(path, O_RDONLY, 0644);
+	if (in_fd == -1)
+	{
+		perror(path);
+		return (ERROR);
+	}
+	unlink(path);
 	return (ft_dup2(in_fd, STDIN_FILENO));
 }
 
@@ -61,6 +75,8 @@ t_error	redirection(t_tnode *node)
 	token = (t_token *)node->content;
 	if (ft_strcmp(token->str, "<") == 0)
 		return (set_infile_normal(path));
+	else if (ft_strcmp(token->str, "<<") == 0)
+		return (set_infile_heredoc(path));
 	else if (ft_strcmp(token->str, ">") == 0)
 		return (set_outfile_trunc(path));
 	else if (ft_strcmp(token->str, ">>") == 0)
