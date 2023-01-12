@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/12 16:33:30 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/12 18:29:23 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,14 @@ void	print_lst(t_list *lst)
 {
 	t_token	*token;
 
+	printf("---------\n");
 	while (lst)
 	{
 		token = (t_token *)(lst->content);
 		printf("[%d] [%s]\n", token->type, token->str);
 		lst = lst->next;
 	}
+	printf("---------\n");
 }
 
 int	main(int argc, char **argv, char **env)

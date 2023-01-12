@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:01:53 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/11 23:11:13 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/12 19:45:11 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <stdlib.h>
 # include <stdbool.h>
 
+# define OPEN_PAREN 1
+# define CLOSE_PAREN 2
+
 // make_tree.c
 t_tnode	*make_tree(t_list *head);
 
@@ -28,9 +31,12 @@ t_error	make_dsv_node(t_tnode **node, t_list *lst);
 t_error	make_t_io(t_tnode *node, t_list **lst);
 t_error	make_t_word(t_tnode *node, t_list *lst);
 
-// check.c
+// check_type.c
 bool	is_dsv_symbol(t_token *token);
 bool	is_this_symbol(t_token *token, t_ttype type);
+int		check_paren(t_token *token);
+
+// check_tnode.c
 t_list	*check_end_node(t_list **lst);
 t_tnode	*check_parent(t_tnode *node, t_token *token);
 t_tnode	*check_root(t_tnode *node);
