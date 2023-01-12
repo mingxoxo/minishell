@@ -6,7 +6,7 @@
 #    By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/12 18:26:19 by jeongmin         ###   ########.fr        #
+#    Updated: 2023/01/12 19:43:29 by jeongmin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,8 @@ PARSING_DIR		= parsing/
 
 _PARSING_SRCS	= token.c \
 				  arr.c \
-				  check.c \
+				  check_tnode.c \
+				  check_type.c \
 				  make_node.c \
 				  make_tree.c
 

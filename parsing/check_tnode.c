@@ -1,44 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check.c                                            :+:      :+:    :+:   */
+/*   check_tnode.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 17:38:04 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/12 16:30:21 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/12 19:45:07 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "make_tree.h"
 
-bool	is_dsv_symbol(t_token *token)
-{
-	if (token == NULL)
-		return (false);
-	if (token->type == T_OPER || token->type == T_PIPE)
-		return (true);
-	return (false);
-}
-
-bool	is_this_symbol(t_token *token, t_ttype type)
-{
-	if (token == NULL)
-		return (false);
-	if (token->type == type)
-		return (true);
-	return (false);
-}
-
 t_list	*check_end_node(t_list **lst)
 {
+	int		cnt;
 	t_list	*end;
 
 	end = *lst;
 	if (!end)
 		return (NULL);
-	while (end->next && !is_this_symbol(end->next->content, T_PAREN))
+	cnt = 1;
+	while (end->next)
+	{
+		cnt += check_paren(end->next->content);
+		if (cnt == 0)
+			break ;
 		end = end->next;
+	}
 	if (!(end->next))
 		return (NULL);
 	if (is_this_symbol(end->content, T_PAREN))

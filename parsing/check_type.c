@@ -1,50 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   syatax_error.c                                     :+:      :+:    :+:   */
+/*   check_type.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 17:45:48 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/12 18:44:10 by jeongmin         ###   ########.fr       */
+/*   Created: 2023/01/11 17:38:04 by jeongmin          #+#    #+#             */
+/*   Updated: 2023/01/12 19:45:12 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "make_tree.h"
 
-int	chk_paren(t_token *token)
+bool	is_dsv_symbol(t_token *token)
+{
+	if (token == NULL)
+		return (false);
+	if (token->type == T_OPER || token->type == T_PIPE)
+		return (true);
+	return (false);
+}
+
+bool	is_this_symbol(t_token *token, t_ttype type)
+{
+	if (token == NULL)
+		return (false);
+	if (token->type == type)
+		return (true);
+	return (false);
+}
+
+int	check_paren(t_token *token)
 {
 	if (is_this_symbol(token, T_PAREN))
 	{
 		if (!token->str)
 			return (0);
 		if (ft_strcmp(token->str, "(") == 0)
-			return (1);
+			return (OPEN_PAREN);
 		else if (ft_strcmp(token->str, ")") == 0)
-			return (-1);
+			return (CLOSE_PAREN);
 	}
 	return (0);
-}
-
-static bool	is_correct_paren(t_list *lst)
-{
-	int	cnt;
-
-	cnt = 0;
-	while (lst)
-	{
-		cnt += chk_paren(lst->content);
-		if (cnt < 0)
-			return (false);
-	}
-	if (cnt != 0)
-		return (false);
-	return (true);
-}
-
-bool	is_correct_syntax(t_list *lst)
-{
-	if (!is_correct_paren)
-		return (false);
-	return (true);
 }
