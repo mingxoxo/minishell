@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/11 23:01:54 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/12 11:42:21 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include "builtin.h"
 #include "make_tree.h"
 #include "minishell.h"
+
+t_envp	g_envp;
 
 void	print_lst(t_list *lst)
 {
@@ -39,7 +41,7 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-	(void)env;
+	init_envp(&g_envp, env);
 	set_minishell_setting();
 	lst = NULL;
 	while (1)
@@ -64,5 +66,6 @@ int	main(int argc, char **argv, char **env)
 		ft_lstclear(&lst, del_t_token);
 		free(str);
 	}
+	clear_envp(&g_envp);
 	return (0);
 }

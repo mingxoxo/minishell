@@ -6,13 +6,16 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:33:05 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/11 23:37:38 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 11:45:52 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include "ds_envp.h"
 #include "execute.h"
 #include "libft.h"
+
+extern t_envp	g_envp;
 
 static t_error	child_execute(t_tnode *cmd_node)
 {
@@ -23,9 +26,9 @@ static t_error	child_execute(t_tnode *cmd_node)
 	cmd_argv = make_argv(cmd_node);
 	if (!cmd_argv)
 		return (ERROR);
-	if (make_cmd_path(cmd_argv[0], &path, envp) == ERROR
-	|| redirection(cmd_node) == ERROR
-	|| execve(path, cmd_argv, envp) == FAIL)
+	if (make_cmd_path(cmd_argv[0], &path, g_envp.arr) == ERROR
+		|| redirection(cmd_node) == ERROR
+		|| execve(path, cmd_argv, g_envp.arr) == FAIL)
 	{
 		free(path);
 		ft_freesplit(cmd_argv);
@@ -49,10 +52,10 @@ static pid_t	fork_child(t_tnode *cmd_node, int *before_fd)
 		return (0);
 	if (child_pid == 0)
 	{
-		if (close(fd[0]) == -1 
-		|| ft_dup2(tmp, STDIN_FILENO) == ERROR 
-		|| ft_dup2(fd[1], STDOUT_FILENO) == ERROR
-		|| child_execute(cmd_node) == ERROR)
+		if (close(fd[0]) == -1
+			|| ft_dup2(tmp, STDIN_FILENO) == ERROR
+			|| ft_dup2(fd[1], STDOUT_FILENO) == ERROR
+			|| child_execute(cmd_node) == ERROR)
 			return (0);
 	}
 	if (close(tmp) == -1 || close(fd[1]) == -1)
@@ -69,8 +72,8 @@ static pid_t	last_fork_child(t_tnode *cmd_node, int before_fd)
 		return (0);
 	if (child_pid == 0)
 	{
-		if (ft_dup2(before_fd, STDIN_FILENO) == ERROR 
-		|| child_execute(cmd_node) == ERROR)
+		if (ft_dup2(before_fd, STDIN_FILENO) == ERROR
+			|| child_execute(cmd_node) == ERROR)
 			return (0);
 	}
 	if (close(before_fd) == -1)
