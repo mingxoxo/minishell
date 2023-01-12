@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:33:50 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/06 22:12:41 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/11 18:22:27 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,14 @@ void	del_node(t_tnode *node, void (*del)(void *))
 	free(node);
 }
 
-void	clear_node(t_tnode *node, void (*del)(void *))
+t_tnode	*clear_node(t_tnode *node, void (*del)(void *))
 {
 	if (!node)
-		return ;
+		return (NULL);
 	clear_node(node->left, del);
 	clear_node(node->right, del);
 	del_node(node, del);
+	return (NULL);
 }
 
 void	*pop_node(t_tnode *node)

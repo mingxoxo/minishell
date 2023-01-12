@@ -6,7 +6,7 @@
 #    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/11 23:37:47 by wonyang          ###   ########seoul.kr   #
+#    Updated: 2023/01/12 10:52:23 by wonyang          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,10 @@ ENVP_SRCS	= $(addprefix $(ENVP_DIR), $(_ENVP_SRCS))
 PARSING_DIR		= parsing/
 
 _PARSING_SRCS	= token.c \
-				  arr.c
+				  arr.c \
+				  check.c \
+				  make_node.c \
+				  make_tree.c
 
 PARSING_SRCS	= $(addprefix $(PARSING_DIR), $(_PARSING_SRCS))
 
