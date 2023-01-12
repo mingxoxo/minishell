@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/12 22:03:43 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/12 22:16:31 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int	main(int argc, char **argv, char **env)
 		print_lst(lst->next);
 		if (!is_correct_syntax(lst->next))
 		{
-			ft_putendl_fd("bash: syntax error near unexpected token `)'", 2);
 			ft_lstclear(&lst, del_t_token);
 			free(str);
 			continue ;
