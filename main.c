@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/11 23:01:54 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/12 16:33:30 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,21 @@
 #include "builtin.h"
 #include "make_tree.h"
 #include "minishell.h"
+
+static void	del_t_paren(void *content)
+{
+	t_token	*token;
+
+	if (!content)
+		return ;
+	token = (t_token *)(content);
+	if (!is_this_symbol(token, T_PAREN))
+		return ;
+	if (token->str)
+		free(token->str);
+	free(content);
+	content = NULL;
+}
 
 void	print_lst(t_list *lst)
 {
@@ -60,8 +75,8 @@ int	main(int argc, char **argv, char **env)
 		print_lst(lst->next);
 		node = make_tree(lst->next);
 		preorder(node, 0, "root");
-		clear_node(node, NULL);
-		ft_lstclear(&lst, del_t_token);
+		ft_lstclear(&lst, del_t_paren);
+		clear_node(node, del_t_token);
 		free(str);
 	}
 	return (0);

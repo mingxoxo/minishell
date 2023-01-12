@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:33:50 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/11 18:22:27 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/12 14:29:37 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	del_node(t_tnode *node, void (*del)(void *))
 {
 	t_pos	pos;
 
+	if (!node)
+		return ;
 	if (node->left || node->right)
 	{
 		printf("del_node error: node has child.");
