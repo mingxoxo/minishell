@@ -6,7 +6,7 @@
 #    By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/11 19:17:33 by jeongmin         ###   ########.fr        #
+#    Updated: 2023/01/12 18:26:19 by jeongmin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ HEADERS		= -I$(LIBFT) \
 LIBS		= -lft -L$(LIBFT) \
 			  -L$(RDLINE_DIR)/lib/ -lreadline\
 
-CFLAGS		= -Wall -Werror -Wextra
+CFLAGS		= -Wall -Werror -Wextra -g3 -fsanitize=address
 
 # builtin source files
 BTN_DIR		= builtin/
