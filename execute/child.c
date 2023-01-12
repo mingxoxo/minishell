@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:33:05 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/12 11:45:52 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 18:38:06 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_error	child_execute(t_tnode *cmd_node)
 	if (!cmd_argv)
 		return (ERROR);
 	if (make_cmd_path(cmd_argv[0], &path, g_envp.arr) == ERROR
-		|| redirection(cmd_node) == ERROR
+		|| apply_redirections(cmd_node) == ERROR
 		|| execve(path, cmd_argv, g_envp.arr) == FAIL)
 	{
 		free(path);
@@ -36,7 +36,6 @@ static t_error	child_execute(t_tnode *cmd_node)
 	}
 	return (SCS);
 }
-
 static pid_t	fork_child(t_tnode *cmd_node, int *before_fd)
 {
 	int		fd[2];
@@ -72,8 +71,10 @@ static pid_t	last_fork_child(t_tnode *cmd_node, int before_fd)
 		return (0);
 	if (child_pid == 0)
 	{
-		if (ft_dup2(before_fd, STDIN_FILENO) == ERROR
-			|| child_execute(cmd_node) == ERROR)
+		if (before_fd != STDIN_FILENO
+			&& ft_dup2(before_fd, STDIN_FILENO) == ERROR)
+			return (0);
+		if (child_execute(cmd_node) == ERROR)
 			return (0);
 	}
 	if (close(before_fd) == -1)
@@ -95,7 +96,7 @@ t_error	create_childs(t_tnode **cmd_list, pid_t *pid_list)
 			return (ERROR);
 		i++;
 	}
-	last_fork_child(cmd_list[i], before_fd);
+	pid_list[i] = last_fork_child(cmd_list[i], before_fd);
 	if (pid_list[i] == 0)
 		return (ERROR);
 	return (SCS);

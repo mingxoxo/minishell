@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 17:36:33 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/11 20:44:15 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 18:09:15 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,18 @@ t_error	redirection(t_tnode *node)
 	else if (ft_strcmp(token->str, ">>") == 0)
 		return (set_outfile_append(path));
 	return (ERROR);
+}
+
+t_error	apply_redirections(t_tnode *node)
+{
+	if (!node)
+		return (ERROR);
+	node = node->right;
+	while (node)
+	{
+		if (redirection(node) == ERROR)
+			return (ERROR);
+		node = node->right;
+	}
+	return (SCS);
 }

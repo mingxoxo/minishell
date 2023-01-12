@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:33:04 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/12 16:34:56 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/12 18:03:33 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_error	create_childs(t_tnode **cmd_list, pid_t *pid_list);
 char	**make_argv(t_tnode *node);
 
 // redirection.c
-t_error	redirection(t_tnode *node);
+t_error	apply_redirections(t_tnode *node);
 
 // path.c
 t_error	make_cmd_path(char *cmd_name, char **path, char **envp);
