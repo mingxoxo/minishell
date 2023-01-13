@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 21:59:01 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 22:24:36 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	main(int argc, char **argv, char **env)
 	lst = NULL;
 	while (1)
 	{
-		str = readline("prompt$ ");
+		str = readline("\033[0;36mISFJ-Shell$\033[0m ");
 		if (str == NULL || ft_strcmp(str, "exit") == 0)
 			break ;
 		else if (ft_strcmp(str, "") == 0)
