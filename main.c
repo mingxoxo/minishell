@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/12 22:16:31 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/13 15:29:08 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 #include "builtin.h"
 #include "make_tree.h"
 #include "minishell.h"
+#include "execute.h"
+
+t_envp	g_envp;
 
 static void	del_t_paren(void *content)
 {
@@ -56,7 +59,7 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-	(void)env;
+	init_envp(&g_envp, env);
 	set_minishell_setting();
 	lst = NULL;
 	while (1)
@@ -67,14 +70,13 @@ int	main(int argc, char **argv, char **env)
 		else if (ft_strcmp(str, "") == 0)
 			continue ;
 		add_history(str);
-		printf("%s\n", str);
 		lst = tokenization(str);
 		if (!lst)
 		{
 			free(str);
 			continue ;
 		}
-		print_lst(lst->next);
+		// print_lst(lst->next);
 		if (!is_correct_syntax(lst->next))
 		{
 			ft_lstclear(&lst, del_t_token);
@@ -82,10 +84,12 @@ int	main(int argc, char **argv, char **env)
 			continue ;
 		}
 		node = make_tree(lst->next);
-		preorder(node, 0, "root");
+		execute_cmds(node);
+		// preorder(node, 0, "root");
 		ft_lstclear(&lst, del_t_paren);
 		clear_node(node, del_t_token);
 		free(str);
 	}
+	clear_envp(&g_envp);
 	return (0);
 }
