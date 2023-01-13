@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:36:28 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/11 11:18:51 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 20:16:51 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,21 +88,26 @@ static t_error	move_oldpwd(t_envp *envp)
 	return (update_pwd(envp));
 }
 
-t_error	ft_cd(char **argv, t_envp *envp)
+int	ft_cd(char **argv, t_envp *envp)
 {
 	char	*path;
+	t_error	errno;
 
 	if (!argv || !(*argv))
 	{
 		printf("ft_cd argument error!\n");
-		return (FAIL);
+		return (1);
 	}
 	path = argv[1];
 	if (!path)
-		return (move_home(envp));
-	if (ft_strcmp(path, "-") == 0)
-		return (move_oldpwd(envp));
-	if (chdir(path) != 0)
-		return (path_error(path));
-	return (update_pwd(envp));
+		errno = move_home(envp);
+	else if (ft_strcmp(path, "-") == 0)
+		errno = move_oldpwd(envp);
+	else if (chdir(path) != 0)
+		errno = path_error(path);
+	else
+		errno = update_pwd(envp);
+	if (errno)
+		return (1);
+	return (0);
 }
