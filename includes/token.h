@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:01:53 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/13 21:59:13 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/13 23:28:49 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,17 @@
 # include "return.h"
 # include <stdlib.h>
 
-# define T_SPACE 6
-
 typedef enum e_token_type
 {
 	T_WORD,
 	T_PIPE,
 	T_IO,
 	T_PAREN,
-	T_OPER
+	T_OPER,
+	T_QUOTE,
+	T_SPACE,
+	T_DOLLER,
+	T_ENVP
 }	t_ttype;
 
 typedef struct s_token
@@ -36,6 +38,7 @@ typedef struct s_token
 
 // token.c
 void	del_t_token(void *content);
+t_error	make_token(char *line, t_ttype type, size_t len, t_list **lst);
 t_list	*tokenization(char *line);
 
 // arr.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 17:22:53 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 22:00:17 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	main(int argc, char **argv, char **env)
 			free(str);
 			continue ;
 		}
-		// print_lst(lst->next);
+		print_lst(lst->next);
 		if (!is_correct_syntax(lst->next))
 		{
 			ft_lstclear(&lst, del_t_token);
@@ -84,7 +84,8 @@ int	main(int argc, char **argv, char **env)
 			continue ;
 		}
 		node = make_tree(lst->next);
-		execute_cmds(node);
+		subst_env(node);
+		//execute_cmds(node);
 		// preorder(node, 0, "root");
 		ft_lstclear(&lst, del_t_paren);
 		clear_node(node, del_t_token);

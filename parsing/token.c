@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:15:15 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/13 22:03:54 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/13 23:29:13 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	del_t_token(void *content)
 	content = NULL;
 }
 
-static t_error	make_token(char *line, t_ttype type, size_t len, t_list **lst)
+t_error	make_token(char *line, t_ttype type, size_t len, t_list **lst)
 {
 	t_token	*token;
 	t_list	*new;
