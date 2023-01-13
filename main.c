@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 15:16:11 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 15:29:08 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,33 @@
 
 t_envp	g_envp;
 
+static void	del_t_paren(void *content)
+{
+	t_token	*token;
+
+	if (!content)
+		return ;
+	token = (t_token *)(content);
+	if (!is_this_symbol(token, T_PAREN))
+		return ;
+	if (token->str)
+		free(token->str);
+	free(content);
+	content = NULL;
+}
+
 void	print_lst(t_list *lst)
 {
 	t_token	*token;
 
+	printf("---------\n");
 	while (lst)
 	{
 		token = (t_token *)(lst->content);
 		printf("[%d] [%s]\n", token->type, token->str);
 		lst = lst->next;
 	}
+	printf("---------\n");
 }
 
 int	main(int argc, char **argv, char **env)
@@ -59,10 +76,18 @@ int	main(int argc, char **argv, char **env)
 			free(str);
 			continue ;
 		}
+		// print_lst(lst->next);
+		if (!is_correct_syntax(lst->next))
+		{
+			ft_lstclear(&lst, del_t_token);
+			free(str);
+			continue ;
+		}
 		node = make_tree(lst->next);
 		execute_cmds(node);
-		clear_node(node, NULL);
-		ft_lstclear(&lst, del_t_token);
+		// preorder(node, 0, "root");
+		ft_lstclear(&lst, del_t_paren);
+		clear_node(node, del_t_token);
 		free(str);
 	}
 	clear_envp(&g_envp);

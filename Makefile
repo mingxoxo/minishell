@@ -6,7 +6,7 @@
 #    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/13 12:59:07 by wonyang          ###   ########seoul.kr   #
+#    Updated: 2023/01/13 15:29:35 by wonyang          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ HEADERS		= -I$(LIBFT) \
 LIBS		= -lft -L$(LIBFT) \
 			  -L$(RDLINE_DIR)/lib/ -lreadline\
 
-# CFLAGS		= -Wall -Werror -Wextra -g3 -fsanitize=address
+CFLAGS		= -Wall -Werror -Wextra -g3 -fsanitize=address
 
 # builtin source files
 BTN_DIR		= builtin/
@@ -67,7 +67,9 @@ PARSING_DIR		= parsing/
 
 _PARSING_SRCS	= token.c \
 				  arr.c \
-				  check.c \
+				  check_syntax.c \
+				  check_tnode.c \
+				  check_type.c \
 				  make_node.c \
 				  make_tree.c
 
