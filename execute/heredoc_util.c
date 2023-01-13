@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 20:42:06 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 15:06:01 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 15:10:08 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*make_heredoc_filename(void)
 	i = 0;
 	while (i < 30)
 	{
-		res[i] = abs(res[i]) % 26 + 65;
+		res[i] = ft_abs(res[i]) % 26 + 65;
 		i++;
 	}
 	path = ft_strjoin("/tmp/.", res);
