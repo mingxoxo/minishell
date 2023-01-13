@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 15:29:08 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 17:22:53 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "minishell.h"
 #include "execute.h"
 
-t_envp	g_envp;
+t_global	g_var;
 
 static void	del_t_paren(void *content)
 {
@@ -59,14 +59,14 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-	init_envp(&g_envp, env);
+	init_envp(&(g_var.envp), env);
 	set_minishell_setting();
 	lst = NULL;
 	while (1)
 	{
 		str = readline("prompt$ ");
 		if (str == NULL || ft_strcmp(str, "exit") == 0)
-			exit(0);
+			break ;
 		else if (ft_strcmp(str, "") == 0)
 			continue ;
 		add_history(str);
@@ -90,6 +90,6 @@ int	main(int argc, char **argv, char **env)
 		clear_node(node, del_t_token);
 		free(str);
 	}
-	clear_envp(&g_envp);
-	return (0);
+	clear_envp(&(g_var.envp));
+	return (g_var.status);
 }
