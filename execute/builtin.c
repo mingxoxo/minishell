@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:36:41 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 22:00:44 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 23:15:28 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	builtin_execve(char *path, char **argv, t_envp *envp)
 	return (-1);
 }
 
-// 부모에서 실행하는 빌트인이라고 가정
 t_error	execute_builtin(t_tnode *node)
 {
 	char	**cmd_argv;

@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:15:07 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/09 17:07:58 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 23:21:17 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	ft_exit(char **argv)
 		printf("ft_exit argument error!\n");
 		return (-1);
 	}
-	ft_putendl_fd("exit", STDERR_FILENO);
+	// ft_putendl_fd("exit", STDERR_FILENO);
 	if (is_valid_argument(argv[1]) == false)
 	{
 		ft_putstr_fd("bash: exit: ", STDERR_FILENO);

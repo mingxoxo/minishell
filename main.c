@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 22:24:36 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 23:25:07 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ int	main(int argc, char **argv, char **env)
 	lst = NULL;
 	while (1)
 	{
-		str = readline("\033[0;36mISFJ-Shell$\033[0m ");
-		if (str == NULL || ft_strcmp(str, "exit") == 0)
+		str = readline("\033[0;36mCUTE-Shell$\033[0m ");
+		if (str == NULL)
 			break ;
 		else if (ft_strcmp(str, "") == 0)
 			continue ;
@@ -92,6 +92,7 @@ int	main(int argc, char **argv, char **env)
 		ft_lstclear(&lst, del_t_paren);
 		clear_node(node, del_t_token);
 		free(str);
+		system("leaks minishell");
 	}
 	clear_envp(&(g_var.envp));
 	return (g_var.status);
