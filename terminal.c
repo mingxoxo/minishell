@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:47:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/10 19:37:00 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 17:17:56 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,17 @@
 #include <stdio.h>
 #include <readline/readline.h>
 #include "libft.h"
+#include "minishell.h"
+
+extern t_global	g_var;
 
 static void	get_terminal_setting(void)
 {
-	struct termios	old_term;
-	struct termios	new_term;
-
-	tcgetattr(STDIN_FILENO, &old_term);
-	tcgetattr(STDIN_FILENO, &new_term);
-	new_term.c_lflag &= ~ECHOCTL;
-	new_term.c_cc[VQUIT] = 0;
-	tcsetattr(STDIN_FILENO, TCSANOW, &new_term);
+	tcgetattr(STDIN_FILENO, &(g_var.old_term));
+	tcgetattr(STDIN_FILENO, &(g_var.new_term));
+	g_var.new_term.c_lflag &= ~ECHOCTL;
+	g_var.new_term.c_cc[VQUIT] = 0;
+	tcsetattr(STDIN_FILENO, TCSANOW, &(g_var.new_term));
 }
 
 static void	sigint_handler_prompt(int signo)
@@ -47,4 +47,5 @@ void	set_minishell_setting(void)
 {
 	get_terminal_setting();
 	set_signal_handling();
+	g_var.status = 0;
 }

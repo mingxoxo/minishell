@@ -6,23 +6,25 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:33:05 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 15:22:17 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 17:14:36 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include "minishell.h"
 #include "ds_envp.h"
 #include "execute.h"
 #include "libft.h"
 
-extern t_envp	g_envp;
+extern t_global	g_var;
 
-static t_error	set_child_signal(void)
+static t_error	set_child_setting(void)
 {
 	if (signal(SIGINT, SIG_DFL) == SIG_ERR)
 		return (ERROR);
+	tcsetattr(STDIN_FILENO, TCSANOW, &(g_var.old_term));
 	return (SCS);
 }
 
@@ -34,7 +36,7 @@ static t_error	child_execute(t_tnode *cmd_node)
 	cmd_argv = make_argv(cmd_node);
 	if (!cmd_argv)
 		return (ERROR);
-	if (make_cmd_path(cmd_argv[0], &path, g_envp.arr) == ERROR)
+	if (make_cmd_path(cmd_argv[0], &path, g_var.envp.arr) == ERROR)
 	{
 		ft_freesplit(cmd_argv);
 		return (ERROR);
@@ -45,8 +47,8 @@ static t_error	child_execute(t_tnode *cmd_node)
 		exit(127);
 	}
 	if (apply_redirections(cmd_node) == ERROR
-		|| set_child_signal() == ERROR
-		|| execve(path, cmd_argv, g_envp.arr) == FAIL)
+		|| set_child_setting() == ERROR
+		|| execve(path, cmd_argv, g_var.envp.arr) == FAIL)
 	{
 		free(path);
 		ft_freesplit(cmd_argv);

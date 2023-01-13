@@ -6,14 +6,17 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 22:30:55 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 15:19:26 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 17:22:10 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
+#include "minishell.h"
 #include "execute.h"
 #include "libft.h"
+
+extern t_global	g_var;
 
 static pid_t	*empty_pid_list(t_tnode **cmd_list)
 {
@@ -59,7 +62,7 @@ t_error	execute_cmds(t_tnode *root)
 		free(cmd_list);
 		return (ERROR);
 	}
-	wait_proc(pid_list);
+	g_var.status = wait_proc(pid_list);
 	free(pid_list);
 	free(cmd_list);
 	return (SCS);
