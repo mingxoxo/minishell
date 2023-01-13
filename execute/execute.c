@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 22:30:55 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/12 22:45:45 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 15:15:01 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ t_error	execute_cmds(t_tnode *root)
 	}
 	wait_proc(pid_list);
 	free(pid_list);
+	free(cmd_list);
 	return (SCS);
 }
