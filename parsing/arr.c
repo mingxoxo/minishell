@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:15:15 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/10 22:40:11 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/13 21:59:16 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,21 @@ int	*init_arr(size_t len)
 	return (arr);
 }
 
-static int	check_cust_idx(char *line)
+size_t	count_len(char *line, int *arr, int i)
 {
-	int			i;
-	const char	symbol[12][3] = {"\"", "\'", "&&", "||", "(", ")", \
-								"<<", "<", ">>", ">", "|", " "};
-	const int	cust_idx[] = {50, 52, 41, 43, 30, 32, \
-								21, 22, 23, 24, 10, 60};
+	size_t	len;
 
-	i = 0;
-	while (i < 12)
+	i++;
+	len = 1;
+	while (line[i] && arr[i - 1] == arr[i])
 	{
-		if (ft_strncmp(line, (char *)(symbol[i]), ft_strlen(symbol[i])) == 0)
-			return (cust_idx[i]);
+		len++;
 		i++;
 	}
-	return (0);
+	return (len);
 }
 
-void	fill_arr(char *line, int *arr)
+void	fill_arr(char *line, int *arr, int (*chk_idx)(char *))
 {
 	int	i;
 	int	cnt;
@@ -55,7 +51,7 @@ void	fill_arr(char *line, int *arr)
 
 	while (*line)
 	{
-		cust_idx = check_cust_idx(line);
+		cust_idx = (*chk_idx)(line);
 		cnt = cust_idx % 10 % 2 + 1;
 		line += cnt;
 		i = 0;
