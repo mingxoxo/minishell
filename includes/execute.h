@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:33:04 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/12 22:37:07 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 12:31:54 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_error	make_cmd_path(char *cmd_name, char **path, char **envp);
 t_error	execute_all_heredoc(t_tnode **cmd_list);
 
 // heredoc_util.c
-t_error	execute_heredoc(t_tnode *node);
+t_error	execute_heredoc(t_tnode *node, int *i);
 void	remove_heredoc_files(char **file_list);
 
 // util.c

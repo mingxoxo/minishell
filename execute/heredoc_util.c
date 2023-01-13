@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 20:42:06 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/12 22:39:45 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 13:01:14 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,26 @@
 #include "execute.h"
 #include "return.h"
 
-static char	*make_heredoc_filename(void)
+static char	*make_heredoc_filename(int i)
 {
-	char	*res;
-	char	*path;
-	int		fd;
+	char	*path[2];
+	char	*tmp;
 
-	fd = open("/dev/urandom", O_RDONLY);
-	if (fd < 0)
-		return (NULL);
-	res = (char *)ft_calloc(sizeof(char), 31);
-	read(fd, res, 30);
-	if (!res || close(fd) == -1)
+	path[0] = "/tmp/.heredoc_";
+	tmp = ft_itoa(i);
+	if (tmp)
 	{
-		free(res);
-		return (NULL);
+		path[0] = ft_strjoin(path[0], tmp);
+		free(tmp);
 	}
-	path = ft_strjoin(".", res);
-	free(res);
-	return (path);
+	tmp = ttyname(STDIN_FILENO);
+	if (tmp)
+	{
+		path[1] = path[0];
+		path[0] = ft_strjoin(path[1], tmp + 5);
+		free(path[1]);
+	}
+	return (path[0]);
 }
 
 static void	heredoc_readline(int fd, char *delimiter)
@@ -68,14 +69,14 @@ static void	change_node_info(t_tnode *node, char *filename)
 	path->str = filename;
 }
 
-t_error	execute_heredoc(t_tnode *node)
+t_error	execute_heredoc(t_tnode *node, int *i)
 {
 	char	*delimiter;
 	char	*file_name;
 	int		fd;
 
 	delimiter = ((t_token *)(node->left->content))->str;
-	file_name = make_heredoc_filename();
+	file_name = make_heredoc_filename(*i);
 	if (!file_name)
 		return (ERROR);
 	fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
@@ -85,6 +86,7 @@ t_error	execute_heredoc(t_tnode *node)
 	change_node_info(node, file_name);
 	if (close(fd) == -1)
 		return (ERROR);
+	*i += 1;
 	return (SCS);
 }
 
