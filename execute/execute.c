@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 22:30:55 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 15:15:01 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 15:19:26 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	wait_proc(pid_t *pid_list)
 
 t_error	execute_cmds(t_tnode *root)
 {
-	t_tnode **cmd_list;
+	t_tnode	**cmd_list;
 	pid_t	*pid_list;
 
 	cmd_list = make_cmd_list(root);
@@ -56,6 +56,7 @@ t_error	execute_cmds(t_tnode *root)
 		|| create_childs(cmd_list, pid_list) == ERROR)
 	{
 		free(pid_list);
+		free(cmd_list);
 		return (ERROR);
 	}
 	wait_proc(pid_list);

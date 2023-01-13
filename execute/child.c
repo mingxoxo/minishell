@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:33:05 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 15:14:24 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 15:22:17 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static t_error	child_execute(t_tnode *cmd_node)
 	char	**cmd_argv;
 	char	*path;
 
-	path = NULL;
 	cmd_argv = make_argv(cmd_node);
 	if (!cmd_argv)
 		return (ERROR);
@@ -55,6 +54,7 @@ static t_error	child_execute(t_tnode *cmd_node)
 	}
 	return (SCS);
 }
+
 static pid_t	fork_child(t_tnode *cmd_node, int *before_fd)
 {
 	int		fd[2];

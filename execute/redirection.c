@@ -6,10 +6,11 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 17:36:33 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 13:24:42 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 15:21:27 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdbool.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdio.h>
@@ -19,7 +20,7 @@
 #include "libft.h"
 #include "execute.h"
 
-static t_error	set_infile_normal(char *path)
+static t_error	set_infile(char *path, bool heredoc)
 {
 	int	in_fd;
 
@@ -29,20 +30,8 @@ static t_error	set_infile_normal(char *path)
 		perror(path);
 		return (ERROR);
 	}
-	return (ft_dup2(in_fd, STDIN_FILENO));
-}
-
-static t_error	set_infile_heredoc(char *path)
-{
-	int	in_fd;
-
-	in_fd = open(path, O_RDONLY, 0644);
-	if (in_fd == -1)
-	{
-		perror(path);
-		return (ERROR);
-	}
-	unlink(path);
+	if (heredoc)
+		unlink(path);
 	return (ft_dup2(in_fd, STDIN_FILENO));
 }
 
@@ -74,9 +63,9 @@ t_error	redirection(t_tnode *node)
 	path = ((t_token *)(node->left->content))->str;
 	token = (t_token *)node->content;
 	if (ft_strcmp(token->str, "<") == 0)
-		return (set_infile_normal(path));
+		return (set_infile(path, false));
 	else if (ft_strcmp(token->str, "<<") == 0)
-		return (set_infile_heredoc(path));
+		return (set_infile(path, true));
 	else if (ft_strcmp(token->str, ">") == 0)
 		return (set_outfile_trunc(path));
 	else if (ft_strcmp(token->str, ">>") == 0)
