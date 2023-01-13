@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:36:28 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 20:16:51 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 22:32:59 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	ft_cd(char **argv, t_envp *envp)
 		return (1);
 	}
 	path = argv[1];
-	if (!path)
+	if (!path || ft_strcmp(path, "~") == 0)
 		errno = move_home(envp);
 	else if (ft_strcmp(path, "-") == 0)
 		errno = move_oldpwd(envp);
