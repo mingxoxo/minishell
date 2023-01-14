@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:01:53 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/14 17:09:09 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/14 21:55:27 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_token
 
 // token.c
 void	del_t_token(void *content);
+t_error	make_lst(char *line, int *arr, t_list **lst);
 t_error	make_token(char *line, t_ttype type, size_t len, t_list **lst);
 t_list	*tokenization(char *line);
 

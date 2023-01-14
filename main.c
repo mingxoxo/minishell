@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/14 19:22:23 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/14 23:04:07 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,14 @@ int	main(int argc, char **argv, char **env)
 			continue ;
 		}
 		node = make_tree(lst->next);
+		ft_lstclear(&lst, del_t_paren);
+		preorder(node, 0, "root");
 		subst_env(node);
 		preorder(node, 0, "root");
 		if (is_builtin_cmd(node))
 			execute_builtin(node);
 		else
 			execute_cmds(node);
-		ft_lstclear(&lst, del_t_paren);
 		clear_node(node, del_t_token);
 		free(str);
 		// system("leaks minishell | grep leaks");

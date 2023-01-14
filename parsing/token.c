@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:15:15 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/13 23:29:13 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/14 23:07:37 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	check_cust_idx(char *line)
 	return (0);
 }
 
-static t_error	make_list(char *line, int *arr, t_list **lst)
+t_error	make_lst(char *line, int *arr, t_list **lst)
 {
 	int		cust_idx;
 	t_ttype	type;
@@ -110,7 +110,7 @@ t_list	*tokenization(char *line)
 	fill_arr(line, arr, &check_cust_idx);
 	handling_quote(line, arr, '\"');
 	handling_quote(line, arr, '\'');
-	if (make_list(line, arr, &lst) == ERROR)
+	if (make_lst(line, arr, &lst) == ERROR)
 	{
 		free(arr);
 		ft_lstclear(&lst, &del_t_token);

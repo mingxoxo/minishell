@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:42:37 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/14 18:47:12 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/14 21:53:05 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // substitute_env_lst
 
-static t_error	make_list(char *line, int *arr, t_list **lst)
+static t_error	make_env_lst(char *line, int *arr, t_list **lst)
 {
 	int		cust_idx;
 	size_t	len;
@@ -40,7 +40,7 @@ static t_error	make_list(char *line, int *arr, t_list **lst)
 	return (SCS);
 }
 
-static t_error	strjoin_list(t_list *lst, t_token *token)
+static t_error	strjoin_env_lst(t_list *lst, t_token *token)
 {
 	char	*new;
 	char	*cache;
@@ -66,7 +66,7 @@ t_error	subst_env_lst(t_token *token, int *arr, t_list **head)
 {
 	t_list	*lst;
 
-	if (make_list(token->str, arr, head) == ERROR)
+	if (make_env_lst(token->str, arr, head) == ERROR)
 		return (ERROR);
 	lst = (*head)->next;
 	while (lst)
@@ -80,7 +80,7 @@ t_error	subst_env_lst(t_token *token, int *arr, t_list **head)
 			return (ERROR);
 		lst = lst->next;
 	}
-	if (strjoin_list((*head)->next, token) == ERROR)
+	if (strjoin_env_lst((*head)->next, token) == ERROR)
 		return (ERROR);
 	return (SCS);
 }
