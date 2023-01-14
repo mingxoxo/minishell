@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:33:05 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/14 21:21:41 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 22:34:33 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,12 @@ static t_error	child_execute(t_tnode *cmd_node)
 		ft_freesplit(cmd_argv);
 		return (ERROR);
 	}
-	if (is_builtin_cmd(cmd_node) == false && !path)
+	if (ft_strcmp(cmd_argv[0], "") == 0
+		|| (is_builtin_cmd(cmd_node) == false && !path))
 	{
-		perror("command not found");
+		ft_putstr_fd("bash: ", STDERR_FILENO);
+		ft_putstr_fd(cmd_argv[0], STDERR_FILENO);
+		ft_putendl_fd(": command not found", STDERR_FILENO);
 		exit(127);
 	}
 	if (apply_redirections(cmd_node) == ERROR
