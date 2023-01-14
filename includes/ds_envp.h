@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ds_envp.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 17:17:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/09 15:57:49 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/14 17:11:41 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_enode	*search_key_enode(t_envp *envp, char *key);
 char	*search_key_value(t_envp *envp, char *key);
 
 // cast_*.c
+t_error	get_key(char *line, char **key);
 char	**cast_envp_arr(t_envp *envp);
 t_error	cast_envp_line(t_envp *envp, char *line);
 t_error	cast_envp_list(t_envp *envp, char **arr);
