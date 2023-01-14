@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:36:41 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 23:15:28 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 11:42:11 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,6 @@ t_error	execute_builtin(t_tnode *node)
 		return (ERROR);
 	}
 	g_var.status =  builtin_execve(path, cmd_argv, &(g_var.envp));
+	ft_freesplit(cmd_argv);
 	return (SCS);
 }

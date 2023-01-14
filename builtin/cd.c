@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:36:28 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/14 11:20:18 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 11:40:01 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static t_error	update_pwd(t_envp *envp)
 		if (!path)
 			return (ERROR);
 		errno = set_env(envp, "PWD", path);
+		free(path);
 	}
 	return (errno);
 }
