@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:36:28 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/14 11:40:01 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 11:57:01 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_error	update_pwd(t_envp *envp)
 	char	*path;
 
 	errno = SCS;
-	if (search_key_value(envp, "OLDPWD"))
+	if (search_key_enode(envp, "OLDPWD"))
 	{
 		old_path = search_key_value(envp, "PWD");
 		if (!old_path)
