@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:33:05 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 23:16:27 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 12:53:27 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_error	child_execve(t_tnode *node, char *path, char **argv)
 		return (ERROR);
 	tcsetattr(STDIN_FILENO, TCSANOW, &(g_var.old_term));
 	if (is_builtin_cmd(node) == true)
-		exit(builtin_execve(builtin, argv, &(g_var.envp)));
+		exit(builtin_execve(builtin, argv, &(g_var.envp), 1));
 	execve(path, argv, g_var.envp.arr);
 	return (ERROR);
 }

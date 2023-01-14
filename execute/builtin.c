@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:36:41 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/14 12:43:54 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 12:52:46 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,17 @@ int	builtin_execve(char *path, char **argv, t_envp *envp, int child)
 {
 	if (ft_strcmp(path, "echo") == 0)
 		return (ft_echo(argv));
-	else if(ft_strcmp(path, "pwd") == 0)
+	else if (ft_strcmp(path, "pwd") == 0)
 		return (ft_pwd(argv));
-	else if(ft_strcmp(path, "cd") == 0)
+	else if (ft_strcmp(path, "cd") == 0)
 		return (ft_cd(argv, envp));
-	else if(ft_strcmp(path, "env") == 0)
+	else if (ft_strcmp(path, "env") == 0)
 		return (ft_env(argv, envp));
-	else if(ft_strcmp(path, "export") == 0)
+	else if (ft_strcmp(path, "export") == 0)
 		return (ft_export(argv, envp));
-	else if(ft_strcmp(path, "unset") == 0)
+	else if (ft_strcmp(path, "unset") == 0)
 		return (ft_unset(argv, envp));
-	else if(ft_strcmp(path, "exit") == 0)
+	else if (ft_strcmp(path, "exit") == 0)
 		return (ft_exit(argv, child));
 	ft_putendl_fd("builtin_execve : invalid path", STDERR_FILENO);
 	return (-1);
