@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:36:41 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/14 12:58:24 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 18:36:25 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ extern t_global	g_var;
 
 bool	is_builtin_cmd(t_tnode *node)
 {
-	t_token	*token;
+	t_token		*token;
 	const char	cmd[7][7] = {"echo", "pwd", "cd", "env", "export", \
 								"unset", "exit"};
-	int		i;
+	int			i;
 
 	if (!node || !node->content)
 	{
