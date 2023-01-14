@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:42:37 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/14 16:22:51 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/14 16:37:31 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ t_error	subst_env_lst(t_list *lst)
 	while (lst)
 	{
 		token = (t_token *)(lst->content);
+		lst = lst->next;
 		if (token->type != T_ENVP)
 			continue ;
 		if (subst_env_str(token) == ERROR)
 			return (ERROR);
-		lst = lst->next;
 	}
 	return (SCS);
 }
