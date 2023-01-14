@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 23:25:07 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 23:31:42 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ int	main(int argc, char **argv, char **env)
 			free(str);
 			continue ;
 		}
-		// print_lst(lst->next);
 		if (!is_correct_syntax(lst->next))
 		{
 			ft_lstclear(&lst, del_t_token);
@@ -88,7 +87,6 @@ int	main(int argc, char **argv, char **env)
 			execute_builtin(node);
 		else
 			execute_cmds(node);
-		// preorder(node, 0, "root");
 		ft_lstclear(&lst, del_t_paren);
 		clear_node(node, del_t_token);
 		free(str);

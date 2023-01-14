@@ -6,13 +6,14 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:36:28 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 22:32:59 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 11:20:18 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <dirent.h>
 #include "libft.h"
 #include "ds_envp.h"
 #include "return.h"
@@ -48,12 +49,14 @@ static t_error	path_error(char *path)
 {
 	ft_putstr_fd("bash: cd: ", STDERR_FILENO);
 	ft_putstr_fd(path, STDERR_FILENO);
-	if (access(path, F_OK) == 0)
-	{
+	if (access(path, F_OK) != 0)
+		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
+	else if (opendir(path) == NULL)
 		ft_putendl_fd(": Not a directory", STDERR_FILENO);
-		return (FAIL);
-	}
-	ft_putendl_fd(": No such file or directory", STDERR_FILENO);
+	else if (access(path, X_OK) != 0)
+		ft_putendl_fd(": permission denied", STDERR_FILENO);
+	else
+		ft_putendl_fd(": error", STDERR_FILENO);
 	return (FAIL);
 }
 

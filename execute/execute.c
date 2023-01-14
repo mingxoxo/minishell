@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 22:30:55 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 18:36:29 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 23:31:30 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ t_error	execute_cmds(t_tnode *root)
 	t_tnode	**cmd_list;
 	pid_t	*pid_list;
 
-	
 	cmd_list = make_cmd_list(root);
 	if (!cmd_list)
 		return (ERROR);
