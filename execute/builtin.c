@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:36:41 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/14 11:42:11 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 12:43:54 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ bool	is_builtin_cmd(t_tnode *node)
 	return (false);
 }
 
-int	builtin_execve(char *path, char **argv, t_envp *envp)
+int	builtin_execve(char *path, char **argv, t_envp *envp, int child)
 {
 	if (ft_strcmp(path, "echo") == 0)
 		return (ft_echo(argv));
@@ -59,7 +59,7 @@ int	builtin_execve(char *path, char **argv, t_envp *envp)
 	else if(ft_strcmp(path, "unset") == 0)
 		return (ft_unset(argv, envp));
 	else if(ft_strcmp(path, "exit") == 0)
-		return (ft_exit(argv));
+		return (ft_exit(argv, child));
 	ft_putendl_fd("builtin_execve : invalid path", STDERR_FILENO);
 	return (-1);
 }
@@ -78,7 +78,7 @@ t_error	execute_builtin(t_tnode *node)
 		ft_freesplit(cmd_argv);
 		return (ERROR);
 	}
-	g_var.status =  builtin_execve(path, cmd_argv, &(g_var.envp));
+	g_var.status = builtin_execve(path, cmd_argv, &(g_var.envp), 0);
 	ft_freesplit(cmd_argv);
 	return (SCS);
 }

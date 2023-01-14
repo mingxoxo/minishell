@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:33:04 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 22:00:33 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 12:40:52 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 // builtin.c
 bool	is_builtin_cmd(t_tnode *node);
-int		builtin_execve(char *path, char **argv, t_envp *envp);
+int		builtin_execve(char *path, char **argv, t_envp *envp, int child);
 t_error	execute_builtin(t_tnode *node);
 
 // preprocess.c
