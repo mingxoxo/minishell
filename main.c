@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/14 18:47:56 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/14 19:22:23 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int	main(int argc, char **argv, char **env)
 		ft_lstclear(&lst, del_t_paren);
 		clear_node(node, del_t_token);
 		free(str);
+		// system("leaks minishell | grep leaks");
 	}
 	clear_envp(&(g_var.envp));
 	return (g_var.status);

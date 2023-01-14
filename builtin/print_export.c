@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 20:04:00 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 22:12:25 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 17:06:19 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,14 @@ static char	**make_arr(t_envp *envp)
 	return (key_arr);
 }
 
-t_error	print_envp(t_envp *envp)
+int	print_envp(t_envp *envp)
 {
 	int		i;
 	char	**key_arr;
 
 	key_arr = make_arr(envp);
 	if (!key_arr)
-		return (ERROR);
+		return (1);
 	i = 0;
 	while (key_arr[i])
 	{
@@ -109,5 +109,5 @@ t_error	print_envp(t_envp *envp)
 		i++;
 	}
 	free(key_arr);
-	return (SCS);
+	return (0);
 }
