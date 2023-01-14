@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:01:53 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/14 16:22:49 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/14 18:40:06 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,16 @@ t_tnode	*check_root(t_tnode *node);
 
 // subst_env.c
 t_error	subst_env(t_tnode *node);
-t_error	subst_env_str(t_token *token);
-t_error	subst_env_lst(t_list *lst);
-void	handling_envp(int *arr, int len);
+
+// subst_env_first.c
 t_error	env_first_step(t_token *token);
+
+// subset_env_lst.c
+t_error	subst_env_lst(t_token *token, int *arr, t_list **head);
+
+// subset_env_str.c
+t_error	subst_env_str(t_token *token);
+
+
 
 #endif

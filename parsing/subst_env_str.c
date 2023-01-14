@@ -1,39 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   subst_env.c                                        :+:      :+:    :+:   */
+/*   subst_env_str.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/13 17:42:37 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/14 18:29:54 by jeongmin         ###   ########.fr       */
+/*   Created: 2023/01/13 22:41:40 by jeongmin          #+#    #+#             */
+/*   Updated: 2023/01/14 18:30:14 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "make_tree.h"
+#include "minishell.h"
 
-// substitute_env
+extern t_global	g_var;
 
-static t_error	cmd_subst_env(t_tnode *node)
+t_error	subst_env_str(t_token *token)
 {
-	while (node)
+	char	*new;
+	char	*value;
+
+	new = NULL;
+	if (ft_strcmp(token->str, "$?") == 0)
+		new = ft_itoa(g_var.status);
+	else
 	{
-		if (env_first_step(node->content) == ERROR)
-			return (ERROR);
-		node = node->left;
+		value = search_key_value(&(g_var.envp), token->str);
+		if (value)
+			new = ft_strdup(value);
+		else
+			new = ft_strdup("");
 	}
+	if (!new)
+		return (ERROR);
+	free(token->str);
+	token->str = new;
 	return (SCS);
-}
-
-t_error	subst_env(t_tnode *node)
-{
-	t_error	errno;
-
-	if (!node)
-		return (SCS);
-	if (is_this_symbol(node->content, T_WORD))
-		return (cmd_subst_env(node));
-	errno = subst_env(node->left);
-	errno = subst_env(node->right);
-	return (errno);
 }
