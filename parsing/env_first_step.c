@@ -6,40 +6,39 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 22:41:40 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/13 23:37:11 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/14 16:29:51 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "make_tree.h"
 #include "minishell.h"
 
-// substitute_env
-
-extern t_global	g_var;
-
 static void	print_arr(int *arr, char *line)
 {
 	size_t	i;
 
 	i = 0;
+	printf("---------------print_arr-------------\n");
 	while (i < ft_strlen(line))
 	{
 		printf(" %d", arr[i]);
 		i++;
 	}
-	printf("\n");
+	printf("-------------------------------------\n");
 }
 
 static void	print_lst(t_list *lst)
 {
 	t_token	*token;
 
+	printf("---------------print_lst-------------\n");
 	while (lst)
 	{
 		token = (t_token *)(lst->content);
 		printf("[%d] [%s]\n", token->type, token->str);
 		lst = lst->next;
 	}
+	printf("-------------------------------------\n");
 }
 
 static int	check_cust_idx(char *line)
@@ -107,7 +106,9 @@ t_error	env_first_step(t_token *token)
 		ft_lstclear(&lst, &del_t_token);
 		return (ERROR);
 	}
-	print_arr(arr, token->str);
+	free(arr);
+	print_lst(lst->next);
+	subst_env_lst(lst->next);
 	print_lst(lst->next);
 	return (SCS);
 }
