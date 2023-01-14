@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 21:52:16 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/13 15:18:32 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/14 15:37:53 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,9 @@ static bool	is_correct_io(t_list *lst, char **str)
 
 static bool	is_paren_pos_ok(t_list *lst)
 {
-	int		flag;
 	t_list	*left;
 	t_list	*right;
 
-	flag = 0;
 	left = NULL;
 	while (lst)
 	{
