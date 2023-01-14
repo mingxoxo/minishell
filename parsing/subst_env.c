@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:42:37 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/14 16:37:31 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/14 18:08:20 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,10 @@ t_error	subst_env_str(t_token *token)
 	else
 	{
 		value = search_key_value(&(g_var.envp), token->str);
-		if (!value)
-		{
-			free(token->str);
-			token->str = NULL;
-			return (SCS);
-		}
-		new = ft_strdup(value);
+		if (value)
+			new = ft_strdup(value);
+		else
+			new = ft_strdup("");
 	}
 	if (!new)
 		return (ERROR);

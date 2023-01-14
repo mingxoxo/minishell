@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:15:15 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/13 21:59:16 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/14 17:09:11 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	fill_arr(char *line, int *arr, int (*chk_idx)(char *))
 	}
 }
 
-static void	make_word(int *arr, int start, int end)
+void	make_word_arr(int *arr, int start, int end)
 {
 	int	i;
 
@@ -94,7 +94,7 @@ void	handling_quote(char *line, int *arr, char c)
 			arr[one - line] = 0;
 			return ;
 		}
-		make_word(arr, one - line, two - line);
+		make_word_arr(arr, one - line, two - line);
 		start = two + 1;
 	}
 }

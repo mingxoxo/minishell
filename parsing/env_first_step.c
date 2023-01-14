@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 22:41:40 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/14 16:36:49 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/14 18:12:44 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,28 @@ static void	print_lst(t_list *lst)
 		lst = lst->next;
 	}
 	printf("-------------------------------------\n");
+}
+
+static t_error	strjoin_list(t_list *lst, t_token *token)
+{
+	char	*new;
+	char	*cache;
+
+	cache = ft_strdup("");
+	if (!cache)
+		return (ERROR);
+	while (lst)
+	{
+		new = ft_strjoin(cache, ((t_token *)(lst->content))->str);
+		free(cache);
+		if (!new)
+			return (ERROR);
+		cache = new;
+		lst = lst->next;
+	}
+	free(token->str);
+	token->str = cache;
+	return (SCS);
 }
 
 static int	check_cust_idx(char *line)
@@ -83,6 +105,30 @@ static t_error	make_list(char *line, int *arr, t_list **lst)
 	return (SCS);
 }
 
+static void	env_handling_quote(char *line, int *arr)
+{
+	char	*start;
+	char	*two;
+
+	start = line;
+	while (*start)
+	{
+		if (*start == '\"' || *start == '\'')
+		{
+			two = ft_strchr(start + 1, *start);
+			if (!two)
+				arr[start - line] = 0;
+			else
+			{
+				if (*start == '\'')
+					make_word_arr(arr, start - line, two - line);
+				start = two;
+			}
+		}
+		start++;
+	}
+}
+
 t_error	env_first_step(t_token *token)
 {
 	int		*arr;
@@ -98,17 +144,23 @@ t_error	env_first_step(t_token *token)
 	}
 	fill_arr(token->str, arr, &check_cust_idx);
 	handling_envp(arr, ft_strlen(token->str));
-	handling_quote(token->str, arr, '\"');
-	handling_quote(token->str, arr, '\'');
+	print_arr(arr, token->str);
+	env_handling_quote(token->str, arr);
 	if (make_list(token->str, arr, &lst) == ERROR)
 	{
 		free(arr);
 		ft_lstclear(&lst, &del_t_token);
 		return (ERROR);
 	}
-	print_arr(arr, token->str);
+	free(arr);
 	print_lst(lst->next);
 	subst_env_lst(lst->next);
-	print_lst(lst->next);
+	if (strjoin_list(lst->next, token))
+	{
+		ft_lstclear(&lst, del_t_token);
+		return (ERROR);
+	}
+	printf("%s\n", token->str);
+	ft_lstclear(&lst, del_t_token);
 	return (SCS);
 }

@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:01:53 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/13 23:28:49 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/14 17:09:09 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_list	*tokenization(char *line);
 // arr.c
 int		*init_arr(size_t len);
 void	fill_arr(char *line, int *arr, int (*chk_idx)(char *));
+void	make_word_arr(int *arr, int start, int end);
 size_t	count_len(char *line, int *arr, int i);
 void	handling_quote(char *line, int *arr, char c);
 
