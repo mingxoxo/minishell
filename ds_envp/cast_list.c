@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 16:21:17 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/08 22:52:31 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/14 17:11:37 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	search_sep(char *line)
 	return (-1);
 }
 
-static t_error	get_key(char *line, char **key)
+t_error	get_key(char *line, char **key)
 {
 	int	sep;
 
