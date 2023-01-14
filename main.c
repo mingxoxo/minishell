@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 22:00:17 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/14 15:32:27 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,14 @@ int	main(int argc, char **argv, char **env)
 	lst = NULL;
 	while (1)
 	{
-		str = readline("prompt$ ");
-		if (str == NULL || ft_strcmp(str, "exit") == 0)
+		str = readline("\033[0;36mCUTE-Shell$\033[0m ");
+		if (str == NULL)
 			break ;
 		else if (ft_strcmp(str, "") == 0)
+		{
+			free(str);
 			continue ;
+		}
 		add_history(str);
 		lst = tokenization(str);
 		if (!lst)
@@ -85,8 +88,11 @@ int	main(int argc, char **argv, char **env)
 		}
 		node = make_tree(lst->next);
 		subst_env(node);
-		//execute_cmds(node);
 		// preorder(node, 0, "root");
+		if (is_builtin_cmd(node))
+			execute_builtin(node);
+		else
+			execute_cmds(node);
 		ft_lstclear(&lst, del_t_paren);
 		clear_node(node, del_t_token);
 		free(str);

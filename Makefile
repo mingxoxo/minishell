@@ -6,7 +6,7 @@
 #    By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/13 22:42:48 by jeongmin         ###   ########.fr        #
+#    Updated: 2023/01/14 15:32:59 by jeongmin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,6 +89,7 @@ _EXE_SRCS		= argv.c \
 				  execute.c \
 				  child.c \
 				  preprocess.c \
+				  builtin.c \
 
 EXE_SRCS		= $(addprefix $(EXE_DIR), $(_EXE_SRCS))
 

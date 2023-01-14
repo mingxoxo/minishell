@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:46:45 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/09 20:27:01 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 21:49:45 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,24 @@ static int	count_argument(char **argv)
 	return (i);
 }
 
-t_error	ft_export(char **argv, t_envp *envp)
+int	ft_export(char **argv, t_envp *envp)
 {
 	int		argc;
+	t_error	errno;
 
 	if (!argv || !(*argv))
 	{
 		printf("ft_export argument error!\n");
-		return (FAIL);
+		return (1);
 	}
 	argc = count_argument(argv);
 	if (argc == 1)
-		return (print_envp(envp));
-	if (argc == 2)
-		return (set_env(envp, argv[1], NULL));
-	return (set_env(envp, argv[1], argv[2]));
+		errno = print_envp(envp);
+	else if (argc == 2)
+		errno = set_env(envp, argv[1], NULL);
+	else
+		errno = set_env(envp, argv[1], argv[2]);
+	if (errno)
+		return (1);
+	return (0);
 }

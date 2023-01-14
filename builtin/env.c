@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 12:40:20 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/11 11:19:47 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 21:47:59 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ int	ft_env(char **argv, t_envp *envp)
 	if (!argv || !(*argv))
 	{
 		printf("ft_env argument error!\n");
-		return (-1);
+		return (1);
 	}
 	if (argv[1])
 	{
 		ft_putstr_fd("env: ", STDERR_FILENO);
 		ft_putstr_fd(argv[1], STDERR_FILENO);
 		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
-		return (-1);
+		return (1);
 	}
 	arr = envp->arr;
 	i = 0;
