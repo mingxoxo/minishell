@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/14 12:01:01 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 13:00:36 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ int	main(int argc, char **argv, char **env)
 		ft_lstclear(&lst, del_t_paren);
 		clear_node(node, del_t_token);
 		free(str);
-		system("leaks minishell");
 	}
 	clear_envp(&(g_var.envp));
 	return (g_var.status);
