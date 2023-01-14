@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 20:04:00 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/09 20:11:37 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 22:12:25 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static char	**make_arr(t_envp *envp)
 	int		len;
 
 	len = count_key(envp);
-	key_arr = (char **)malloc(sizeof(char *) * len + 1);
+	key_arr = (char **)malloc(sizeof(char *) * (len + 1));
 	if (!key_arr)
 		return (NULL);
 	key_arr[len] = NULL;

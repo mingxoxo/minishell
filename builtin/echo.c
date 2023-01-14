@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:35:35 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/11 11:19:22 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/13 21:47:04 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	ft_echo(char **argv)
 	if (!argv || !(*argv))
 	{
 		printf("ft_echo argument error!\n");
-		return (-1);
+		return (1);
 	}
 	if (is_valid_option(argv[1]) == true)
 		print_argument(argv, 2);

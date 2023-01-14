@@ -6,13 +6,14 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:36:28 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/11 11:18:51 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 11:57:01 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <dirent.h>
 #include "libft.h"
 #include "ds_envp.h"
 #include "return.h"
@@ -24,7 +25,7 @@ static t_error	update_pwd(t_envp *envp)
 	char	*path;
 
 	errno = SCS;
-	if (search_key_value(envp, "OLDPWD"))
+	if (search_key_enode(envp, "OLDPWD"))
 	{
 		old_path = search_key_value(envp, "PWD");
 		if (!old_path)
@@ -40,6 +41,7 @@ static t_error	update_pwd(t_envp *envp)
 		if (!path)
 			return (ERROR);
 		errno = set_env(envp, "PWD", path);
+		free(path);
 	}
 	return (errno);
 }
@@ -48,12 +50,14 @@ static t_error	path_error(char *path)
 {
 	ft_putstr_fd("bash: cd: ", STDERR_FILENO);
 	ft_putstr_fd(path, STDERR_FILENO);
-	if (access(path, F_OK) == 0)
-	{
+	if (access(path, F_OK) != 0)
+		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
+	else if (opendir(path) == NULL)
 		ft_putendl_fd(": Not a directory", STDERR_FILENO);
-		return (FAIL);
-	}
-	ft_putendl_fd(": No such file or directory", STDERR_FILENO);
+	else if (access(path, X_OK) != 0)
+		ft_putendl_fd(": permission denied", STDERR_FILENO);
+	else
+		ft_putendl_fd(": error", STDERR_FILENO);
 	return (FAIL);
 }
 
@@ -88,21 +92,26 @@ static t_error	move_oldpwd(t_envp *envp)
 	return (update_pwd(envp));
 }
 
-t_error	ft_cd(char **argv, t_envp *envp)
+int	ft_cd(char **argv, t_envp *envp)
 {
 	char	*path;
+	t_error	errno;
 
 	if (!argv || !(*argv))
 	{
 		printf("ft_cd argument error!\n");
-		return (FAIL);
+		return (1);
 	}
 	path = argv[1];
-	if (!path)
-		return (move_home(envp));
-	if (ft_strcmp(path, "-") == 0)
-		return (move_oldpwd(envp));
-	if (chdir(path) != 0)
-		return (path_error(path));
-	return (update_pwd(envp));
+	if (!path || ft_strcmp(path, "~") == 0)
+		errno = move_home(envp);
+	else if (ft_strcmp(path, "-") == 0)
+		errno = move_oldpwd(envp);
+	else if (chdir(path) != 0)
+		errno = path_error(path);
+	else
+		errno = update_pwd(envp);
+	if (errno)
+		return (1);
+	return (0);
 }

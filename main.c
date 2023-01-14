@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 17:22:53 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 13:00:36 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,14 @@ int	main(int argc, char **argv, char **env)
 	lst = NULL;
 	while (1)
 	{
-		str = readline("prompt$ ");
-		if (str == NULL || ft_strcmp(str, "exit") == 0)
+		str = readline("\033[0;36mCUTE-Shell$\033[0m ");
+		if (str == NULL)
 			break ;
 		else if (ft_strcmp(str, "") == 0)
+		{
+			free(str);
 			continue ;
+		}
 		add_history(str);
 		lst = tokenization(str);
 		if (!lst)
@@ -76,7 +79,6 @@ int	main(int argc, char **argv, char **env)
 			free(str);
 			continue ;
 		}
-		// print_lst(lst->next);
 		if (!is_correct_syntax(lst->next))
 		{
 			ft_lstclear(&lst, del_t_token);
@@ -84,8 +86,10 @@ int	main(int argc, char **argv, char **env)
 			continue ;
 		}
 		node = make_tree(lst->next);
-		execute_cmds(node);
-		// preorder(node, 0, "root");
+		if (is_builtin_cmd(node))
+			execute_builtin(node);
+		else
+			execute_cmds(node);
 		ft_lstclear(&lst, del_t_paren);
 		clear_node(node, del_t_token);
 		free(str);
