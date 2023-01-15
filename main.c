@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/14 22:47:58 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 11:46:01 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int	main(int argc, char **argv, char **env)
 		else
 			execute_cmds(node);
 		tcsetattr(STDIN_FILENO, TCSANOW, &(g_var.new_term));
+		set_signal_handling();
 		ft_lstclear(&lst, del_t_paren);
 		clear_node(node, del_t_token);
 		free(str);

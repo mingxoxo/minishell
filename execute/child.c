@@ -6,13 +6,14 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:33:05 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/14 22:34:33 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 11:46:51 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <signal.h>
 #include "minishell.h"
 #include "ds_envp.h"
 #include "execute.h"
@@ -123,6 +124,7 @@ t_error	create_childs(t_tnode **cmd_list, pid_t *pid_list)
 
 	before_fd = STDIN_FILENO;
 	i = 0;
+	signal(SIGINT, SIG_IGN);
 	while (cmd_list[i + 1])
 	{
 		pid_list[i] = fork_child(cmd_list[i], &before_fd);
