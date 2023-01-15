@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:42:37 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/15 15:24:00 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/15 17:32:37 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,23 @@ static char	*strjoin_cmd(t_tnode *node, size_t len)
 		node = node->left;
 	}
 	return (new);
+}
+
+static t_error	r_file_subst_env(t_tnode *node)
+{
+	node = node->right;
+	while (node)
+	{
+		if (ft_strcmp(((t_token *)(node->content))->str, "<<") == 0)
+		{
+			node = node->right;
+			continue ;
+		}
+		if (env_first_step(node->left->content) == ERROR)
+			return (ERROR);
+		node = node->right;
+	}
+	return (SCS);
 }
 
 static t_error	cmd_subst_env(t_tnode *node, t_tnode *cmd)
@@ -55,6 +72,17 @@ static t_error	cmd_subst_env(t_tnode *node, t_tnode *cmd)
 	return (SCS);
 }
 
+static bool	is_envp_in_cmd(t_tnode *node)
+{
+	while (node)
+	{
+		if (ft_strchr(((t_token *)(node->content))->str, '$'))
+			return (true);
+		node = node->left;
+	}
+	return (false);
+}
+
 t_error	subst_env(t_tnode *node)
 {
 	t_error	errno;
@@ -62,7 +90,13 @@ t_error	subst_env(t_tnode *node)
 	if (!node)
 		return (SCS);
 	if (is_this_symbol(node->content, T_WORD))
-		return (cmd_subst_env(node, node));
+	{
+		if (is_envp_in_cmd(node) && cmd_subst_env(node, node) == ERROR)
+			return (ERROR);
+		if (r_file_subst_env(node) == ERROR)
+			return (ERROR);
+		return (SCS);
+	}
 	errno = subst_env(node->left);
 	errno = subst_env(node->right);
 	return (errno);
