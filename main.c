@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 18:06:54 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 18:37:05 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,17 @@
 
 t_global	g_var;
 
-int	main(int argc, char **argv, char **env)
+static void	routine(void)
 {
 	char	*str;
 	t_tnode	*root;
 
-	(void)argc;
-	(void)argv;
-	init_envp(&(g_var.envp), env);
-	set_minishell_setting();
 	while (1)
 	{
 		str = readline(PROMPT);
 		if (str == NULL)
 		{
-			ft_putstr_fd("\x1b[1A", STDOUT_FILENO);
-			ft_putstr_fd("\033[12C", STDOUT_FILENO);
-			ft_putendl_fd("exit", STDOUT_FILENO);
+			ft_putendl_fd("\x1b[1A\033[12Cexit", STDOUT_FILENO);
 			break ;
 		}
 		if (ft_strcmp(str, "") == 0)
@@ -52,16 +46,19 @@ int	main(int argc, char **argv, char **env)
 		if (!root)
 			continue ;
 		add_history(str);
-		if (is_builtin_cmd(root))
-			execute_builtin(root);
-		else
-			execute_cmds(root);
-		tcsetattr(STDIN_FILENO, TCSANOW, &(g_var.new_term));
-		set_signal_handling();
+		execute_tree(root);
 		clear_node(root, del_t_token);
 		free(str);
-		// system("leaks minishell | grep leaks");
 	}
+}
+
+int	main(int argc, char **argv, char **env)
+{
+	(void)argv;
+	if (argc != 1)
+		return (1);
+	init_minishell_setting(env);
+	routine();
 	clear_envp(&(g_var.envp));
 	return (g_var.status);
 }
