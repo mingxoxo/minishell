@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 17:38:04 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/12 19:45:12 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/14 22:35:17 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	is_dsv_symbol(t_token *token)
 {
-	if (token == NULL)
+	if (token == NULL || token->str == NULL)
 		return (false);
 	if (token->type == T_OPER || token->type == T_PIPE)
 		return (true);
@@ -23,7 +23,7 @@ bool	is_dsv_symbol(t_token *token)
 
 bool	is_this_symbol(t_token *token, t_ttype type)
 {
-	if (token == NULL)
+	if (token == NULL || token->str == NULL)
 		return (false);
 	if (token->type == type)
 		return (true);

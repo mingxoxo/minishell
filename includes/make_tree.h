@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:01:53 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/12 22:04:43 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/15 15:00:12 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 // make_tree.c
 t_tnode	*make_tree(t_list *head);
+t_error	make_cmd(t_tnode **node, t_list **lst);
 
 // make_node.c
 t_error	make_new_node(t_tnode **node);
@@ -43,5 +44,16 @@ int		check_paren(t_token *token);
 t_list	*check_end_node(t_list **lst);
 t_tnode	*check_parent(t_tnode *node, t_token *token);
 t_tnode	*check_root(t_tnode *node);
+
+// subst_env.c
+t_error	subst_env(t_tnode *node);
+
+// subst_env_*.c
+t_error	env_first_step(t_token *token);
+t_error	env_second_step(char *str, t_tnode *node);
+
+// subset_env_lst.c
+t_error	subst_env_lst(t_token *token, int *arr, t_list **head);
+char	*strjoin_lst(t_list *lst);
 
 #endif
