@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 21:52:16 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/14 15:37:53 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/15 15:43:34 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ static bool	is_dsv_pos_ok(t_list *lst, char	**str)
 	int	flag;
 
 	flag = 0;
+	*str = NULL;
 	while (lst)
 	{
 		if (is_dsv_symbol(lst->content))
@@ -91,7 +92,7 @@ static bool	is_dsv_pos_ok(t_list *lst, char	**str)
 			lst = lst->next;
 		lst = lst->next;
 	}
-	if (flag != 1)
+	if (flag != 1 && *str)
 		return (false);
 	return (true);
 }

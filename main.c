@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 15:23:02 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/15 15:47:16 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,13 @@ int	main(int argc, char **argv, char **env)
 		ft_lstclear(&lst, del_t_paren);
 		subst_env(node);
 		preorder(node, 0, "root");
-		if (is_builtin_cmd(node))
-			execute_builtin(node);
-		else
-			execute_cmds(node);
+		if (node)
+		{
+			if (is_builtin_cmd(node))
+				execute_builtin(node);
+			else
+				execute_cmds(node);
+		}
 		tcsetattr(STDIN_FILENO, TCSANOW, &(g_var.new_term));
 		set_signal_handling();
 		clear_node(node, del_t_token);
