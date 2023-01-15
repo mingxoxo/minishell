@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 22:30:55 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 18:27:22 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 20:07:14 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,6 @@ void	execute_tree(t_tnode *root)
 		errno = execute_child(root);
 	tcsetattr(STDIN_FILENO, TCSANOW, &(g_var.new_term));
 	set_signal_handling();
-	if (!errno)
+	if (errno)
 		g_var.status = 1;
 }
