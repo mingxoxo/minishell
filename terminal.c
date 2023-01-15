@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:47:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 11:49:27 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 18:29:00 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ void	set_signal_handling(void)
 	signal(SIGINT, sigint_handler_prompt);
 }
 
-void	set_minishell_setting(void)
+void	init_minishell_setting(char **env)
 {
+	init_envp(&(g_var.envp), env);
 	get_terminal_setting();
 	set_signal_handling();
 	g_var.status = 0;
