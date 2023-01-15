@@ -6,11 +6,12 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/14 18:34:14 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 22:47:58 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <unistd.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "libft.h"
@@ -90,6 +91,7 @@ int	main(int argc, char **argv, char **env)
 			execute_builtin(node);
 		else
 			execute_cmds(node);
+		tcsetattr(STDIN_FILENO, TCSANOW, &(g_var.new_term));
 		ft_lstclear(&lst, del_t_paren);
 		clear_node(node, del_t_token);
 		free(str);
