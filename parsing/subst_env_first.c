@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:42:37 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/14 21:08:49 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/15 15:58:55 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ t_error	env_first_step(t_token *token)
 	int		*arr;
 	t_list	*lst;
 
+	if (ft_strchr(token->str, '$') == NULL)
+		return (SCS);
 	arr = init_arr(ft_strlen(token->str));
 	lst = ft_lstnew(NULL);
 	if (!arr || !lst)
