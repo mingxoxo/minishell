@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:33:05 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 16:38:25 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 17:30:53 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ static t_error	child_execve(t_tnode *node, char *path, char **argv)
 	char	*builtin;
 
 	builtin = ((t_token *)(node->content))->str;
-	if (apply_redirections(node) == ERROR)
-		return (ERROR);
 	if (signal(SIGINT, SIG_DFL) == SIG_ERR)
 		return (ERROR);
 	tcsetattr(STDIN_FILENO, TCSANOW, &(g_var.old_term));
@@ -47,7 +45,8 @@ static t_error	child_execute(t_tnode *cmd_node)
 	cmd_argv = make_argv(cmd_node);
 	if (!cmd_argv)
 		return (ERROR);
-	if (make_cmd_path(cmd_argv[0], &path, g_var.envp.arr) == ERROR)
+	if (apply_redirections(cmd_node) == ERROR
+		|| make_cmd_path(cmd_argv[0], &path, g_var.envp.arr) == ERROR)
 	{
 		ft_freesplit(cmd_argv);
 		return (ERROR);
