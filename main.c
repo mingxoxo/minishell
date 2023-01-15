@@ -6,11 +6,12 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/14 23:04:07 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/15 14:22:18 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <unistd.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "libft.h"
@@ -95,6 +96,8 @@ int	main(int argc, char **argv, char **env)
 			execute_builtin(node);
 		else
 			execute_cmds(node);
+		tcsetattr(STDIN_FILENO, TCSANOW, &(g_var.new_term));
+		set_signal_handling();
 		clear_node(node, del_t_token);
 		free(str);
 		// system("leaks minishell | grep leaks");
