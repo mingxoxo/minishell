@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:35:48 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 17:47:17 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 19:07:01 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "ds_tree.h"
 
 # define PROMPT "\033[0;36mCUTE-Shell$\033[0m "
+
 typedef struct s_global
 {
 	t_envp			envp;
