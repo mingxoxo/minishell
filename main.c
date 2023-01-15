@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 18:43:17 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 19:57:36 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ int	main(int argc, char **argv, char **env)
 	init_minishell_setting(env);
 	routine();
 	clear_envp(&(g_var.envp));
+	tcsetattr(STDIN_FILENO, TCSANOW, &(g_var.old_term));
 	return (g_var.status);
 }

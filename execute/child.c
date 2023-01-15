@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:33:05 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 19:10:27 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 19:54:22 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static void	child_execve(t_tnode *node, char *path, char **argv)
 	char	*builtin;
 
 	builtin = ((t_token *)(node->content))->str;
-	if (signal(SIGINT, SIG_DFL) == SIG_ERR)
+	if (signal(SIGQUIT, SIG_DFL) == SIG_ERR
+		|| signal(SIGINT, SIG_DFL) == SIG_ERR)
 		exit(1);
 	tcsetattr(STDIN_FILENO, TCSANOW, &(g_var.old_term));
 	if (is_builtin_cmd(node) == true)

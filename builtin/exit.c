@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:15:07 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/14 12:46:23 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 19:48:05 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	ft_exit(char **argv, int child)
 		ft_putendl_fd("bash: exit: too many arguments", STDERR_FILENO);
 		return (1);
 	}
+	tcsetattr(STDIN_FILENO, TCSANOW, &(g_var.old_term));
 	if (count_argument(argv) == 2)
 		exit(ft_atoi(argv[1]));
 	exit(g_var.status);
