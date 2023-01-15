@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 14:22:18 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/15 15:23:02 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ int	main(int argc, char **argv, char **env)
 		}
 		node = make_tree(lst->next);
 		ft_lstclear(&lst, del_t_paren);
-		preorder(node, 0, "root");
 		subst_env(node);
 		preorder(node, 0, "root");
 		if (is_builtin_cmd(node))

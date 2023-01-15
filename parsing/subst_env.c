@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:42:37 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/14 23:02:36 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/15 15:24:00 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,49 +14,44 @@
 
 // substitute_env
 
-static char	*strjoin_cmd(char *cache, t_token *token)
+static char	*strjoin_cmd(t_tnode *node, size_t len)
 {
 	char	*new;
-	char	*new2;
 
-	new = ft_strjoin(cache, " ");
+	new = ft_calloc(len + 1, sizeof(char));
 	if (!new)
 		return (NULL);
-	new2 = ft_strjoin(new, token->str);
-	if (!new2)
+	while (node)
 	{
-		free(new);
-		return (NULL);
+		ft_strlcat(new, " ", len + 1);
+		ft_strlcat(new, ((t_token *)(node->content))->str, len + 1);
+		node = node->left;
 	}
-	return (new2);
+	return (new);
 }
 
 static t_error	cmd_subst_env(t_tnode *node, t_tnode *cmd)
 {
-	char	*new;
-	char	*cache;
+	size_t	len;
+	char	*line;
 
-	cache = ft_strdup("");
-	if (!cache)
-		return (ERROR);
+	len = 0;
 	while (node)
 	{
 		if (env_first_step(node->content) == ERROR)
 			return (ERROR);
-		new = strjoin_cmd(cache, node->content);
-		if (!new)
-		{
-			free(cache);
-			return (ERROR);
-		}
-		cache = new;
+		len += ft_strlen(((t_token *)(node->content))->str) + 1;
 		node = node->left;
 	}
-	if (env_second_step(cache, cmd) == ERROR)
+	line = strjoin_cmd(cmd, len);
+	if (!line)
+		return (ERROR);
+	if (env_second_step(line, cmd) == ERROR)
 	{
-		free(cache);
+		free(line);
 		return (ERROR);
 	}
+	free(line);
 	return (SCS);
 }
 

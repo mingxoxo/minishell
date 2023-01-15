@@ -6,7 +6,7 @@
 #    By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/15 14:27:51 by jeongmin         ###   ########.fr        #
+#    Updated: 2023/01/15 15:23:35 by jeongmin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,10 @@ RDLINE_DIR	= $(shell brew --prefix readline)
 
 HEADERS		= -I$(LIBFT) \
 			  -Iincludes \
-			  -I$(RDLINE_DIR)/include/ \
+			  -I$(RDLINE_DIR)/include/ 
 
 LIBS		= -lft -L$(LIBFT) \
-			  -L$(RDLINE_DIR)/lib/ -lreadline\
+			  -L$(RDLINE_DIR)/lib/ -lreadline
 
 CFLAGS		= -Wall -Werror -Wextra -g3 -fsanitize=address
 
@@ -36,7 +36,7 @@ _BTN_SRCS	= cd.c \
 			  unset.c \
 			  exit.c \
 			  export.c \
-			  print_export.c \
+			  print_export.c 
 
 BTN_SRCS	= $(addprefix $(BTN_DIR), $(_BTN_SRCS))
 
@@ -46,7 +46,7 @@ TREE_DIR	= ds_tree/
 _TREE_SRCS	= add.c \
 			  delete.c \
 			  init.c \
-			  search.c \
+			  search.c 
 
 TREE_SRCS	= $(addprefix $(TREE_DIR), $(_TREE_SRCS))
 
@@ -58,7 +58,7 @@ _ENVP_SRCS	= cast_arr.c \
 			  delete.c \
 			  init.c \
 			  search.c \
-			  set.c \
+			  set.c 
 
 ENVP_SRCS	= $(addprefix $(ENVP_DIR), $(_ENVP_SRCS))
 
@@ -91,20 +91,20 @@ _EXE_SRCS		= argv.c \
 				  execute.c \
 				  child.c \
 				  preprocess.c \
-				  builtin.c \
+				  builtin.c 
 
 EXE_SRCS		= $(addprefix $(EXE_DIR), $(_EXE_SRCS))
 
 # main source files
 SRCS		= main.c \
-			  terminal.c \
+			  terminal.c 
 
 OBJS		= $(BTN_SRCS:%.c=%.o) \
 			  $(TREE_SRCS:%.c=%.o) \
 			  $(ENVP_SRCS:%.c=%.o) \
 			  $(PARSING_SRCS:%.c=%.o) \
 			  $(EXE_SRCS:%.c=%.o) \
-			  $(SRCS:%.c=%.o) \
+			  $(SRCS:%.c=%.o) 
 
 # define compile commands
 $(NAME) : 	$(OBJS) $(LIBFT_LIB)

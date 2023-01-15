@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:42:37 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/15 14:28:03 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/15 15:20:12 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,31 +66,40 @@ static t_error	make_env_lst(char *line, int *arr, t_list **lst)
 	return (SCS);
 }
 
-static t_error	strjoin_env_lst(t_list *lst, t_token *token)
+static size_t	strlen_lst(t_list *lst)
 {
-	char	*new;
-	char	*cache;
+	size_t	len;
 
-	cache = ft_strdup("");
-	if (!cache)
-		return (ERROR);
+	len = 0;
 	while (lst)
 	{
-		new = ft_strjoin(cache, ((t_token *)(lst->content))->str);
-		free(cache);
-		if (!new)
-			return (ERROR);
-		cache = new;
+		len += ft_strlen(((t_token *)(lst->content))->str);
 		lst = lst->next;
 	}
-	free(token->str);
-	token->str = cache;
-	return (SCS);
+	return (len);
+}
+
+char	*strjoin_lst(t_list *lst)
+{
+	size_t	len;
+	char	*new;
+
+	len = strlen_lst(lst);
+	new = ft_calloc(len + 1, sizeof(char));
+	if (!new)
+		return (NULL);
+	while (lst)
+	{
+		ft_strlcat(new, ((t_token *)(lst->content))->str, len + 1);
+		lst = lst->next;
+	}
+	return (new);
 }
 
 t_error	subst_env_lst(t_token *token, int *arr, t_list **head)
 {
 	t_list	*lst;
+	char	*new;
 
 	if (make_env_lst(token->str, arr, head) == ERROR)
 		return (ERROR);
@@ -106,7 +115,10 @@ t_error	subst_env_lst(t_token *token, int *arr, t_list **head)
 			return (ERROR);
 		lst = lst->next;
 	}
-	if (strjoin_env_lst((*head)->next, token) == ERROR)
+	new = strjoin_lst((*head)->next);
+	if (!new)
 		return (ERROR);
+	free(token->str);
+	token->str = new;
 	return (SCS);
 }
