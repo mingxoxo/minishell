@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 19:57:36 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 22:11:36 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	routine(void)
 		if (!root)
 			continue ;
 		add_history(str);
-		execute_tree(root);
+		execute(root);
 		clear_node(root, del_t_token);
 		free(str);
 	}
