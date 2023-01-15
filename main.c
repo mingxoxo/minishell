@@ -6,21 +6,18 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 18:37:05 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 18:43:17 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <unistd.h>
+#include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "libft.h"
-#include "ds_envp.h"
-#include "ds_tree.h"
-#include "builtin.h"
-#include "make_tree.h"
 #include "minishell.h"
 #include "execute.h"
+#include "token.h"
 
 t_global	g_var;
 
