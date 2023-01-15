@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 22:30:55 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 20:07:14 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 22:10:18 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "minishell.h"
 #include "execute.h"
 #include "libft.h"
+#include "make_tree.h"
 
 extern t_global	g_var;
 
@@ -68,7 +69,7 @@ static t_error	execute_child(t_tnode *root)
 	return (SCS);
 }
 
-void	execute_tree(t_tnode *root)
+static void	execute_tree(t_tnode *root)
 {
 	t_error	errno;
 
@@ -80,4 +81,23 @@ void	execute_tree(t_tnode *root)
 	set_signal_handling();
 	if (errno)
 		g_var.status = 1;
+}
+
+void	execute(t_tnode *node)
+{
+	t_token	*token;
+
+	if (!node)
+		return ;
+	token = (t_token *)(node->content);
+	if (!is_this_symbol(token, T_OPER))
+	{
+		execute_tree(node);
+		return ;
+	}
+	execute(node->left);
+	if (ft_strcmp(token->str, "&&") == 0 && g_var.status == 0)
+		execute(node->right);
+	else if (ft_strcmp(token->str, "||") == 0 && g_var.status != 0)
+		execute(node->right);
 }

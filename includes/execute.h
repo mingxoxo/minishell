@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 20:33:04 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 18:25:54 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 22:11:12 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_error	execute_parent(t_tnode *node);
 t_tnode	**make_cmd_list(t_tnode *root);
 
 // execute.c
-void	execute_tree(t_tnode *root);
+void	execute(t_tnode *node);
 
 // child.c
 t_error	create_childs(t_tnode **cmd_list, pid_t *pid_list);
