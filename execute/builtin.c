@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:36:41 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 15:47:52 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 18:24:28 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	builtin_execve(char *path, char **argv, t_envp *envp, int child)
 	return (-1);
 }
 
-t_error	execute_builtin(t_tnode *node)
+t_error	execute_parent(t_tnode *node)
 {
 	char	**cmd_argv;
 	char	*path;

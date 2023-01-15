@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:33:05 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 16:38:25 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 19:54:22 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,19 @@
 
 extern t_global	g_var;
 
-static t_error	child_execve(t_tnode *node, char *path, char **argv)
+static void	child_execve(t_tnode *node, char *path, char **argv)
 {
 	char	*builtin;
 
 	builtin = ((t_token *)(node->content))->str;
-	if (apply_redirections(node) == ERROR)
-		return (ERROR);
-	if (signal(SIGINT, SIG_DFL) == SIG_ERR)
-		return (ERROR);
+	if (signal(SIGQUIT, SIG_DFL) == SIG_ERR
+		|| signal(SIGINT, SIG_DFL) == SIG_ERR)
+		exit(1);
 	tcsetattr(STDIN_FILENO, TCSANOW, &(g_var.old_term));
 	if (is_builtin_cmd(node) == true)
 		exit(builtin_execve(builtin, argv, &(g_var.envp), 1));
 	execve(path, argv, g_var.envp.arr);
 	exit(0);
-	return (ERROR);
 }
 
 static t_error	child_execute(t_tnode *cmd_node)
@@ -47,7 +45,8 @@ static t_error	child_execute(t_tnode *cmd_node)
 	cmd_argv = make_argv(cmd_node);
 	if (!cmd_argv)
 		return (ERROR);
-	if (make_cmd_path(cmd_argv[0], &path, g_var.envp.arr) == ERROR)
+	if (apply_redirections(cmd_node) == ERROR
+		|| make_cmd_path(cmd_argv[0], &path, g_var.envp.arr) == ERROR)
 	{
 		ft_freesplit(cmd_argv);
 		return (ERROR);
@@ -60,12 +59,7 @@ static t_error	child_execute(t_tnode *cmd_node)
 		ft_putendl_fd(": command not found", STDERR_FILENO);
 		exit(127);
 	}
-	if (child_execve(cmd_node, path, cmd_argv) == ERROR)
-	{
-		free(path);
-		ft_freesplit(cmd_argv);
-		return (ERROR);
-	}
+	child_execve(cmd_node, path, cmd_argv);
 	return (SCS);
 }
 

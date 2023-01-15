@@ -6,7 +6,7 @@
 #    By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/15 15:23:35 by jeongmin         ###   ########.fr        #
+#    Updated: 2023/01/15 19:03:14 by jeongmin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,8 @@ _PARSING_SRCS	= token.c \
 				  subst_env.c \
 				  subst_env_first.c \
 				  subst_env_lst.c \
-				  subst_env_second.c
+				  subst_env_second.c \
+				  del_quote.c
 
 PARSING_SRCS	= $(addprefix $(PARSING_DIR), $(_PARSING_SRCS))
 
@@ -97,7 +98,8 @@ EXE_SRCS		= $(addprefix $(EXE_DIR), $(_EXE_SRCS))
 
 # main source files
 SRCS		= main.c \
-			  terminal.c 
+			  terminal.c \
+			  parse.c
 
 OBJS		= $(BTN_SRCS:%.c=%.o) \
 			  $(TREE_SRCS:%.c=%.o) \

@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 22:30:55 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 23:31:30 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 20:07:14 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	wait_proc(pid_t *pid_list)
 	return (status / 256);
 }
 
-t_error	execute_cmds(t_tnode *root)
+static t_error	execute_child(t_tnode *root)
 {
 	t_tnode	**cmd_list;
 	pid_t	*pid_list;
@@ -66,4 +66,18 @@ t_error	execute_cmds(t_tnode *root)
 	free(pid_list);
 	free(cmd_list);
 	return (SCS);
+}
+
+void	execute_tree(t_tnode *root)
+{
+	t_error	errno;
+
+	if (is_builtin_cmd(root))
+		errno = execute_parent(root);
+	else
+		errno = execute_child(root);
+	tcsetattr(STDIN_FILENO, TCSANOW, &(g_var.new_term));
+	set_signal_handling();
+	if (errno)
+		g_var.status = 1;
 }

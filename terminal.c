@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:47:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 11:49:27 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 19:58:40 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,24 @@ static void	sigint_handler_prompt(int signo)
 	rl_redisplay();
 }
 
+void	sigint_handler_parent(int signo)
+{
+	(void)signo;
+	g_var.status = 130;
+	ft_putchar_fd('\n', STDOUT_FILENO);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+}
+
 void	set_signal_handling(void)
 {
 	signal(SIGINT, sigint_handler_prompt);
 }
 
-void	set_minishell_setting(void)
+void	init_minishell_setting(char **env)
 {
+	signal(SIGQUIT, SIG_IGN);
+	init_envp(&(g_var.envp), env);
 	get_terminal_setting();
 	set_signal_handling();
 	g_var.status = 0;
