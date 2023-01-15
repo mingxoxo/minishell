@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 11:46:01 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 15:47:16 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int	main(int argc, char **argv, char **env)
 			free(str);
 			continue ;
 		}
+		print_lst(lst->next);
 		if (!is_correct_syntax(lst->next))
 		{
 			ft_lstclear(&lst, del_t_token);
@@ -87,13 +88,18 @@ int	main(int argc, char **argv, char **env)
 			continue ;
 		}
 		node = make_tree(lst->next);
-		if (is_builtin_cmd(node))
-			execute_builtin(node);
-		else
-			execute_cmds(node);
+		ft_lstclear(&lst, del_t_paren);
+		subst_env(node);
+		preorder(node, 0, "root");
+		if (node)
+		{
+			if (is_builtin_cmd(node))
+				execute_builtin(node);
+			else
+				execute_cmds(node);
+		}
 		tcsetattr(STDIN_FILENO, TCSANOW, &(g_var.new_term));
 		set_signal_handling();
-		ft_lstclear(&lst, del_t_paren);
 		clear_node(node, del_t_token);
 		free(str);
 		// system("leaks minishell | grep leaks");

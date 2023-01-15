@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:15:15 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/12 15:19:09 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/14 23:07:37 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	del_t_token(void *content)
 	content = NULL;
 }
 
-static t_error	make_token(char *line, t_ttype type, size_t len, t_list **lst)
+t_error	make_token(char *line, t_ttype type, size_t len, t_list **lst)
 {
 	t_token	*token;
 	t_list	*new;
@@ -48,21 +48,25 @@ static t_error	make_token(char *line, t_ttype type, size_t len, t_list **lst)
 	return (SCS);
 }
 
-static size_t	count_len(char *line, int *arr, int i)
+static int	check_cust_idx(char *line)
 {
-	size_t	len;
+	int			i;
+	const char	symbol[12][3] = {"\"", "\'", "&&", "||", "(", ")", \
+								"<<", "<", ">>", ">", "|", " "};
+	const int	cust_idx[] = {50, 52, 41, 43, 30, 32, \
+								21, 22, 23, 24, 10, 60};
 
-	i++;
-	len = 1;
-	while (line[i] && arr[i - 1] == arr[i])
+	i = 0;
+	while (i < 12)
 	{
-		len++;
+		if (ft_strncmp(line, (char *)(symbol[i]), ft_strlen(symbol[i])) == 0)
+			return (cust_idx[i]);
 		i++;
 	}
-	return (len);
+	return (0);
 }
 
-static t_error	make_list(char *line, int *arr, t_list **lst)
+t_error	make_lst(char *line, int *arr, t_list **lst)
 {
 	int		cust_idx;
 	t_ttype	type;
@@ -103,13 +107,13 @@ t_list	*tokenization(char *line)
 		free(lst);
 		return (NULL);
 	}
-	fill_arr(line, arr);
+	fill_arr(line, arr, &check_cust_idx);
 	handling_quote(line, arr, '\"');
 	handling_quote(line, arr, '\'');
-	if (make_list(line, arr, &lst) == ERROR)
+	if (make_lst(line, arr, &lst) == ERROR)
 	{
 		free(arr);
-		ft_lstclear(&lst, del_t_token);
+		ft_lstclear(&lst, &del_t_token);
 		return (NULL);
 	}
 	free(arr);
