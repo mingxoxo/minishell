@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 17:57:53 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 18:06:54 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,12 @@ int	main(int argc, char **argv, char **env)
 	{
 		str = readline(PROMPT);
 		if (str == NULL)
+		{
+			ft_putstr_fd("\x1b[1A", STDOUT_FILENO);
+			ft_putstr_fd("\033[12C", STDOUT_FILENO);
+			ft_putendl_fd("exit", STDOUT_FILENO);
 			break ;
+		}
 		if (ft_strcmp(str, "") == 0)
 		{
 			free(str);
