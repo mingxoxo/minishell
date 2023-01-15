@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:35:48 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 11:45:51 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 17:47:17 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 # include <term.h>
 # include "return.h"
 # include "ds_envp.h"
+# include "ds_tree.h"
 
+# define PROMPT "\033[0;36mCUTE-Shell$\033[0m "
 typedef struct s_global
 {
 	t_envp			envp;
@@ -27,5 +29,6 @@ typedef struct s_global
 
 void	set_signal_handling(void);
 void	set_minishell_setting(void);
+t_tnode	*parse_line(char *str);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 15:47:16 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/15 17:57:53 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <readline/history.h>
 #include "libft.h"
 #include "ds_envp.h"
+#include "ds_tree.h"
 #include "builtin.h"
 #include "make_tree.h"
 #include "minishell.h"
@@ -23,84 +24,36 @@
 
 t_global	g_var;
 
-static void	del_t_paren(void *content)
-{
-	t_token	*token;
-
-	if (!content)
-		return ;
-	token = (t_token *)(content);
-	if (!is_this_symbol(token, T_PAREN))
-		return ;
-	if (token->str)
-		free(token->str);
-	free(content);
-	content = NULL;
-}
-
-void	print_lst(t_list *lst)
-{
-	t_token	*token;
-
-	printf("---------\n");
-	while (lst)
-	{
-		token = (t_token *)(lst->content);
-		printf("[%d] [%s]\n", token->type, token->str);
-		lst = lst->next;
-	}
-	printf("---------\n");
-}
-
 int	main(int argc, char **argv, char **env)
 {
 	char	*str;
-	t_tnode	*node;
-	t_list	*lst;
+	t_tnode	*root;
 
 	(void)argc;
 	(void)argv;
 	init_envp(&(g_var.envp), env);
 	set_minishell_setting();
-	lst = NULL;
 	while (1)
 	{
-		str = readline("\033[0;36mCUTE-Shell$\033[0m ");
+		str = readline(PROMPT);
 		if (str == NULL)
 			break ;
-		else if (ft_strcmp(str, "") == 0)
+		if (ft_strcmp(str, "") == 0)
 		{
 			free(str);
 			continue ;
 		}
+		root = parse_line(str);
+		if (!root)
+			continue ;
 		add_history(str);
-		lst = tokenization(str);
-		if (!lst)
-		{
-			free(str);
-			continue ;
-		}
-		print_lst(lst->next);
-		if (!is_correct_syntax(lst->next))
-		{
-			ft_lstclear(&lst, del_t_token);
-			free(str);
-			continue ;
-		}
-		node = make_tree(lst->next);
-		ft_lstclear(&lst, del_t_paren);
-		subst_env(node);
-		preorder(node, 0, "root");
-		if (node)
-		{
-			if (is_builtin_cmd(node))
-				execute_builtin(node);
-			else
-				execute_cmds(node);
-		}
+		if (is_builtin_cmd(root))
+			execute_builtin(root);
+		else
+			execute_cmds(root);
 		tcsetattr(STDIN_FILENO, TCSANOW, &(g_var.new_term));
 		set_signal_handling();
-		clear_node(node, del_t_token);
+		clear_node(root, del_t_token);
 		free(str);
 		// system("leaks minishell | grep leaks");
 	}

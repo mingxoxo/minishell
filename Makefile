@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+         #
+#    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/15 15:23:35 by jeongmin         ###   ########.fr        #
+#    Updated: 2023/01/15 17:20:42 by wonyang          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -97,7 +97,8 @@ EXE_SRCS		= $(addprefix $(EXE_DIR), $(_EXE_SRCS))
 
 # main source files
 SRCS		= main.c \
-			  terminal.c 
+			  terminal.c \
+			  parse.c
 
 OBJS		= $(BTN_SRCS:%.c=%.o) \
 			  $(TREE_SRCS:%.c=%.o) \
