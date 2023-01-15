@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:36:41 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/14 18:36:25 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 15:47:52 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,17 +70,23 @@ t_error	execute_builtin(t_tnode *node)
 {
 	char	**cmd_argv;
 	char	*path;
+	int		in_fd;
+	int		out_fd;
 
 	path = ((t_token *)(node->content))->str;
 	cmd_argv = make_argv(node);
 	if (!cmd_argv)
 		return (ERROR);
-	if (apply_redirections(node) == ERROR)
+	in_fd = dup(STDIN_FILENO);
+	out_fd = dup(STDOUT_FILENO);
+	if (in_fd < 0 || out_fd < 0 || apply_redirections(node) == ERROR)
 	{
 		ft_freesplit(cmd_argv);
 		return (ERROR);
 	}
 	g_var.status = builtin_execve(path, cmd_argv, &(g_var.envp), 0);
+	ft_dup2(in_fd, STDIN_FILENO);
+	ft_dup2(out_fd, STDOUT_FILENO);
 	ft_freesplit(cmd_argv);
 	return (SCS);
 }
