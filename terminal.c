@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:47:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 19:54:30 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 19:58:40 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ static void	get_terminal_setting(void)
 {
 	tcgetattr(STDIN_FILENO, &(g_var.old_term));
 	tcgetattr(STDIN_FILENO, &(g_var.new_term));
-	// g_var.old_term.c_lflag &= ECHOCTL;
-	// g_var.old_term.c_cc[VQUIT] = 1;
 	g_var.new_term.c_lflag &= ~ECHOCTL;
 	g_var.new_term.c_cc[VQUIT] = 0;
 	tcsetattr(STDIN_FILENO, TCSANOW, &(g_var.new_term));
