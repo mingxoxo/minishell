@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 17:19:11 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 15:22:10 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/14 22:33:47 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ t_error	make_cmd_path(char *cmd_name, char **path, char **envp)
 	*path = NULL;
 	if (access(cmd_name, X_OK) == 0)
 	{
-		*path = cmd_name;
+		*path = ft_strdup(cmd_name);
 		return (SCS);
 	}
 	path_list = parse_paths(envp);
