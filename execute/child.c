@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:33:05 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 11:46:51 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 16:38:25 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,7 @@ static t_error	child_execute(t_tnode *cmd_node)
 		ft_putendl_fd(": command not found", STDERR_FILENO);
 		exit(127);
 	}
-	if (apply_redirections(cmd_node) == ERROR
-		|| child_execve(cmd_node, path, cmd_argv) == ERROR)
+	if (child_execve(cmd_node, path, cmd_argv) == ERROR)
 	{
 		free(path);
 		ft_freesplit(cmd_argv);
