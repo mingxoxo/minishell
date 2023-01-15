@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:20:31 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 17:47:28 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/15 18:35:24 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_tnode	*parse_line(char *str)
 	}
 	node = make_tree(lst->next);
 	ft_lstclear(&lst, del_t_paren);
-	if (subst_env(node) == ERROR || !node)
+	if (subst_env(node) == ERROR || del_quote(node) == ERROR || !node)
 	{
 		free(str);
 		return (NULL);
