@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/16 13:10:07 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 19:42:32 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@
 #include "token.h"
 
 t_global	g_var;
+
+void	run_code(char *str)
+{
+	t_tnode	*root;
+
+	root = parse_line(str);
+	if (!root)
+		return ;
+	add_history(str);
+	execute(root);
+	clear_node(root, del_t_token);
+}
 
 static void	routine(void)
 {

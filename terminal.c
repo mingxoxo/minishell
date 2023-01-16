@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:47:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/16 18:10:01 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 19:53:03 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ t_error	init_minishell_setting(char **env)
 	get_terminal_setting();
 	g_var.status = 0;
 	g_var.is_signal = 0;
+	run_code("mkdir -p tmp");
 	return (SCS);
 }
