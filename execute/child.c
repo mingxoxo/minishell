@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:33:05 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/16 16:37:51 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 21:18:36 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static pid_t	fork_child(t_tnode *cmd_node, int *before_fd)
 			|| (tmp != STDIN_FILENO && ft_dup2(tmp, STDIN_FILENO) == ERROR)
 			|| ft_dup2(fd[1], STDOUT_FILENO) == ERROR
 			|| child_execute(cmd_node) == ERROR)
-			return (0);
+			exit(1);
 	}
 	if ((tmp != STDIN_FILENO && close(tmp) == -1)
 		|| close(fd[1]) == -1)
