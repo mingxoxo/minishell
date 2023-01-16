@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 20:42:06 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/16 18:43:26 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 19:47:16 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*make_heredoc_filename(void)
 		res[i] = ft_abs(res[i]) % 26 + 65;
 		i++;
 	}
-	path = ft_strjoin("/tmp/.", res);
+	path = ft_strjoin("./tmp/.", res);
 	free(res);
 	return (path);
 }
