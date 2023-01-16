@@ -6,17 +6,17 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 22:30:55 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/16 18:37:21 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 19:14:20 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/wait.h>
 #include "minishell.h"
 #include "execute.h"
 #include "libft.h"
 #include "make_tree.h"
-#include <sys/wait.h>
 
 extern t_global	g_var;
 
