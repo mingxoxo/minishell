@@ -6,7 +6,7 @@
 #    By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/16 20:55:53 by jeongmin         ###   ########.fr        #
+#    Updated: 2023/01/16 20:59:55 by jeongmin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,7 +102,8 @@ EXE_SRCS		= $(addprefix $(EXE_DIR), $(_EXE_SRCS))
 # main source files
 SRCS		= main.c \
 			  terminal.c \
-			  parse.c
+			  parse.c \
+			  signal.c
 
 OBJS		= $(BTN_SRCS:%.c=%.o) \
 			  $(TREE_SRCS:%.c=%.o) \
