@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 18:40:41 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/16 18:40:52 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 19:01:51 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,16 @@ t_error	execute_all_heredoc(t_tnode **cmd_list)
 	int		i;
 	t_tnode	*node;
 
-	i = 0;
-
+	i = -1;
 	if (signal(SIGINT, sigint_handler_heredoc) == SIG_ERR)
 		return (ERROR);
-	while (cmd_list[i])
+	while (cmd_list[++i])
 	{
 		node = cmd_list[i];
 		while (node)
 		{
 			if (is_heredoc_node(node) && execute_heredoc(node) == ERROR)
-			{
-				perror("");
-				ft_putendl_fd("heredoc error", 2);
 				return (ERROR);
-			}
 			if (g_var.is_signal)
 			{
 				g_var.is_signal = 0;
@@ -59,7 +54,6 @@ t_error	execute_all_heredoc(t_tnode **cmd_list)
 			}
 			node = node->right;
 		}
-		i++;
 	}
 	if (signal(SIGINT, sigint_handler_prompt) == SIG_ERR)
 		return (ERROR);
