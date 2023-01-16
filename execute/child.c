@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:33:05 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/16 11:29:16 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 13:11:33 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,8 @@ t_error	create_childs(t_tnode **cmd_list, pid_t *pid_list)
 
 	before_fd = STDIN_FILENO;
 	i = 0;
-	signal(SIGINT, sigint_handler_parent);
+	if (signal(SIGINT, SIG_IGN) == SIG_ERR)
+		return (ERROR);
 	while (cmd_list[i + 1])
 	{
 		pid_list[i] = fork_child(cmd_list[i], &before_fd);
