@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:42:37 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/16 17:12:43 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/16 20:27:17 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,14 @@ t_error	subst_wildcard(t_tnode *node)
 		node = node->left;
 	}
 	return (SCS);
+}
+
+void	resubst_wildcard(char *str)
+{
+	while (*str)
+	{
+		if (*str == WILDCARD)
+			*str *= -1;
+		str++;
+	}
 }

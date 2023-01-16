@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:42:37 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/16 17:06:55 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/16 18:56:34 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ static bool	is_wildcard_in_cmd(t_tnode *node)
 
 t_error	subst(t_tnode *node)
 {
-	t_error	errno;
-
 	if (!node)
 		return (SCS);
 	if (is_this_symbol(node->content, T_WORD))
@@ -52,7 +50,7 @@ t_error	subst(t_tnode *node)
 			return (ERROR);
 		return (SCS);
 	}
-	errno = subst(node->left);
-	errno = subst(node->right);
-	return (errno);
+	if (subst(node->left) == ERROR || subst(node->right) == ERROR)
+		return (ERROR);
+	return (SCS);
 }
