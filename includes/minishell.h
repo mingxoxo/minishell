@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:35:48 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/16 18:35:22 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 20:01:28 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,8 @@ t_error	init_minishell_setting(char **env);
 
 // parse.c
 t_tnode	*parse_line(char *str);
+
+// main.c
+void	run_code(char *str);
 
 #endif
