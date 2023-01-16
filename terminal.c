@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:47:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 19:58:40 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 15:47:36 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	get_terminal_setting(void)
 	tcsetattr(STDIN_FILENO, TCSANOW, &(g_var.new_term));
 }
 
-static void	sigint_handler_prompt(int signo)
+void	sigint_handler_prompt(int signo)
 {
 	(void)signo;
 	g_var.status = 1;
@@ -48,16 +48,41 @@ void	sigint_handler_parent(int signo)
 	rl_replace_line("", 0);
 }
 
-void	set_signal_handling(void)
+static t_error	set_envp_value(t_envp *envp)
 {
-	signal(SIGINT, sigint_handler_prompt);
+	char	*str;
+	int		num;
+
+	str = getcwd(NULL, 0);
+	if (!str)
+		return (ERROR);
+	set_env(envp, "PWD", str);
+	free(str);
+	del_key_enode(envp, "OLDPWD");
+	set_env(envp, "OLDPWD", NULL);
+	str = search_key_value(envp, "SHLVL");
+	if (!str)
+		set_env(envp, "SHLVL", "1");
+	else
+	{
+		num = ft_atoi(str);
+		str = ft_itoa(num + 1);
+		if (!str)
+			return (ERROR);
+		set_env(envp, "SHLVL", str);
+		free(str);
+	}
+	return (SCS);
 }
 
-void	init_minishell_setting(char **env)
+t_error	init_minishell_setting(char **env)
 {
-	signal(SIGQUIT, SIG_IGN);
-	init_envp(&(g_var.envp), env);
+	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR
+		|| signal(SIGINT, sigint_handler_prompt) == SIG_ERR
+		|| init_envp(&(g_var.envp), env) == ERROR
+		|| set_envp_value(&(g_var.envp)) == ERROR)
+		return (ERROR);
 	get_terminal_setting();
-	set_signal_handling();
 	g_var.status = 0;
+	return (SCS);
 }

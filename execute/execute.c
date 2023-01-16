@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 22:30:55 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 22:10:18 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 12:21:11 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "execute.h"
 #include "libft.h"
 #include "make_tree.h"
+#include <sys/wait.h>
 
 extern t_global	g_var;
 
@@ -41,6 +42,8 @@ static int	wait_proc(pid_t *pid_list)
 	while (pid_list[i])
 	{
 		waitpid(pid_list[i], &status, 0);
+		if (status == 2)
+			status = 130 * 256;
 		i++;
 	}
 	return (status / 256);
@@ -78,7 +81,7 @@ static void	execute_tree(t_tnode *root)
 	else
 		errno = execute_child(root);
 	tcsetattr(STDIN_FILENO, TCSANOW, &(g_var.new_term));
-	set_signal_handling();
+	signal(SIGINT, sigint_handler_prompt);
 	if (errno)
 		g_var.status = 1;
 }

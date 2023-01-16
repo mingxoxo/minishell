@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 22:11:36 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 13:10:07 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,8 @@ static void	routine(void)
 int	main(int argc, char **argv, char **env)
 {
 	(void)argv;
-	if (argc != 1)
+	if (argc != 1 || init_minishell_setting(env) == ERROR)
 		return (1);
-	init_minishell_setting(env);
 	routine();
 	clear_envp(&(g_var.envp));
 	tcsetattr(STDIN_FILENO, TCSANOW, &(g_var.old_term));
