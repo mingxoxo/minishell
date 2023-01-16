@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
+#    By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/16 17:40:57 by wonyang          ###   ########seoul.kr   #
+#    Updated: 2023/01/16 20:59:55 by jeongmin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -78,7 +78,8 @@ _PARSING_SRCS	= token.c \
 				  subst_env_lst.c \
 				  subst_env_second.c \
 				  subst_wildcard.c \
-				  del_quote.c
+				  del_quote.c \
+				  wildcard.c
 
 PARSING_SRCS	= $(addprefix $(PARSING_DIR), $(_PARSING_SRCS))
 

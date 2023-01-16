@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 23:33:50 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/11 18:10:46 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/16 19:03:45 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,16 @@ void	set_content(t_tnode *node, void *content)
 
 void	set_lchild(t_tnode *node, t_tnode *left)
 {
-	node->left = left;
-	left->parent = node;
+	if (node)
+		node->left = left;
+	if (left)
+		left->parent = node;
 }
 
 void	set_rchild(t_tnode *node, t_tnode *right)
 {
-	node->right = right;
-	right->parent = node;
+	if (node)
+		node->right = right;
+	if (right)
+		right->parent = node;
 }

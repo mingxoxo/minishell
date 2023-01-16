@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:20:31 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/16 17:01:47 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/16 20:58:35 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,19 @@ static void	del_t_paren(void *content)
 	content = NULL;
 }
 
+static t_error	post_processing(t_tnode *node)
+{
+	if (!node)
+		return (ERROR);
+	if (subst(node) == ERROR)
+		return (ERROR);
+	if (del_quote(node) == ERROR)
+		return (ERROR);
+	if (wildcard(node) == ERROR)
+		return (ERROR);
+	return (SCS);
+}
+
 t_tnode	*parse_line(char *str)
 {
 	t_list	*lst;
@@ -44,15 +57,16 @@ t_tnode	*parse_line(char *str)
 	}
 	if (!is_correct_syntax(lst->next))
 	{
-		ft_lstclear(&lst, del_t_token);
+		ft_lstclear(&lst, &del_t_token);
 		free(str);
 		return (NULL);
 	}
 	node = make_tree(lst->next);
-	ft_lstclear(&lst, del_t_paren);
-	if (subst(node) == ERROR || del_quote(node) == ERROR || !node)
+	ft_lstclear(&lst, &del_t_paren);
+	if (post_processing(node) == ERROR)
 	{
 		free(str);
+		clear_node(node, del_t_token);
 		return (NULL);
 	}
 	return (node);
