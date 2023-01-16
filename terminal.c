@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:47:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/16 13:11:46 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 15:47:36 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ static t_error	set_envp_value(t_envp *envp)
 	else
 	{
 		num = ft_atoi(str);
-		free(str);
 		str = ft_itoa(num + 1);
 		if (!str)
 			return (ERROR);
