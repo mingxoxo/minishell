@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:35:48 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/16 13:07:52 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 17:43:09 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,14 @@ typedef struct s_global
 	int				status;
 }	t_global;
 
+// signal.c
 void	sigint_handler_prompt(int signo);
 void	sigint_handler_parent(int signo);
+
+// terminal.c
 t_error	init_minishell_setting(char **env);
+
+// parse.c
 t_tnode	*parse_line(char *str);
 
 #endif
