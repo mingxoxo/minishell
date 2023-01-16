@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 17:19:11 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/14 22:33:47 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 16:21:34 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include "libft.h"
 #include "return.h"
+#include "execute.h"
 
 static char	*join_cmd_path(char *path, char *cmd)
 {
@@ -53,7 +54,7 @@ static char	**parse_paths(char **envp)
 
 static int	chech_path(char **path)
 {
-	if (access(*path, X_OK) == 0)
+	if (!is_directory(*path) && access(*path, X_OK) == 0)
 		return (1);
 	free(*path);
 	*path = NULL;
@@ -86,7 +87,7 @@ t_error	make_cmd_path(char *cmd_name, char **path, char **envp)
 	char	**path_list;
 
 	*path = NULL;
-	if (access(cmd_name, X_OK) == 0)
+	if (!is_directory(cmd_name) && access(cmd_name, X_OK) == 0)
 	{
 		*path = ft_strdup(cmd_name);
 		return (SCS);

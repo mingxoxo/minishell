@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:33:05 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 19:54:22 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 16:31:05 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,18 @@ static void	child_execve(t_tnode *node, char *path, char **argv)
 {
 	char	*builtin;
 
+	if (is_builtin_cmd(node) == false && !path)
+	{
+		ft_putstr_fd("bash: ", STDERR_FILENO);
+		ft_putstr_fd(argv[0], STDERR_FILENO);
+		if (ft_strcmp(argv[0], "") != 0 && is_directory(argv[0]))
+		{
+			ft_putendl_fd(": is a directory", STDERR_FILENO);
+			exit(126);
+		}
+		ft_putendl_fd(": command not found", STDERR_FILENO);
+		exit(127);
+	}
 	builtin = ((t_token *)(node->content))->str;
 	if (signal(SIGQUIT, SIG_DFL) == SIG_ERR
 		|| signal(SIGINT, SIG_DFL) == SIG_ERR)
@@ -50,14 +62,6 @@ static t_error	child_execute(t_tnode *cmd_node)
 	{
 		ft_freesplit(cmd_argv);
 		return (ERROR);
-	}
-	if (ft_strcmp(cmd_argv[0], "") == 0
-		|| (is_builtin_cmd(cmd_node) == false && !path))
-	{
-		ft_putstr_fd("bash: ", STDERR_FILENO);
-		ft_putstr_fd(cmd_argv[0], STDERR_FILENO);
-		ft_putendl_fd(": command not found", STDERR_FILENO);
-		exit(127);
 	}
 	child_execve(cmd_node, path, cmd_argv);
 	return (SCS);
