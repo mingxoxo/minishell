@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:36:41 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 18:24:28 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 18:51:07 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,25 +68,36 @@ int	builtin_execve(char *path, char **argv, t_envp *envp, int child)
 
 t_error	execute_parent(t_tnode *node)
 {
+	t_tnode	**cmd_list;
 	char	**cmd_argv;
 	char	*path;
-	int		in_fd;
-	int		out_fd;
+	int		fd[2];
 
 	path = ((t_token *)(node->content))->str;
 	cmd_argv = make_argv(node);
 	if (!cmd_argv)
 		return (ERROR);
-	in_fd = dup(STDIN_FILENO);
-	out_fd = dup(STDOUT_FILENO);
-	if (in_fd < 0 || out_fd < 0 || apply_redirections(node) == ERROR)
+	cmd_list = make_cmd_list(node);
+	if (!cmd_list)
 	{
 		ft_freesplit(cmd_argv);
 		return (ERROR);
 	}
+	fd[0] = dup(STDIN_FILENO);
+	fd[1] = dup(STDOUT_FILENO);
+	if (fd[0] < 0 || fd[1] < 0 || execute_all_heredoc(cmd_list) != SCS
+		|| apply_redirections(node) == ERROR)
+	{
+		close(fd[0]);
+		close(fd[1]);
+		ft_freesplit(cmd_argv);
+		free(cmd_list);
+		return (ERROR);
+	}
 	g_var.status = builtin_execve(path, cmd_argv, &(g_var.envp), 0);
-	ft_dup2(in_fd, STDIN_FILENO);
-	ft_dup2(out_fd, STDOUT_FILENO);
+	ft_dup2(fd[0], STDIN_FILENO);
+	ft_dup2(fd[1], STDOUT_FILENO);
 	ft_freesplit(cmd_argv);
+	free(cmd_list);
 	return (SCS);
 }
