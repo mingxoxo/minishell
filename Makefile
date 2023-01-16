@@ -6,7 +6,7 @@
 #    By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/15 19:03:14 by jeongmin         ###   ########.fr        #
+#    Updated: 2023/01/16 17:11:46 by jeongmin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,10 +72,12 @@ _PARSING_SRCS	= token.c \
 				  check_type.c \
 				  make_node.c \
 				  make_tree.c \
+				  subst.c \
 				  subst_env.c \
 				  subst_env_first.c \
 				  subst_env_lst.c \
 				  subst_env_second.c \
+				  subst_wildcard.c \
 				  del_quote.c
 
 PARSING_SRCS	= $(addprefix $(PARSING_DIR), $(_PARSING_SRCS))
