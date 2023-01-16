@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:42:37 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/16 20:55:23 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/16 21:51:53 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,26 @@ static t_token	*make_node_token(char *line, t_ttype type)
 	return (token);
 }
 
-static bool	match_wcard(char *pattern, char *dname)
+static bool	match_wcard(char *str, char *dname)
 {
-	int	len_p;
-	int	len_w;
-	int	nth;
+	int	str_len;
+	int	d_len;
+	int	i;
 	int	skip;
 
-	nth = 0;
-	len_p = ft_strlen(pattern);
-	len_w = ft_strlen(dname);
-	while (nth < len_p && nth < len_w && (pattern[nth] == dname[nth]))
-		nth++;
-	if (len_p == nth)
-		return (nth == len_w);
-	if (pattern[nth] == WILDCARD)
+	i = 0;
+	str_len = ft_strlen(str);
+	d_len = ft_strlen(dname);
+	while (i < str_len && i < d_len && (str[i] == dname[i]))
+		i++;
+	if (str_len == i)
+		return (i == d_len);
+	if (str[i] == WILDCARD)
 	{
 		skip = 0;
-		while (skip + nth <= len_w)
+		while (skip + i <= d_len)
 		{
-			if (match_wcard(pattern + nth + 1, dname + skip + nth))
+			if (match_wcard(str + i + 1, dname + skip + i))
 				return (true);
 			skip += 1;
 		}
