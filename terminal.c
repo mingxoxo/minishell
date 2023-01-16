@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:47:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 19:58:40 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 12:21:54 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	get_terminal_setting(void)
 	tcsetattr(STDIN_FILENO, TCSANOW, &(g_var.new_term));
 }
 
-static void	sigint_handler_prompt(int signo)
+void	sigint_handler_prompt(int signo)
 {
 	(void)signo;
 	g_var.status = 1;
@@ -48,16 +48,11 @@ void	sigint_handler_parent(int signo)
 	rl_replace_line("", 0);
 }
 
-void	set_signal_handling(void)
-{
-	signal(SIGINT, sigint_handler_prompt);
-}
-
 void	init_minishell_setting(char **env)
 {
 	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, sigint_handler_prompt);
 	init_envp(&(g_var.envp), env);
 	get_terminal_setting();
-	set_signal_handling();
 	g_var.status = 0;
 }
