@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:20:31 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/16 20:58:35 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/16 23:45:52 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 #include "make_tree.h"
 #include "ds_tree.h"
 #include "libft.h"
+#include "minishell.h"
+
+extern t_global	g_var;
 
 static void	del_t_paren(void *content)
 {
@@ -31,15 +34,39 @@ static void	del_t_paren(void *content)
 	content = NULL;
 }
 
+static t_list	*pre_processing(char *str)
+{
+	t_list	*lst;
+
+	lst = tokenization(str);
+	if (!lst)
+		return (NULL);
+	if (!is_correct_syntax(lst->next))
+	{
+		ft_lstclear(&lst, &del_t_token);
+		return (NULL);
+	}
+	return (lst);
+}
+
 static t_error	post_processing(t_tnode *node)
 {
-	if (!node)
-		return (ERROR);
 	if (subst(node) == ERROR)
+	{
+		g_var.status = 1;
 		return (ERROR);
+	}
 	if (del_quote(node) == ERROR)
+	{
+		g_var.status = 1;
 		return (ERROR);
+	}
 	if (wildcard(node) == ERROR)
+	{
+		g_var.status = 1;
+		return (ERROR);
+	}
+	if (!node)
 		return (ERROR);
 	return (SCS);
 }
@@ -49,16 +76,11 @@ t_tnode	*parse_line(char *str)
 	t_list	*lst;
 	t_tnode	*node;
 
-	lst = tokenization(str);
+	lst = pre_processing(str);
 	if (!lst)
 	{
 		free(str);
-		return (NULL);
-	}
-	if (!is_correct_syntax(lst->next))
-	{
-		ft_lstclear(&lst, &del_t_token);
-		free(str);
+		g_var.status = 1;
 		return (NULL);
 	}
 	node = make_tree(lst->next);
@@ -66,7 +88,7 @@ t_tnode	*parse_line(char *str)
 	if (post_processing(node) == ERROR)
 	{
 		free(str);
-		clear_node(node, del_t_token);
+		clear_node(node, &del_t_token);
 		return (NULL);
 	}
 	return (node);
