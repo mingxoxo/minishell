@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 20:42:06 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 15:10:08 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/16 18:43:26 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 #include "libft.h"
 #include "execute.h"
 #include "return.h"
+#include "minishell.h"
+
+extern t_global	g_var;
 
 static char	*make_heredoc_filename(void)
 {
@@ -56,7 +59,7 @@ static void	heredoc_readline(int fd, char *delimiter)
 	while (1)
 	{
 		line = readline("> ");
-		if (!line || ft_strcmp(line, delimiter) == 0)
+		if (!line || ft_strcmp(line, delimiter) == 0 || g_var.is_signal)
 		{
 			free(line);
 			break ;
@@ -90,6 +93,8 @@ t_error	execute_heredoc(t_tnode *node)
 		return (ERROR);
 	heredoc_readline(fd, delimiter);
 	change_node_info(node, file_name);
+	if (g_var.is_signal)
+		unlink(file_name);
 	if (close(fd) == -1)
 		return (ERROR);
 	return (SCS);
