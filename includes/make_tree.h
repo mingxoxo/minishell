@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 16:01:53 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/16 17:11:07 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/16 20:26:51 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # define OPEN_PAREN 1
 # define CLOSE_PAREN -1
+# define WILDCARD -42
 
 // make_tree.c
 t_tnode	*make_tree(t_list *head);
@@ -59,6 +60,10 @@ t_error	subst_env_lst(t_token *token, int *arr, t_list **head);
 
 // subst_wildcard.c
 t_error	subst_wildcard(t_tnode *node);
+void	resubst_wildcard(char *str);
+
+// wildcard.c
+t_error	wildcard(t_tnode *node);
 
 // del_quote.c
 t_error	del_quote(t_tnode *node);
