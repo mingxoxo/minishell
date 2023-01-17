@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 18:36:41 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/16 18:59:16 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 11:01:45 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ bool	is_builtin_cmd(t_tnode *node)
 	i = 0;
 	while (i < 7)
 	{
-		if (ft_strncmp(token->str, (char *)(cmd[i]), ft_strlen(cmd[i])) == 0)
+		if (ft_strcmp(token->str, (char *)(cmd[i])) == 0)
 			return (true);
 		i++;
 	}
