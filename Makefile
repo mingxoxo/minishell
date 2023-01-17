@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+         #
+#    By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/28 21:52:18 by wonyang           #+#    #+#              #
-#    Updated: 2023/01/16 20:59:55 by jeongmin         ###   ########.fr        #
+#    Updated: 2023/01/17 11:59:06 by wonyang          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ HEADERS		= -I$(LIBFT) \
 LIBS		= -lft -L$(LIBFT) \
 			  -L$(RDLINE_DIR)/lib/ -lreadline
 
-CFLAGS		= -Wall -Werror -Wextra -g3 -fsanitize=address
+CFLAGS		= -Wall -Werror -Wextra
 
 # builtin source files
 BTN_DIR		= builtin/

@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/17 11:15:19 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 11:59:07 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static void	routine(void)
 		execute(root);
 		clear_node(root, del_t_token);
 		free(str);
-		system("leaks minishell | grep leaked");
 	}
 }
 
