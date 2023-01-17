@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 22:30:55 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/16 19:14:20 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 11:35:36 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static int	wait_proc(pid_t *pid_list)
 	while (pid_list[i])
 	{
 		waitpid(pid_list[i], &status, 0);
-		if (status == 2)
-			status = 130 * 256;
+		if (0 < status && status < 256)
+			status = (128 + status) * 256;
 		i++;
 	}
 	return (status / 256);
