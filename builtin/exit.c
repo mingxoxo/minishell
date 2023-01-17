@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 16:15:07 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/15 19:48:05 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 13:37:19 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ int	ft_exit(char **argv, int child)
 		ft_putendl_fd("exit", STDERR_FILENO);
 	if (is_valid_argument(argv[1]) == false)
 	{
-		ft_putstr_fd("bash: exit: ", STDERR_FILENO);
+		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
 		ft_putstr_fd(argv[1], STDERR_FILENO);
 		ft_putendl_fd(": numeric argument required", STDERR_FILENO);
 		exit(255);
 	}
 	if (count_argument(argv) > 2)
 	{
-		ft_putendl_fd("bash: exit: too many arguments", STDERR_FILENO);
+		ft_putendl_fd("minishell: exit: too many arguments", STDERR_FILENO);
 		return (1);
 	}
 	tcsetattr(STDIN_FILENO, TCSANOW, &(g_var.old_term));
