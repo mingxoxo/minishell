@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/17 12:31:48 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 14:05:49 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	run_code(char *str)
 	if (!root)
 		return ;
 	execute(root);
-	clear_node(root, del_t_token);
+	clear_node(root, &del_t_token);
 }
 
 static void	routine(void)
@@ -55,7 +55,7 @@ static void	routine(void)
 		if (!root)
 			continue ;
 		execute(root);
-		clear_node(root, del_t_token);
+		clear_node(root, &del_t_token);
 		free(str);
 	}
 }
