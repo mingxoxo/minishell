@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 23:33:05 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/17 11:57:10 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 13:37:19 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	child_execve(t_tnode *node, char *path, char **argv)
 
 	if (is_builtin_cmd(node) == false && !path)
 	{
-		ft_putstr_fd("bash: ", STDERR_FILENO);
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
 		ft_putstr_fd(argv[0], STDERR_FILENO);
 		if (ft_strcmp(argv[0], "") != 0 && is_directory(argv[0]))
 		{

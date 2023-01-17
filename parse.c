@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:20:31 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/16 23:45:52 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/17 13:40:35 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ static t_list	*pre_processing(char *str)
 	lst = tokenization(str);
 	if (!lst)
 		return (NULL);
+	if (lst->next == NULL)
+	{
+		ft_lstclear(&lst, &del_t_token);
+		return (NULL);
+	}
 	if (!is_correct_syntax(lst->next))
 	{
 		ft_lstclear(&lst, &del_t_token);

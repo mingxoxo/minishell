@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 21:36:28 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/14 11:57:01 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 13:37:20 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static t_error	update_pwd(t_envp *envp)
 
 static t_error	path_error(char *path)
 {
-	ft_putstr_fd("bash: cd: ", STDERR_FILENO);
+	ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
 	ft_putstr_fd(path, STDERR_FILENO);
 	if (access(path, F_OK) != 0)
 		ft_putendl_fd(": No such file or directory", STDERR_FILENO);
@@ -68,7 +68,7 @@ static t_error	move_home(t_envp *envp)
 	path = search_key_value(envp, "HOME");
 	if (!path)
 	{
-		ft_putendl_fd("bash: cd: HOME not set", STDERR_FILENO);
+		ft_putendl_fd("minishell: cd: HOME not set", STDERR_FILENO);
 		return (FAIL);
 	}
 	if (chdir(path) != 0)
@@ -83,7 +83,7 @@ static t_error	move_oldpwd(t_envp *envp)
 	path = search_key_value(envp, "OLDPWD");
 	if (!path)
 	{
-		ft_putendl_fd("bash: cd: OLDPWD not set", STDERR_FILENO);
+		ft_putendl_fd("minishell: cd: OLDPWD not set", STDERR_FILENO);
 		return (FAIL);
 	}
 	if (chdir(path) != 0)
