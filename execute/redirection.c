@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 17:36:33 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/13 15:21:27 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 14:04:48 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static t_error	set_infile(char *path, bool heredoc)
 	in_fd = open(path, O_RDONLY, 0644);
 	if (in_fd == -1)
 	{
+		ft_putstr_fd("minishell: ", 2);
 		perror(path);
 		return (ERROR);
 	}
