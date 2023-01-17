@@ -6,7 +6,7 @@
 /*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 17:42:37 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/15 15:58:55 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/17 14:06:00 by jeongmin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,6 @@ t_error	env_first_step(t_token *token)
 		return (ERROR);
 	}
 	free(arr);
-	ft_lstclear(&lst, del_t_token);
+	ft_lstclear(&lst, &del_t_token);
 	return (SCS);
 }
