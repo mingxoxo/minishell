@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeongmin <jeongmin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 22:30:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/17 14:05:49 by jeongmin         ###   ########.fr       */
+/*   Updated: 2023/01/17 15:22:01 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	main(int argc, char **argv, char **env)
 		return (1);
 	routine();
 	clear_envp(&(g_var.envp));
+	free(g_var.tmp_path);
 	tcsetattr(STDIN_FILENO, TCSANOW, &(g_var.old_term));
 	return (g_var.status);
 }

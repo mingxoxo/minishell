@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 15:47:32 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/16 19:53:03 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 15:19:14 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,22 @@ static t_error	set_envp_value(t_envp *envp)
 	return (SCS);
 }
 
+static t_error	make_dir(void)
+{
+	char	*path;
+
+	path = ft_strjoin("mkdir -p ", g_var.tmp_path);
+	if (!path)
+		return (ERROR);
+	run_code(path);
+	free(path);
+	return (SCS);
+}
+
 t_error	init_minishell_setting(char **env)
 {
+	char	*path;
+
 	if (signal(SIGQUIT, SIG_IGN) == SIG_ERR
 		|| signal(SIGINT, sigint_handler_prompt) == SIG_ERR
 		|| init_envp(&(g_var.envp), env) == ERROR
@@ -63,6 +77,12 @@ t_error	init_minishell_setting(char **env)
 	get_terminal_setting();
 	g_var.status = 0;
 	g_var.is_signal = 0;
-	run_code("mkdir -p tmp");
+	path = getcwd(NULL, 0);
+	if (!path)
+		return (ERROR);
+	g_var.tmp_path = ft_strjoin(path, "/tmp");
+	free(path);
+	if (!g_var.tmp_path || make_dir() == ERROR)
+		return (ERROR);
 	return (SCS);
 }
