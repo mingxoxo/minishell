@@ -6,11 +6,11 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 16:21:17 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/14 17:11:37 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 14:46:49 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ds_envp.h"
+#include "ds_envp.h"
 
 static int	search_sep(char *line)
 {

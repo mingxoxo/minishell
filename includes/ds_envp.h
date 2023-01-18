@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 17:17:28 by jeongmin          #+#    #+#             */
-/*   Updated: 2023/01/14 17:11:41 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 14:47:15 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-# include  "../includes/return.h"
-# include "../libft/libft.h"
+# include  "return.h"
+# include "libft.h"
 
 typedef struct s_enode
 {

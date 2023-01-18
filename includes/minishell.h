@@ -6,7 +6,7 @@
 /*   By: wonyang <wonyang@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 19:35:48 by wonyang           #+#    #+#             */
-/*   Updated: 2023/01/16 20:01:28 by wonyang          ###   ########seoul.kr  */
+/*   Updated: 2023/01/17 15:07:44 by wonyang          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_global
 	struct termios	new_term;
 	int				status;
 	int				is_signal;
+	char			*tmp_path;
 }	t_global;
 
 // signal.c
