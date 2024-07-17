@@ -12,7 +12,7 @@
 
 | Name | Intra ID |
 | --- | --- |
-| 양원석 | [@wonyang](https://github.com/gemstoneyang) |
+| 양원석 | [@wonyang](https://github.com/wonyangs) |
 | 이정민 | [@jeongmin](https://github.com/mingxoxo) |
 
 <br>
